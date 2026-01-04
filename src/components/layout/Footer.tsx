@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
+import knowgraphLogo from "@/assets/knowgraph-logo.png";
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-border">
+    <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block">
-              <span className="text-xl font-heading font-semibold text-foreground">
-                KnowGraph
-              </span>
+              <img 
+                src={knowgraphLogo} 
+                alt="KnowGraph" 
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-sm">
               Graph-based learning for complex systems. Structured knowledge for

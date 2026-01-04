@@ -6,9 +6,12 @@ interface FeatureCardProps {
   title: string;
   description: string;
   className?: string;
+  color?: string;
 }
 
-export function FeatureCard({ icon: Icon, title, description, className }: FeatureCardProps) {
+export function FeatureCard({ icon: Icon, title, description, className, color }: FeatureCardProps) {
+  const iconColor = color || "bg-primary/10 text-primary";
+  
   return (
     <div
       className={cn(
@@ -16,8 +19,8 @@ export function FeatureCard({ icon: Icon, title, description, className }: Featu
         className
       )}
     >
-      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
-        <Icon className="w-6 h-6 text-primary" />
+      <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors", iconColor)}>
+        <Icon className="w-6 h-6" />
       </div>
       <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
         {title}

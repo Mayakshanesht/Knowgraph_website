@@ -71,8 +71,8 @@ export default function Try() {
       <Layout>
         <Section className="pt-24 md:pt-32 min-h-[60vh] flex items-center">
           <div className="max-w-md mx-auto text-center">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-primary" />
+            <div className="w-16 h-16 rounded-full bg-green/10 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-8 h-8 text-green" />
             </div>
             <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">
               Request Received
@@ -89,111 +89,119 @@ export default function Try() {
   return (
     <Layout>
       {/* Hero */}
-      <Section className="pt-24 md:pt-32">
-        <div className="max-w-xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-6">
-            Request Beta Access
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Join early users exploring graph-based learning for complex technical systems.
-          </p>
+      <section className="relative pt-24 md:pt-32 pb-12 bg-hero-gradient animate-gradient overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+              Request Beta Access
+            </h1>
+            <p className="text-lg text-white/80">
+              Join early users exploring graph-based learning for complex technical systems.
+            </p>
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* Form */}
-      <Section className="pt-8">
+      <Section>
         <div className="max-w-lg mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Your full name"
-              />
-            </div>
+          <div className="p-8 rounded-2xl bg-card border border-border shadow-card">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Your full name"
+                  className="bg-background"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="you@example.com"
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email Address</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="you@example.com"
+                  className="bg-background"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="role">Role</Label>
-              <Select
-                value={formData.role}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({ ...prev, role: value }))
-                }
+              <div className="space-y-2">
+                <Label htmlFor="role">Role</Label>
+                <Select
+                  value={formData.role}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, role: value }))
+                  }
+                >
+                  <SelectTrigger className="bg-background">
+                    <SelectValue placeholder="Select your role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roles.map((role) => (
+                      <SelectItem key={role.value} value={role.value}>
+                        {role.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="interest">Primary Interest Area</Label>
+                <Select
+                  value={formData.interest}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, interest: value }))
+                  }
+                >
+                  <SelectTrigger className="bg-background">
+                    <SelectValue placeholder="Select your interest" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {interests.map((interest) => (
+                      <SelectItem key={interest.value} value={interest.value}>
+                        {interest.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">Message (Optional)</Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Tell us about your learning goals..."
+                  rows={4}
+                  className="bg-background"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={isSubmitting}
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your role" />
-                </SelectTrigger>
-                <SelectContent>
-                  {roles.map((role) => (
-                    <SelectItem key={role.value} value={role.value}>
-                      {role.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="interest">Primary Interest Area</Label>
-              <Select
-                value={formData.interest}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({ ...prev, interest: value }))
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your interest" />
-                </SelectTrigger>
-                <SelectContent>
-                  {interests.map((interest) => (
-                    <SelectItem key={interest.value} value={interest.value}>
-                      {interest.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Message (Optional)</Label>
-              <Textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                placeholder="Tell us about your learning goals..."
-                rows={4}
-              />
-            </div>
-
-            <Button
-              type="submit"
-              variant="hero"
-              size="lg"
-              className="w-full"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Request Beta Access"}
-            </Button>
-          </form>
+                {isSubmitting ? "Submitting..." : "Request Beta Access"}
+              </Button>
+            </form>
+          </div>
 
           <p className="text-sm text-muted-foreground text-center mt-6">
             We're onboarding early users in small batches.
@@ -202,7 +210,7 @@ export default function Try() {
       </Section>
 
       {/* Admin Note */}
-      <Section className="bg-secondary/30">
+      <Section className="bg-card">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
             Beta requests are viewable through a secure admin dashboard.
