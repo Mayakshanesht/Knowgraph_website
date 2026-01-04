@@ -26,22 +26,26 @@ export default function Pricing() {
   return (
     <Layout>
       {/* Hero */}
-      <Section className="pt-24 md:pt-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-6">
-            Pricing
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Simple, transparent pricing for learners and creators.
-          </p>
+      <section className="relative pt-24 md:pt-32 pb-16 bg-hero-gradient animate-gradient overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+              Pricing
+            </h1>
+            <p className="text-lg text-white/80">
+              Simple, transparent pricing for learners and creators.
+            </p>
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* Pricing Cards */}
       <Section>
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Learner Plan */}
-          <div className="p-8 rounded-xl bg-card border-2 border-primary shadow-card">
+          <div className="p-8 rounded-2xl bg-card border-2 border-primary shadow-elevated relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-primary-gradient" />
             <div className="mb-6">
               <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
                 Learner Subscription
@@ -57,7 +61,7 @@ export default function Pricing() {
                 <span className="text-muted-foreground">/ month</span>
               </div>
               <p className="text-sm text-muted-foreground">International pricing</p>
-              <p className="text-sm text-primary mt-2">
+              <p className="text-sm text-primary font-medium mt-2">
                 ₹499 / month for India
               </p>
             </div>
@@ -65,7 +69,9 @@ export default function Pricing() {
             <ul className="space-y-3 mb-8">
               {learnerFeatures.map((feature) => (
                 <li key={feature} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-primary" />
+                  </div>
                   <span className="text-sm text-foreground">{feature}</span>
                 </li>
               ))}
@@ -79,7 +85,7 @@ export default function Pricing() {
           </div>
 
           {/* Creator Plan */}
-          <div className="p-8 rounded-xl bg-card border border-border shadow-card">
+          <div className="p-8 rounded-2xl bg-card border border-border shadow-card">
             <div className="mb-6">
               <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
                 Creator / Instructor Plan
@@ -99,7 +105,9 @@ export default function Pricing() {
             <ul className="space-y-3 mb-8">
               {creatorFeatures.map((feature) => (
                 <li key={feature} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div className="w-5 h-5 rounded-full bg-violet/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-violet" />
+                  </div>
                   <span className="text-sm text-foreground">{feature}</span>
                 </li>
               ))}
@@ -116,7 +124,7 @@ export default function Pricing() {
       </Section>
 
       {/* FAQ */}
-      <Section className="bg-secondary/30">
+      <Section className="bg-card">
         <SectionHeader
           title="Questions?"
           description="Get in touch to learn more about our plans"
