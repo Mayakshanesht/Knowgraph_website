@@ -7,7 +7,6 @@ import knowgraphLogo from "@/assets/knowgraph-logo.png";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Platform", href: "/platform" },
-  { name: "Capsules", href: "/capsules" },
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Courses", href: "/courses" },
   { name: "Pricing", href: "/pricing" },
@@ -18,13 +17,13 @@ export function Header() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
       <nav className="container mx-auto flex items-center justify-between py-3 px-4 lg:px-8">
         <Link to="/" className="flex items-center gap-3">
           <img 
             src={knowgraphLogo} 
             alt="KnowGraph" 
-            className="h-10 w-auto"
+            className="h-9 w-auto"
           />
         </Link>
 
@@ -47,7 +46,7 @@ export function Header() {
 
         <div className="hidden lg:block">
           <Button asChild variant="hero" size="default">
-            <Link to="/try">Try KnowGraph</Link>
+            <Link to="/try">Join Beta</Link>
           </Button>
         </div>
 
@@ -63,7 +62,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-background border-b border-border">
+        <div className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navigation.map((item) => (
               <Link
@@ -81,7 +80,7 @@ export function Header() {
             ))}
             <Button asChild variant="hero" size="default" className="w-full">
               <Link to="/try" onClick={() => setMobileMenuOpen(false)}>
-                Try KnowGraph
+                Join Beta
               </Link>
             </Button>
           </div>

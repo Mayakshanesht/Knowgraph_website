@@ -31,12 +31,22 @@ const interests = [
   { value: "other", label: "Other" },
 ];
 
+const planInterests = [
+  { value: "free", label: "Free Explorer" },
+  { value: "learner", label: "Learner" },
+  { value: "professional", label: "Professional" },
+  { value: "student-pro", label: "Student Pro" },
+  { value: "creator", label: "Creator (notify me)" },
+  { value: "enterprise", label: "Enterprise (talk to us)" },
+];
+
 export default function Try() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     role: "",
     interest: "",
+    plan: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,13 +79,13 @@ export default function Try() {
   if (isSubmitted) {
     return (
       <Layout>
-        <Section className="pt-24 md:pt-32 min-h-[60vh] flex items-center">
+        <Section className="pt-32 md:pt-40 min-h-[70vh] flex items-center">
           <div className="max-w-md mx-auto text-center">
-            <div className="w-16 h-16 rounded-full bg-green/10 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-green" />
+            <div className="w-20 h-20 rounded-full bg-teal/10 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-10 h-10 text-teal" />
             </div>
             <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">
-              Request Received
+              You're on the list
             </h1>
             <p className="text-muted-foreground">
               Thank you for your interest in KnowGraph. We're onboarding early users in small batches and will be in touch soon.
@@ -89,24 +99,25 @@ export default function Try() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-24 md:pt-32 pb-12 bg-hero-gradient animate-gradient overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]" />
+      <section className="relative pt-28 md:pt-36 pb-16 bg-hero-gradient animate-gradient overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12)_0%,transparent_50%)]" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
-              Request Beta Access
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 animate-float-up">
+              Join the Beta
             </h1>
-            <p className="text-lg text-white/80">
-              Join early users exploring graph-based learning for complex technical systems.
+            <p className="text-lg text-white/80 animate-float-up delay-200">
+              Be among the first to experience graph-based learning for complex systems.
             </p>
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Form */}
-      <Section>
+      <Section className="py-16">
         <div className="max-w-lg mx-auto">
-          <div className="p-8 rounded-2xl bg-card border border-border shadow-card">
+          <div className="p-8 rounded-3xl bg-card border border-border shadow-elevated">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
@@ -179,6 +190,27 @@ export default function Try() {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="plan">Which plan interests you?</Label>
+                <Select
+                  value={formData.plan}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, plan: value }))
+                  }
+                >
+                  <SelectTrigger className="bg-background">
+                    <SelectValue placeholder="Select a plan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {planInterests.map((plan) => (
+                      <SelectItem key={plan.value} value={plan.value}>
+                        {plan.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="message">Message (Optional)</Label>
                 <Textarea
                   id="message"
@@ -186,7 +218,7 @@ export default function Try() {
                   value={formData.message}
                   onChange={handleInputChange}
                   placeholder="Tell us about your learning goals..."
-                  rows={4}
+                  rows={3}
                   className="bg-background"
                 />
               </div>
@@ -198,23 +230,19 @@ export default function Try() {
                 className="w-full"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Request Beta Access"}
+                {isSubmitting ? "Submitting..." : "Join the Beta"}
               </Button>
             </form>
           </div>
 
-          <p className="text-sm text-muted-foreground text-center mt-6">
-            We're onboarding early users in small batches.
-          </p>
-        </div>
-      </Section>
-
-      {/* Admin Note */}
-      <Section className="bg-card">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-sm text-muted-foreground">
-            Beta requests are viewable through a secure admin dashboard.
-          </p>
+          <div className="text-center mt-8 space-y-2">
+            <p className="text-sm text-muted-foreground">
+              No payment required. Free during beta.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              We're onboarding early users in small batches.
+            </p>
+          </div>
         </div>
       </Section>
     </Layout>
