@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -14,24 +15,18 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { CheckCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const roles = [
   { value: "student", label: "Student" },
   { value: "researcher", label: "Researcher" },
   { value: "engineer", label: "Engineer" },
   { value: "educator", label: "Educator" },
+  { value: "professional", label: "Professional" },
   { value: "other", label: "Other" },
 ];
 
-const interests = [
-  { value: "ai", label: "AI" },
-  { value: "autonomous-driving", label: "Autonomous Driving" },
-  { value: "robotics", label: "Robotics" },
-  { value: "controls", label: "Controls" },
-  { value: "other", label: "Other" },
-];
-
-const planInterests = [
+const planOptions = [
   { value: "free", label: "Free Explorer" },
   { value: "learner", label: "Learner" },
   { value: "professional", label: "Professional" },
@@ -45,26 +40,81 @@ export default function Try() {
     name: "",
     email: "",
     role: "",
-    interest: "",
-    plan: "",
     message: "",
   });
+  const [selectedPlans, setSelectedPlans] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.role) {
+      toast({
+        title: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate submission - in production, this would connect to a backend
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const { error } = await supabase
+        .from("beta_signups")
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          role: formData.role,
+          interested_plans: selectedPlans,
+          message: formData.message || null,
+        });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({
-      title: "Request submitted",
-      description: "We'll be in touch soon with beta access details.",
-    });
+      if (error) {
+        if (error.code === "23505") {
+          toast({
+            title: "Email already registered",
+            description: "You're already on our beta list!",
+            variant: "destructive",
+          });
+        } else {
+          throw error;
+        }
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Call edge function to send notification email
+      try {
+        await supabase.functions.invoke("send-beta-notification", {
+          body: {
+            name: formData.name,
+            email: formData.email,
+            role: formData.role,
+            interested_plans: selectedPlans,
+            message: formData.message,
+          },
+        });
+      } catch (emailError) {
+        // Don't fail the submission if email fails
+        console.error("Failed to send notification email:", emailError);
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      toast({
+        title: "Request submitted",
+        description: "We'll be in touch soon with beta access details.",
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast({
+        title: "Submission failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (
@@ -74,6 +124,14 @@ export default function Try() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handlePlanToggle = (planValue: string) => {
+    setSelectedPlans((prev) =>
+      prev.includes(planValue)
+        ? prev.filter((p) => p !== planValue)
+        : [...prev, planValue]
+    );
   };
 
   if (isSubmitted) {
@@ -99,19 +157,17 @@ export default function Try() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-28 md:pt-36 pb-16 bg-hero-gradient animate-gradient overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12)_0%,transparent_50%)]" />
+      <section className="relative pt-28 md:pt-36 pb-16 bg-deep-indigo overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 animate-float-up">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-deep-indigo-foreground mb-6 animate-float-up">
               Join the Beta
             </h1>
-            <p className="text-lg text-white/80 animate-float-up delay-200">
+            <p className="text-lg text-deep-indigo-foreground/80 animate-float-up delay-200">
               Be among the first to experience graph-based learning for complex systems.
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Form */}
@@ -120,7 +176,7 @@ export default function Try() {
           <div className="p-8 rounded-3xl bg-card border border-border shadow-elevated">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Full Name *</Label>
                 <Input
                   id="name"
                   name="name"
@@ -134,7 +190,7 @@ export default function Try() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email">Email Address *</Label>
                 <Input
                   id="email"
                   name="email"
@@ -148,7 +204,7 @@ export default function Try() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
+                <Label htmlFor="role">Role *</Label>
                 <Select
                   value={formData.role}
                   onValueChange={(value) =>
@@ -168,46 +224,28 @@ export default function Try() {
                 </Select>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="interest">Primary Interest Area</Label>
-                <Select
-                  value={formData.interest}
-                  onValueChange={(value) =>
-                    setFormData((prev) => ({ ...prev, interest: value }))
-                  }
-                >
-                  <SelectTrigger className="bg-background">
-                    <SelectValue placeholder="Select your interest" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {interests.map((interest) => (
-                      <SelectItem key={interest.value} value={interest.value}>
-                        {interest.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="plan">Which plan interests you?</Label>
-                <Select
-                  value={formData.plan}
-                  onValueChange={(value) =>
-                    setFormData((prev) => ({ ...prev, plan: value }))
-                  }
-                >
-                  <SelectTrigger className="bg-background">
-                    <SelectValue placeholder="Select a plan" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {planInterests.map((plan) => (
-                      <SelectItem key={plan.value} value={plan.value}>
+              <div className="space-y-3">
+                <Label>Which plans interest you?</Label>
+                <div className="grid grid-cols-2 gap-3">
+                  {planOptions.map((plan) => (
+                    <div
+                      key={plan.value}
+                      className="flex items-center space-x-2"
+                    >
+                      <Checkbox
+                        id={plan.value}
+                        checked={selectedPlans.includes(plan.value)}
+                        onCheckedChange={() => handlePlanToggle(plan.value)}
+                      />
+                      <label
+                        htmlFor={plan.value}
+                        className="text-sm text-foreground cursor-pointer"
+                      >
                         {plan.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                      </label>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -225,9 +263,8 @@ export default function Try() {
 
               <Button
                 type="submit"
-                variant="hero"
                 size="lg"
-                className="w-full"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : "Join the Beta"}
