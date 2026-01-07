@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import Pricing from "./pages/Pricing";
 import Try from "./pages/Try";
 import Admin from "./pages/Admin";
+import AdminAuth from "./pages/AdminAuth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/try" element={<Try />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/login" element={<AdminAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

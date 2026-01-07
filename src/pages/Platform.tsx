@@ -69,7 +69,7 @@ export default function Platform() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-28 md:pt-36 pb-20 bg-hero-gradient animate-gradient overflow-hidden">
+      <section className="relative pt-28 md:pt-36 pb-20 hero-gradient overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12)_0%,transparent_50%)]" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">

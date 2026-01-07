@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { supabase } from "@/integrations/supabase/client";
-import { Download, RefreshCw, Users, TrendingUp } from "lucide-react";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { Download, RefreshCw, Users, TrendingUp, LogOut, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 
 interface BetaSignup {
@@ -33,6 +35,8 @@ interface BetaSignup {
 }
 
 export default function Admin() {
+  const { user, isAdmin, isLoading: authLoading, signOut } = useAdminAuth();
+  const navigate = useNavigate();
   const [signups, setSignups] = useState<BetaSignup[]>([]);
   const [filteredSignups, setFilteredSignups] = useState<BetaSignup[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +47,17 @@ export default function Admin() {
   const roles = ["student", "researcher", "engineer", "educator", "professional", "other"];
   const plans = ["free", "learner", "professional", "student-pro", "creator", "enterprise"];
 
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate("/admin/login");
+    } else if (!authLoading && user && !isAdmin) {
+      navigate("/admin/login");
+    }
+  }, [authLoading, user, isAdmin, navigate]);
+
   const fetchSignups = async () => {
+    if (!isAdmin) return;
+    
     setIsLoading(true);
     try {
       const { data, error } = await supabase
@@ -61,8 +75,10 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    fetchSignups();
-  }, []);
+    if (isAdmin) {
+      fetchSignups();
+    }
+  }, [isAdmin]);
 
   useEffect(() => {
     let filtered = [...signups];
@@ -129,16 +145,36 @@ export default function Admin() {
     return acc;
   }, {} as Record<string, number>);
 
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return null;
+  }
+
   return (
     <Layout>
-      <section className="pt-28 md:pt-36 pb-8 bg-deep-indigo">
+      <section className="pt-28 md:pt-36 pb-8 hero-gradient">
         <div className="container mx-auto px-4 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-heading font-bold text-deep-indigo-foreground mb-2">
-            Beta Signups Admin
-          </h1>
-          <p className="text-deep-indigo-foreground/70">
-            View and manage beta signup requests
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              Beta Signups Admin
+            </h1>
+              <p className="text-white/70">
+                View and manage beta signup requests
+              </p>
+            </div>
+            <Button variant="outline" size="sm" onClick={signOut} className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -261,7 +297,7 @@ export default function Admin() {
               {isLoading ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8">
-                    Loading...
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" />
                   </TableCell>
                 </TableRow>
               ) : filteredSignups.length === 0 ? (
