@@ -47,7 +47,7 @@ export default function Courses() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-28 md:pt-36 pb-20 bg-hero-gradient animate-gradient overflow-hidden">
+      <section className="relative pt-28 md:pt-36 pb-20 hero-gradient overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12)_0%,transparent_50%)]" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -155,7 +155,7 @@ export default function Courses() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-20 bg-hero-gradient">
+      <Section className="py-20 hero-gradient">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-heading font-semibold text-white mb-4">
             Want to create your own course?

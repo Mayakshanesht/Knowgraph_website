@@ -82,69 +82,57 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section - Canvas Animation Background */}
-      <section className="relative min-h-[90vh] flex items-center justify-center bg-charcoal overflow-hidden">
-        {/* Canvas Animation Background */}
-        <div className="absolute inset-0">
-          <HeroCanvasAnimation />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-charcoal/60" />
+      <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
+        {/* Canvas Animation Background - positioned higher */}
+        <div className="absolute inset-0 flex items-start justify-center pt-8">
+          <div className="w-full h-[80vh] max-h-[700px]">
+            <HeroCanvasAnimation />
+          </div>
         </div>
         
-        <div className="container mx-auto px-4 lg:px-8 relative z-10 py-24">
-          <div className="max-w-5xl mx-auto text-center">
-            {/* Large Logo - 70-80% width */}
-            <div className="mb-8" style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
-              <div className="inline-block p-6 md:p-10 bg-white/95 rounded-3xl shadow-elevated">
-                <img 
-                  src={knowgraphLogo} 
-                  alt="KnowGraph" 
-                  className="w-[70vw] max-w-3xl h-auto mx-auto"
-                />
-              </div>
-            </div>
+        {/* Content overlay */}
+        <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-32 pb-24">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Text Logo */}
+            <h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards', opacity: 0 }}
+            >
+              KnowGraph
+            </h1>
             
             <p 
-              className="text-xl md:text-2xl lg:text-3xl text-charcoal-foreground font-heading font-medium mb-4"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards', opacity: 0 }}
+              className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium mb-4"
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.15s forwards', opacity: 0 }}
             >
               Learn complex systems, one Capsule at a time.
             </p>
             
             <p 
-              className="text-lg text-charcoal-foreground/70 max-w-2xl mx-auto mb-10"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards', opacity: 0 }}
+              className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.25s forwards', opacity: 0 }}
             >
               Structured, connected learning for a world where knowledge changes daily.
             </p>
             
             <div 
               className="flex flex-col sm:flex-row gap-4 justify-center"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards', opacity: 0 }}
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.35s forwards', opacity: 0 }}
             >
-              <Button asChild size="xl" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/try">
                   Join the Beta
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="xl" className="border-charcoal-foreground/30 text-charcoal-foreground hover:bg-charcoal-foreground/10">
-                <Link to="/pricing">
-                  View Plans
+              <Button asChild variant="outline" size="lg">
+                <Link to="/platform">
+                  Explore the Platform
                 </Link>
               </Button>
             </div>
-            
-            <p 
-              className="text-sm text-charcoal-foreground/50 mt-6"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards', opacity: 0 }}
-            >
-              Beta access available. Paid plans optional.
-            </p>
           </div>
         </div>
-        
-        {/* Bottom fade to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal to-transparent" />
       </section>
 
       {/* The Attention Paradox - Visual-First Section */}
