@@ -82,42 +82,32 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section - Canvas Animation Background */}
-      <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
-        {/* Canvas Animation Background - positioned higher */}
-        <div className="absolute inset-0 flex items-start justify-center pt-8">
-          <div className="w-full h-[80vh] max-h-[700px]">
-            <HeroCanvasAnimation />
-          </div>
+      <section className="relative min-h-screen flex items-end justify-center bg-background overflow-hidden pb-24">
+        {/* Canvas Animation Background - full screen, positioned at top */}
+        <div className="absolute inset-0">
+          <HeroCanvasAnimation />
         </div>
         
-        {/* Content overlay */}
-        <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-32 pb-24">
+        {/* Content overlay at bottom */}
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Text Logo */}
-            <h1 
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards', opacity: 0 }}
-            >
-              KnowGraph
-            </h1>
-            
             <p 
               className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium mb-4"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.15s forwards', opacity: 0 }}
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards', opacity: 0 }}
             >
               Learn complex systems, one Capsule at a time.
             </p>
             
             <p 
               className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.25s forwards', opacity: 0 }}
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards', opacity: 0 }}
             >
               Structured, connected learning for a world where knowledge changes daily.
             </p>
             
             <div 
               className="flex flex-col sm:flex-row gap-4 justify-center"
-              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.35s forwards', opacity: 0 }}
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards', opacity: 0 }}
             >
               <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/try">
