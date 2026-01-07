@@ -110,7 +110,7 @@ export default function Pricing() {
                 ))}
               </ul>
               
-              <Button asChild variant={plan.highlight ? "hero" : "outline"} size="sm" className="w-full">
+              <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
                 <Link to="/try">I'm interested</Link>
               </Button>
             </div>
