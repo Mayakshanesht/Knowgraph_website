@@ -9,12 +9,18 @@ const navigation = [
   { name: "Platform", href: "/platform" },
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Courses", href: "/courses" },
+  { name: "KnowGraph Demo", href: "/app-demo" },
   { name: "Pricing", href: "/pricing" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isAppDemo = location.pathname === "/app-demo";
+
+  if (isAppDemo) {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
@@ -45,7 +51,7 @@ export function Header() {
         </div>
 
         <div className="hidden lg:block">
-          <Button asChild variant="hero" size="default">
+          <Button asChild variant="default" size="default" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
             <Link to="/try">Join Beta</Link>
           </Button>
         </div>
@@ -78,7 +84,7 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button asChild variant="hero" size="default" className="w-full">
+            <Button asChild variant="default" size="default" className="w-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
               <Link to="/try" onClick={() => setMobileMenuOpen(false)}>
                 Join Beta
               </Link>

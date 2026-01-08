@@ -6,33 +6,41 @@ import { Check, ArrowRight, Sparkles, Building2, Users } from "lucide-react";
 
 const plans = [
   {
-    name: "Free",
+    name: "Free Explorer",
     description: "Explore the platform",
-    credits: "Limited credits",
+    price: "₹0",
+    priceUsd: "Free",
+    credits: "30 credits / month",
     color: "border-border",
-    features: ["Public Capsules", "Read-only graphs", "Light progress tracking"],
+    features: ["Public Capsules", "Read-only graphs", "Basic analytics"],
   },
   {
     name: "Learner",
     description: "For active learners",
-    credits: "Monthly credits",
+    price: "₹999 / month",
+    priceUsd: "$10",
+    credits: "150 credits / month",
     color: "border-primary/50",
     highlight: true,
-    features: ["Full learning paths", "Quizzes & exercises", "Personal learning guide", "Progress analytics"],
+    features: ["Learning paths", "Quizzes", "Learning analytics"],
   },
   {
     name: "Professional",
     description: "For career growth",
-    credits: "More credits",
+    price: "₹2,499 / month",
+    priceUsd: "$25",
+    credits: "500 credits / month",
     color: "border-violet/50",
-    features: ["Faster recommendations", "Deeper analytics", "Priority support", "Designed for upskilling"],
+    features: ["Advanced analytics", "Faster recommendations", "Priority support"],
   },
   {
     name: "Student Pro",
     description: "For serious students",
-    credits: "Maximum credits",
+    price: "₹4,999 / month",
+    priceUsd: "$49",
+    credits: "1,200 credits / month",
     color: "border-teal/50",
-    features: ["Deep mastery tracking", "Exam alignment", "Curriculum mapping", "Long-term learning"],
+    features: ["Deep mastery analytics", "Exam alignment", "Curriculum tracking"],
   },
 ];
 
@@ -47,8 +55,10 @@ export default function Pricing() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 animate-float-up">
               Pricing
             </h1>
-            <p className="text-lg md:text-xl text-white/80 animate-float-up delay-200">
+            <p className="text-lg text-white/80 animate-float-up delay-200">
               Credit-based plans designed for different learning journeys.
+              <br />
+              <span className="text-white font-medium">Each capsule: 40 seconds to 1.5 minutes</span>
             </p>
           </div>
         </div>
@@ -99,6 +109,12 @@ export default function Pricing() {
                 {plan.name}
               </h3>
               <p className="text-sm text-muted-foreground mb-2">{plan.description}</p>
+              <div className="mb-4">
+                <span className="text-2xl font-bold text-foreground">{plan.price}</span>
+                {plan.priceUsd && (
+                  <span className="text-sm text-muted-foreground ml-2">({plan.priceUsd})</span>
+                )}
+              </div>
               <p className="text-sm font-medium text-primary mb-4">{plan.credits}</p>
               
               <ul className="space-y-2 mb-6">
@@ -205,7 +221,7 @@ export default function Pricing() {
           <p className="text-white/80 mb-8">
             Help shape the platform while learning for free.
           </p>
-          <Button asChild variant="hero-white" size="lg">
+          <Button asChild variant="default" size="lg" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
             <Link to="/try">
               Join the Beta
               <ArrowRight className="w-5 h-5" />

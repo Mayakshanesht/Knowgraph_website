@@ -143,7 +143,7 @@ export default function Courses() {
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </Button>
-                <Button asChild variant="ghost" className="flex-1">
+                <Button asChild variant="default" className="flex-1">
                   <Link to="/try">
                     Join Beta to Access
                   </Link>

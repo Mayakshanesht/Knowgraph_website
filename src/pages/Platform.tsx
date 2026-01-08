@@ -12,6 +12,15 @@ import {
   Upload,
   Users,
   ArrowRight,
+  Brain,
+  Bot,
+  Sparkles,
+  Target,
+  Zap,
+  BookOpen,
+  Gift,
+  Trophy,
+  Star,
 } from "lucide-react";
 
 const platformFeatures = [
@@ -65,6 +74,81 @@ const platformFeatures = [
   },
 ];
 
+const aiAgents = [
+  {
+    icon: Brain,
+    title: "Research Agents",
+    description: "Automatically discover and extract key concepts from any learning material using advanced AI research methodologies.",
+    features: [
+      "Intelligent concept extraction",
+      "Cross-reference validation", 
+      "Source credibility assessment",
+      "Knowledge gap identification"
+    ],
+    color: "bg-gradient-to-br from-blue-500 to-purple-600 text-white",
+  },
+  {
+    icon: Bot,
+    title: "Reasoning Agents",
+    description: "Apply logical reasoning to structure concepts, identify prerequisites, and build optimal learning paths.",
+    features: [
+      "Prerequisite relationship mapping",
+      "Learning path optimization",
+      "Difficulty level assessment",
+      "Personalized adaptation"
+    ],
+    color: "bg-gradient-to-br from-green-500 to-teal-600 text-white",
+  },
+];
+
+const storytellingFeatures = [
+  {
+    icon: Sparkles,
+    title: "AI Storytelling",
+    description: "Transform complex concepts into engaging narratives that enhance memory retention and understanding.",
+    color: "bg-purple/10 text-purple",
+  },
+  {
+    icon: BookOpen,
+    title: "Interactive Capsules",
+    description: "40-second micro-learning experiences with rich storytelling and contextual examples.",
+    color: "bg-blue/10 text-blue",
+  },
+  {
+    icon: Target,
+    title: "Contextual Learning",
+    description: "Every concept wrapped in relevant stories and real-world applications for deeper comprehension.",
+    color: "bg-green/10 text-green",
+  },
+];
+
+const studentPerks = [
+  {
+    icon: Trophy,
+    title: "Achievement System",
+    description: "Earn badges and certificates as you master concepts and complete learning paths.",
+    color: "bg-yellow/10 text-yellow",
+  },
+  {
+    icon: Gift,
+    title: "Premium Content",
+    description: "Access exclusive capsules, advanced topics, and expert-created learning materials.",
+    color: "bg-purple/10 text-purple",
+  },
+  {
+    icon: Zap,
+    title: "Study Groups",
+    description: "Join collaborative learning sessions and study with peers from around the world.",
+    color: "bg-blue/10 text-blue",
+  },
+  {
+    icon: Star,
+    title: "Personalized Coaching",
+    description: "Get 1-on-1 guidance from AI tutor for difficult concepts.",
+    color: "bg-green/10 text-green",
+  },
+];
+
 export default function Platform() {
   return (
     <Layout>
@@ -84,10 +168,105 @@ export default function Platform() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
+      {/* AI Agents Section */}
+      <Section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <SectionHeader
+          title="AI-Powered Learning Intelligence"
+          description="Advanced research and reasoning agents that transform how you learn"
+        />
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {aiAgents.map((agent, i) => {
+            const Icon = agent.icon;
+            return (
+              <div
+                key={agent.title}
+                className="p-8 rounded-3xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className={`w-16 h-16 rounded-2xl ${agent.color} flex items-center justify-center mb-6`}>
+                  <Icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
+                  {agent.title}
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {agent.description}
+                </p>
+                <ul className="space-y-3">
+                  {agent.features.map((feature, index) => (
+                    <li key={index} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="text-sm text-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* Storytelling Section */}
+      <Section className="py-20">
+        <SectionHeader
+          title="Storytelling-Driven Learning"
+          description="Transform complex concepts into memorable learning experiences"
+        />
+        <div className="grid md:grid-cols-3 gap-6">
+          {storytellingFeatures.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <div
+                key={feature.title}
+                className="p-6 rounded-2xl bg-card border border-border shadow-soft card-hover"
+              >
+                <div className={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-4`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* Student Perks Section */}
+      <Section className="py-20 bg-gradient-to-r from-primary/5 via-violet/5 to-teal/5">
+        <SectionHeader
+          title="Exclusive Student Perks"
+          description="Unlock premium features and benefits to accelerate your learning journey"
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {studentPerks.map((perk, i) => {
+            const Icon = perk.icon;
+            return (
+              <div
+                key={perk.title}
+                className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/20 shadow-soft hover:shadow-lg transition-all duration-300"
+              >
+                <div className={`w-12 h-12 rounded-xl ${perk.color} flex items-center justify-center mb-4`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                  {perk.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {perk.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
       {/* Platform Features */}
       <Section className="py-20">
         <SectionHeader
-          title="Platform Features"
+          title="Core Platform Features"
           description="Everything you need to master complex technical subjects"
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

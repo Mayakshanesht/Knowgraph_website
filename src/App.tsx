@@ -9,6 +9,7 @@ import LearningPaths from "./pages/LearningPaths";
 import Courses from "./pages/Courses";
 import Pricing from "./pages/Pricing";
 import Try from "./pages/Try";
+import AppDemo from "./pages/AppDemo";
 import Admin from "./pages/Admin";
 import AdminAuth from "./pages/AdminAuth";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/courses" element={<Courses />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/try" element={<Try />} />
+          <Route path="/app-demo" element={<AppDemo />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
