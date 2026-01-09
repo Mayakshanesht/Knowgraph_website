@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Route, Target, TrendingUp } from "lucide-react";
+import { ArrowRight, Route, Target, TrendingUp, Lightbulb, Package, FolderOpen, Network, Globe } from "lucide-react";
 
 const examplePaths = [
   {
@@ -99,6 +99,30 @@ export default function LearningPaths() {
         </div>
       </Section>
 
+      {/* Why KnowGraph Exists */}
+      <Section className="py-20 bg-gradient-to-b from-background via-primary/[0.02] to-background">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">
+            Why KnowGraph Exists
+          </h2>
+          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              KnowGraph was built to solve a personal problem.
+            </p>
+            <p>
+              Keeping up with the latest research in AI and autonomous driving isn't practical anymore.
+              Reading every paper doesn't scale. Skimming abstracts doesn't build understanding. Videos fragment context.
+            </p>
+            <p>
+              I needed a tool that could understand research, break it into key ideas, convert it into reel-style learning, and show it in my feed—so learning could happen daily.
+            </p>
+            <p className="text-foreground font-medium">
+              That tool didn't exist. So I built it.
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* Example Paths */}
       <Section className="py-20 bg-gradient-to-b from-background via-primary/[0.02] to-background">
         <SectionHeader
@@ -119,6 +143,115 @@ export default function LearningPaths() {
               </p>
             </div>
           ))}
+        </div>
+      </Section>
+
+      {/* How KnowGraph Works */}
+      <Section className="py-20">
+        <div className="max-w-4xl mx-auto">
+          <SectionHeader
+            title="How KnowGraph Works"
+            description="A Simple Knowledge Hierarchy"
+          />
+          
+          <div className="space-y-6">
+            {/* Knowledge Hierarchy Flow */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 py-8">
+              {/* Key Ideas */}
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Lightbulb className="w-8 h-8" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Key Ideas</h4>
+                <p className="text-sm text-muted-foreground max-w-[120px]">
+                  distilled insights from papers, PDFs, notes, or videos
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:block text-primary">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+              <div className="md:hidden text-primary rotate-90">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+
+              {/* Capsules */}
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Package className="w-8 h-8" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Capsules</h4>
+                <p className="text-sm text-muted-foreground max-w-[120px]">
+                  each key idea becomes a short, visual learning unit
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:block text-primary">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+              <div className="md:hidden text-primary rotate-90">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+
+              {/* Containers */}
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <FolderOpen className="w-8 h-8" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Containers</h4>
+                <p className="text-sm text-muted-foreground max-w-[120px]">
+                  related capsules form a topic or short course
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:block text-primary">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+              <div className="md:hidden text-primary rotate-90">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+
+              {/* Clusters */}
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Network className="w-8 h-8" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Clusters</h4>
+                <p className="text-sm text-muted-foreground max-w-[120px]">
+                  containers connect across domains
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:block text-primary">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+              <div className="md:hidden text-primary rotate-90">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+
+              {/* Global Knowledge Graph */}
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Globe className="w-8 h-8" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Global Knowledge Graph</h4>
+                <p className="text-sm text-muted-foreground max-w-[120px]">
+                  a living, connected map of knowledge
+                </p>
+              </div>
+            </div>
+
+            {/* Footer Line */}
+            <div className="text-center pt-6 border-t border-border">
+              <p className="text-lg font-medium text-foreground">
+                You don't just consume content—you see how concepts relate.
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 

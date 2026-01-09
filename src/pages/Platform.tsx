@@ -21,6 +21,11 @@ import {
   Gift,
   Trophy,
   Star,
+  PlayCircle,
+  Navigation,
+  BrainCircuit,
+  FileCheck,
+  MessageCircle,
 } from "lucide-react";
 
 const platformFeatures = [
@@ -98,6 +103,39 @@ const aiAgents = [
       "Personalized adaptation"
     ],
     color: "bg-gradient-to-br from-green-500 to-teal-600 text-white",
+  },
+];
+
+const howYouLearnFeatures = [
+  {
+    icon: PlayCircle,
+    title: "Short, focused capsules",
+    description: "Like reels, but purposeful—40-second micro-learning experiences that build real understanding.",
+    color: "bg-blue/10 text-blue",
+  },
+  {
+    icon: Navigation,
+    title: "Visual navigation",
+    description: "Navigate through containers and clusters with intuitive visual connections between concepts.",
+    color: "bg-violet/10 text-violet",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Higher retention",
+    description: "Learn via abstraction and visuals that stick, not just rote memorization.",
+    color: "bg-teal/10 text-teal",
+  },
+  {
+    icon: FileCheck,
+    title: "Quizzes and analytics",
+    description: "Validate your understanding with targeted quizzes and track progress with detailed analytics.",
+    color: "bg-green/10 text-green",
+  },
+  {
+    icon: MessageCircle,
+    title: "Personal AI tutor",
+    description: "Get instant clarification on doubts from your AI tutor, available 24/7.",
+    color: "bg-orange/10 text-orange",
   },
 ];
 
@@ -234,6 +272,35 @@ export default function Platform() {
         </div>
       </Section>
 
+      {/* How You Learn Section */}
+      <Section className="py-20 bg-gradient-to-b from-background via-primary/[0.02] to-background">
+        <SectionHeader
+          title="How You Learn with KnowGraph"
+          description="Experience a new way of learning that adapts to your needs"
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {howYouLearnFeatures.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <div
+                key={feature.title}
+                className="p-6 rounded-2xl bg-card border border-border shadow-soft card-hover"
+              >
+                <div className={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-4`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
       {/* Student Perks Section */}
       <Section className="py-20 bg-gradient-to-r from-primary/5 via-violet/5 to-teal/5">
         <SectionHeader
@@ -289,6 +356,61 @@ export default function Platform() {
               </div>
             );
           })}
+        </div>
+      </Section>
+
+      {/* Bring Your Own Content Section */}
+      <Section className="py-20 bg-gradient-to-b from-background via-primary/[0.02] to-background">
+        <div className="max-w-4xl mx-auto">
+          <SectionHeader
+            title="Bring Your Own Content"
+            description="Transform your existing materials into structured learning experiences"
+          />
+          
+          <div className="text-center mb-8">
+            <p className="text-lg text-muted-foreground mb-8">
+              Upload your own:
+            </p>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="p-6 rounded-2xl bg-card border border-border shadow-soft">
+                <div className="w-12 h-12 rounded-xl bg-blue/10 text-blue flex items-center justify-center mx-auto mb-3">
+                  <Upload className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Research Papers</h4>
+              </div>
+              
+              <div className="p-6 rounded-2xl bg-card border border-border shadow-soft">
+                <div className="w-12 h-12 rounded-xl bg-violet/10 text-violet flex items-center justify-center mx-auto mb-3">
+                  <FileCheck className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">PDFs</h4>
+              </div>
+              
+              <div className="p-6 rounded-2xl bg-card border border-border shadow-soft">
+                <div className="w-12 h-12 rounded-xl bg-teal/10 text-teal flex items-center justify-center mx-auto mb-3">
+                  <BookOpen className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Lecture Notes</h4>
+              </div>
+              
+              <div className="p-6 rounded-2xl bg-card border border-border shadow-soft">
+                <div className="w-12 h-12 rounded-xl bg-green/10 text-green flex items-center justify-center mx-auto mb-3">
+                  <PlayCircle className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-foreground mb-1">Videos</h4>
+              </div>
+            </div>
+            
+            <div className="p-8 rounded-3xl bg-gradient-to-r from-primary/5 via-violet/5 to-teal/5 border border-primary/20">
+              <p className="text-lg font-medium text-foreground mb-2">
+                KnowGraph automatically builds structured learning containers and delivers them in a personalized learning feed.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Save hours of manual organization. Let AI do the heavy lifting while you focus on learning.
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 
