@@ -62,6 +62,34 @@ export default function Courses() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
+      {/* LMS CTA Section */}
+      <section className="py-16 bg-gradient-to-br from-primary/10 via-primary/5 to-background/50">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">
+              Start Your Learning Journey Today
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Access our comprehensive courses on the new KnowGraph Learning Management System
+            </p>
+            <Button 
+              asChild 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30"
+            >
+              <a 
+                href="https://know-path-weaver-onsf.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Enroll & Start Learning on the KnowGraph LMS
+                <ExternalLink className="w-5 h-5 ml-2" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* How Courses Work */}
       <Section className="py-16">
         <div className="max-w-4xl mx-auto">

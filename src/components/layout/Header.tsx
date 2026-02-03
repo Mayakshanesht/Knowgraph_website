@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ExternalLink } from "lucide-react";
 import knowgraphLogo from "@/assets/knowgraph-logo.png";
 
 const navigation = [
@@ -48,6 +48,21 @@ export function Header() {
               {item.name}
             </Link>
           ))}
+          <Button 
+            asChild 
+            variant="outline" 
+            size="default" 
+            className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-medium"
+          >
+            <a 
+              href="https://know-path-weaver-onsf.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Go to LMS
+              <ExternalLink className="w-4 h-4 ml-1" />
+            </a>
+          </Button>
         </div>
 
         <div className="hidden lg:block">
@@ -84,6 +99,22 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
+            <Button 
+              asChild 
+              variant="outline" 
+              size="default" 
+              className="w-full border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-medium"
+            >
+              <a 
+                href="https://know-path-weaver-onsf.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Go to LMS
+                <ExternalLink className="w-4 h-4 ml-1" />
+              </a>
+            </Button>
             <Button asChild variant="default" size="default" className="w-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
               <Link to="/try" onClick={() => setMobileMenuOpen(false)}>
                 Join Beta
