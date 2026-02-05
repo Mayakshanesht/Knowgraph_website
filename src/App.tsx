@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Platform from "./pages/Platform";
 import LearningPaths from "./pages/LearningPaths";
 import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
 import Pricing from "./pages/Pricing";
 import Try from "./pages/Try";
 import AppDemo from "./pages/AppDemo";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/platform" element={<Platform />} />
           <Route path="/learning-paths" element={<LearningPaths />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseSlug" element={<CourseDetail />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/try" element={<Try />} />
           <Route path="/app-demo" element={<AppDemo />} />

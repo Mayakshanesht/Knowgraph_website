@@ -4,32 +4,34 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, BookOpen, Layers, Network, ArrowRight } from "lucide-react";
 
+const LMS_URL = "https://know-path-weaver.vercel.app/";
+
 const courses = [
   {
+    slug: "ai",
     title: "AI Course — ML → LLMs → Generative AI",
-    description: "Comprehensive journey from machine learning fundamentals through deep learning to large language models and generative AI.",
-    link: "https://sites.google.com/cloudbeerobotics-ai.com/home/courses/ai-bootcamp",
+    description: "Foundations → system-level thinking → deployable autonomy projects.",
     color: "border-t-primary",
     bgColor: "bg-primary/5",
   },
   {
-    title: "Autonomous Driving Systems",
-    description: "Complete coverage of autonomous driving technology including perception, sensor fusion, prediction, planning, and control.",
-    link: "https://sites.google.com/cloudbeerobotics-ai.com/home/courses/advanced-driver-assistance-systems-development-bootcamp",
+    slug: "autonomous-driving-adas",
+    title: "Autonomous Driving & ADAS Course",
+    description: "End-to-end ADAS and autonomous driving engineering.",
     color: "border-t-violet",
     bgColor: "bg-violet/5",
   },
   {
+    slug: "vehicle-control",
     title: "Modern Vehicle Control — PID → LQR → MPC",
-    description: "From classical PID control through optimal control theory to model predictive control for autonomous vehicles.",
-    link: "https://sites.google.com/cloudbeerobotics-ai.com/home/courses/advanced-controls-bootcamp-for-autonomous-driving",
+    description: "Advanced vehicle dynamics and control for ADAS & autonomous driving.",
     color: "border-t-teal",
     bgColor: "bg-teal/5",
   },
   {
+    slug: "motion-prediction-planning",
     title: "Motion Prediction & Planning",
-    description: "Understanding and implementing motion prediction and trajectory planning systems for autonomous vehicles.",
-    link: "https://sites.google.com/cloudbeerobotics-ai.com/home/courses/motion-prediction-planning-for-autonomous-driving-bootcamp",
+    description: "Planning, prediction, and decision-making projects for autonomous driving.",
     color: "border-t-accent",
     bgColor: "bg-accent/5",
   },
@@ -78,7 +80,7 @@ export default function Courses() {
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30"
             >
               <a 
-                href="https://know-path-weaver-onsf.vercel.app/" 
+                href={LMS_URL} 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -166,10 +168,10 @@ export default function Courses() {
               </p>
               <div className="flex gap-3">
                 <Button asChild variant="outline" className="flex-1">
-                  <a href={course.link} target="_blank" rel="noopener noreferrer">
+                  <Link to={`/courses/${course.slug}`}>
                     View Course
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </Button>
                 <Button asChild variant="default" className="flex-1">
                   <Link to="/try">

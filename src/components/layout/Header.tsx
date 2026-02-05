@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ExternalLink } from "lucide-react";
 import knowgraphLogo from "@/assets/knowgraph-logo.png";
 
+const LMS_URL = "https://know-path-weaver.vercel.app/";
+
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Platform", href: "/platform" },
@@ -55,7 +57,7 @@ export function Header() {
             className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-medium"
           >
             <a 
-              href="https://know-path-weaver-onsf.vercel.app/" 
+              href={LMS_URL} 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -106,7 +108,7 @@ export function Header() {
               className="w-full border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-medium"
             >
               <a 
-                href="https://know-path-weaver-onsf.vercel.app/" 
+                href={LMS_URL} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
