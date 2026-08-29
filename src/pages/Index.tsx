@@ -421,6 +421,11 @@ export default function Index() {
               </span>
             ))}
           </div>
+          <div className="mt-8 flex justify-center gap-6 text-sm text-muted-foreground">
+            <a href="/privacy.html" className="hover:text-foreground underline">Privacy Policy</a>
+            <a href="/terms.html" className="hover:text-foreground underline">Terms of Service</a>
+            <a href="mailto:mayurwaghchoure1995@gmail.com" className="hover:text-foreground underline">Contact</a>
+          </div>
         </div>
       </Section>
     </Layout>
