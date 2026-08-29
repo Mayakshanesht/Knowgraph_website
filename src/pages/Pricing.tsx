@@ -6,45 +6,52 @@ import { Check, ArrowRight, Sparkles, Building2, Users } from "lucide-react";
 
 const plans = [
   {
-    name: "Free Explorer",
-    description: "Explore the platform",
+    name: "Free",
+    tier: "",
+    description: "Learn every day, free forever",
     price: "₹0",
-    priceUsd: "Free",
-    credits: "30 credits / month",
+    priceUsd: "€0",
+    credits: "3 path generations / month",
     color: "border-border",
-    features: ["Public Capsules", "Read-only graphs", "Basic analytics"],
+    features: [
+      "Unlimited feed & courses browsing",
+      "20 playground runs a day",
+      "Enroll in any free course",
+    ],
   },
   {
-    name: "Learner",
+    name: "Standard",
+    tier: "standard",
     description: "For active learners",
-    price: "₹999 / month",
-    priceUsd: "$10",
-    credits: "150 credits / month",
+    price: "₹99 / month",
+    priceUsd: "€1.99",
+    credits: "30 path generations / month",
     color: "border-primary/50",
     highlight: true,
-    features: ["Learning paths", "Quizzes", "Learning analytics"],
+    features: [
+      "Everything in Free",
+      "200 playground runs a day",
+      "Priority generation queue",
+    ],
   },
   {
-    name: "Professional",
-    description: "For career growth",
-    price: "₹2,499 / month",
-    priceUsd: "$25",
-    credits: "500 credits / month",
+    name: "Creator",
+    tier: "creator",
+    description: "Build and sell your own courses",
+    price: "₹599 / month",
+    priceUsd: "€9.99",
+    credits: "100 path generations / month",
     color: "border-violet/50",
-    features: ["Advanced analytics", "Faster recommendations", "Priority support"],
-  },
-  {
-    name: "Student Pro",
-    description: "For serious students",
-    price: "₹4,999 / month",
-    priceUsd: "$49",
-    credits: "1,200 credits / month",
-    color: "border-teal/50",
-    features: ["Deep mastery analytics", "Exam alignment", "Curriculum tracking"],
+    features: [
+      "Everything in Standard",
+      "Create courses: AI-generated or your own videos",
+      "70% revenue share on paid enrollments",
+    ],
   },
 ];
 
 export default function Pricing() {
+  const uid = new URLSearchParams(window.location.search).get("uid") ?? "";
   return (
     <Layout>
       {/* Hero */}
@@ -126,9 +133,23 @@ export default function Pricing() {
                 ))}
               </ul>
               
-              <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
-                <Link to="/try">I'm interested</Link>
-              </Button>
+              {plan.tier ? (
+                uid ? (
+                  <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
+                    <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}`}>
+                      Subscribe — {plan.price}
+                    </a>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" className="w-full" disabled>
+                    Open from the Knowgraph app to subscribe
+                  </Button>
+                )
+              ) : (
+                <Button asChild variant="outline" size="sm" className="w-full">
+                  <Link to="/try">Get the app</Link>
+                </Button>
+              )}
             </div>
           ))}
         </div>
