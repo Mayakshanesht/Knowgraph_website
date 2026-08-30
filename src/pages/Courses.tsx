@@ -6,6 +6,35 @@ import { ExternalLink, BookOpen, Layers, Network, ArrowRight } from "lucide-reac
 
 const LMS_URL = "https://know-path-weaver.vercel.app/";
 
+const APP_URL =
+  "https://knowgraph-api.greenlifeai.workers.dev/v1/media/app/knowgraph-latest.apk";
+
+// Reel courses that live in the Knowgraph app: enroll happens in-app, with
+// chapter 1 free as a preview in the feed.
+const appCourses = [
+  {
+    title: "Computer Vision & Generative AI",
+    description:
+      "91 micro-reels across 8 chapters — camera models to diffusion. Chapter 1 free in the app. \u20B9999",
+    color: "border-t-primary",
+    bgColor: "bg-primary/5",
+  },
+  {
+    title: "Physical AI & Robotics",
+    description:
+      "From sensing to locomotion and manipulation, with AI-generated concept demos. Chapter 1 free in the app. \u20B9799",
+    color: "border-t-teal",
+    bgColor: "bg-teal/5",
+  },
+  {
+    title: "CI/CD Foundations",
+    description:
+      "The delivery pipeline one concept at a time — 40 reels plus the written course and project. Free.",
+    color: "border-t-violet",
+    bgColor: "bg-violet/5",
+  },
+];
+
 const courses = [
   {
     slug: "ai",
@@ -135,6 +164,34 @@ export default function Courses() {
               </span>
             ))}
           </div>
+        </div>
+      </Section>
+
+      {/* In-app reel courses */}
+      <Section className="py-20">
+        <SectionHeader
+          title="Reel Courses — in the Knowgraph App"
+          description="Cinema-grade micro-reels with AI concept demos, quizzes and streaks. Download the app to preview chapter 1 of every course free."
+        />
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+          {appCourses.map((course) => (
+            <div
+              key={course.title}
+              className={`p-6 rounded-2xl bg-card border border-border border-t-4 ${course.color} ${course.bgColor} shadow-soft flex flex-col`}
+            >
+              <h3 className="font-heading font-semibold text-foreground mb-2">
+                {course.title}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4 flex-1">
+                {course.description}
+              </p>
+              <Button asChild size="sm" variant="outline">
+                <a href={APP_URL}>
+                  Get the app <ArrowRight className="w-4 h-4 ml-1" />
+                </a>
+              </Button>
+            </div>
+          ))}
         </div>
       </Section>
 
