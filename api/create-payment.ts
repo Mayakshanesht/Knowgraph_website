@@ -27,6 +27,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const tier = String(req.query.tier ?? '');
   const courseId = String(req.query.courseId ?? '');
 
+  // One-time purchases that are not courses: annual plan and streak freeze.
+  const product = String(req.query.product ?? '');
+  if (product === 'standard-annual' || product === 'freeze') {
+    const amount = product === 'freeze' ? 2900 : 69900;
+    const r = await fetch(`${RZP}/payment_links`, {
+      method: 'POST',
+      headers: { Authorization: auth, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount,
+        currency: 'INR',
+        description:
+          product === 'freeze'
+            ? 'Knowgraph streak freeze'
+            : 'Knowgraph Standard - 1 year',
+        notes: { uid, product },
+      }),
+    });
+    const link = await r.json();
+    if (!r.ok || !link.short_url) return res.status(502).json({ error: link });
+    return res.redirect(302, link.short_url);
+  }
+
   if (tier === 'standard' || tier === 'creator') {
     const plan =
       tier === 'creator'

@@ -63,13 +63,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const body = JSON.stringify(
     notes?.courseId
       ? { type: 'course', userId: uid, courseId: notes.courseId, amountCents: amount }
-      : {
-          type: 'subscription',
-          userId: uid,
-          tier: notes?.tier === 'creator' ? 'creator' : 'standard',
-          amountCents: amount,
-          months: 1,
-        },
+      : notes?.product === 'freeze'
+        ? { type: 'freeze', userId: uid, quantity: 1 }
+        : notes?.product === 'standard-annual'
+          ? {
+              type: 'subscription',
+              userId: uid,
+              tier: 'standard',
+              amountCents: amount,
+              months: 12,
+            }
+          : {
+              type: 'subscription',
+              userId: uid,
+              tier: notes?.tier === 'creator' ? 'creator' : 'standard',
+              amountCents: amount,
+              months: 1,
+            },
   );
   const mac = createHmac('sha256', kgSecret).update(body).digest('hex');
   const upstream = await fetch(`${kgApi}/v1/webhooks/payment`, {
