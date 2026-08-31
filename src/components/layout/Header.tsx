@@ -6,11 +6,12 @@ import knowgraphLogo from "@/assets/knowgraph-logo.png";
 
 const LMS_URL = "https://courses.knowgraphapp.com/";
 
-const navigation = [
+const navigation: { name: string; href: string; external?: boolean }[] = [
   { name: "Home", href: "/" },
   { name: "Platform", href: "/platform" },
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Courses", href: "/courses" },
+  { name: "Web App", href: "/app/", external: true },
   { name: "KnowGraph Demo", href: "/app-demo" },
   { name: "Pricing", href: "/pricing" },
 ];
@@ -38,6 +39,15 @@ export function Header() {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           {navigation.map((item) => (
+            item.external ? (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
+              >
+                {item.name}
+              </a>
+            ) : (
             <Link
               key={item.name}
               to={item.href}
@@ -49,6 +59,7 @@ export function Header() {
             >
               {item.name}
             </Link>
+            )
           ))}
           <Button 
             asChild 
@@ -88,6 +99,15 @@ export function Header() {
         <div className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navigation.map((item) => (
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="block text-sm font-medium text-muted-foreground hover:text-primary"
+                >
+                  {item.name}
+                </a>
+              ) : (
               <Link
                 key={item.name}
                 to={item.href}
@@ -100,6 +120,7 @@ export function Header() {
               >
                 {item.name}
               </Link>
+              )
             ))}
             <Button 
               asChild 
