@@ -29,8 +29,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // One-time purchases that are not courses: annual plan and streak freeze.
   const product = String(req.query.product ?? '');
-  if (product === 'standard-annual' || product === 'freeze') {
-    const amount = product === 'freeze' ? 2900 : 69900;
+  // Annual = ten months' price (routes around RBI e-mandate renewal
+  // failures on recurring cards); freeze is a one-off.
+  const ANNUAL: Record<string, number> = {
+    'learner-annual': 199000,
+    'pro-annual': 399000,
+    'creator-annual': 999000,
+    'standard-annual': 199000, // legacy alias -> learner
+  };
+  if (product === 'freeze' || ANNUAL[product] !== undefined) {
+    const amount = product === 'freeze' ? 2900 : ANNUAL[product];
     const r = await fetch(`${RZP}/payment_links`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
@@ -49,11 +57,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.redirect(302, link.short_url);
   }
 
-  if (tier === 'standard' || tier === 'creator') {
-    const plan =
-      tier === 'creator'
-        ? process.env.RAZORPAY_PLAN_CREATOR
-        : process.env.RAZORPAY_PLAN_STANDARD;
+  if (['learner', 'pro', 'creator', 'standard'].includes(tier)) {
+    const plan = {
+      learner: process.env.RAZORPAY_PLAN_LEARNER,
+      standard: process.env.RAZORPAY_PLAN_LEARNER, // legacy alias
+      pro: process.env.RAZORPAY_PLAN_PRO,
+      creator: process.env.RAZORPAY_PLAN_CREATOR,
+    }[tier];
     if (!plan) return res.status(503).json({ error: `no plan configured for ${tier}` });
     const r = await fetch(`${RZP}/subscriptions`, {
       method: 'POST',

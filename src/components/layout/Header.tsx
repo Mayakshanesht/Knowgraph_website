@@ -12,7 +12,6 @@ const navigation: { name: string; href: string; external?: boolean }[] = [
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Courses", href: "/courses" },
   { name: "Web App", href: "/app/", external: true },
-  { name: "KnowGraph Demo", href: "/app-demo" },
   { name: "Pricing", href: "/pricing" },
 ];
 
@@ -89,7 +88,7 @@ export function Header() {
 
         <div className="hidden lg:block">
           <Button asChild variant="default" size="default" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
-            <Link to="/try">Join Beta</Link>
+            <a href="/app/">Open App</a>
           </Button>
         </div>
 
@@ -148,9 +147,9 @@ export function Header() {
               </a>
             </Button>
             <Button asChild variant="default" size="default" className="w-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
-              <Link to="/try" onClick={() => setMobileMenuOpen(false)}>
-                Join Beta
-              </Link>
+              <a href="/app/" onClick={() => setMobileMenuOpen(false)}>
+                Open App
+              </a>
             </Button>
           </div>
         </div>

@@ -10,41 +10,61 @@ const plans = [
     tier: "",
     description: "Learn every day, free forever",
     price: "₹0",
-    priceUsd: "€0",
-    credits: "3 path generations / month",
+    priceUsd: "$0",
+    credits: "5 generations / month",
     color: "border-border",
     features: [
-      "Unlimited feed & courses browsing",
+      "Unlimited feed — always free, every tier",
       "20 playground runs a day",
       "Enroll in any free course",
     ],
   },
   {
-    name: "Standard",
-    tier: "standard",
+    name: "Learner",
+    tier: "learner",
+    annual: "learner-annual",
     description: "For active learners",
-    price: "₹99 / month",
-    priceUsd: "€1.99",
-    credits: "30 path generations / month",
+    price: "₹199 / month",
+    priceUsd: "$6",
+    annualPrice: "₹1,990 / year (2 months free)",
+    credits: "40 generations / month",
     color: "border-primary/50",
     highlight: true,
     features: [
       "Everything in Free",
-      "200 playground runs a day",
+      "100 playground runs a day",
+      "Offline courses, streak freezes, certificates",
+    ],
+  },
+  {
+    name: "Pro",
+    tier: "pro",
+    annual: "pro-annual",
+    description: "For heavy daily use",
+    price: "₹399 / month",
+    priceUsd: "$15",
+    annualPrice: "₹3,990 / year (2 months free)",
+    credits: "150 generations / month",
+    color: "border-teal/50",
+    features: [
+      "Everything in Learner",
+      "300 playground runs a day",
       "Priority generation queue",
     ],
   },
   {
     name: "Creator",
     tier: "creator",
+    annual: "creator-annual",
     description: "Build and sell your own courses",
-    price: "₹599 / month",
-    priceUsd: "€9.99",
-    credits: "100 path generations / month",
+    price: "₹999 / month",
+    priceUsd: "$39",
+    annualPrice: "₹9,990 / year (2 months free)",
+    credits: "500 generations / month",
     color: "border-violet/50",
     features: [
-      "Everything in Standard",
-      "Create courses: AI-generated or your own videos",
+      "Everything in Pro",
+      "Create & publish courses: AI-generated or your own videos",
       "70% revenue share on paid enrollments",
     ],
   },
@@ -135,11 +155,18 @@ export default function Pricing() {
               
               {plan.tier ? (
                 uid ? (
-                  <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
-                    <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}`}>
-                      Subscribe — {plan.price}
-                    </a>
-                  </Button>
+                  <div className="space-y-2">
+                    <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
+                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}`}>
+                        Subscribe — {plan.price}
+                      </a>
+                    </Button>
+                    <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
+                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&product=${plan.annual}`}>
+                        {plan.annualPrice}
+                      </a>
+                    </Button>
+                  </div>
                 ) : (
                   <Button variant="outline" size="sm" className="w-full" disabled>
                     Open from the Knowgraph app to subscribe
@@ -147,7 +174,7 @@ export default function Pricing() {
                 )
               ) : (
                 <Button asChild variant="outline" size="sm" className="w-full">
-                  <Link to="/try">Get the app</Link>
+                  <a href="/app/">Start free in the browser</a>
                 </Button>
               )}
             </div>

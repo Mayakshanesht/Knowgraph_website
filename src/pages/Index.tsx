@@ -140,10 +140,10 @@ export default function Index() {
               style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards', opacity: 0 }}
             >
               <Button asChild size="lg" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
-                <Link to="/app-demo">
+                <a href="/app/">
                   Try KnowGraph App
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </a>
               </Button>
               <Button asChild variant="outline" size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="border-2 border-primary/30 hover:border-primary hover:bg-primary/10">
                 <span>
@@ -396,10 +396,10 @@ export default function Index() {
             KnowGraph is opening gradually to early users who care about understanding, not just consumption.
           </p>
           <Button asChild size="xl" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-200 border-2 border-primary/30">
-            <Link to="/try">
-              Join the Beta
+            <a href="/app/">
+              Open Knowgraph — free
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
           </Button>
           <p className="text-sm text-deep-indigo-foreground/60 mt-4">
             No payment required. Help shape the platform.

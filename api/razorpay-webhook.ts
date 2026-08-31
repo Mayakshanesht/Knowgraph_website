@@ -65,18 +65,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ? { type: 'course', userId: uid, courseId: notes.courseId, amountCents: amount }
       : notes?.product === 'freeze'
         ? { type: 'freeze', userId: uid, quantity: 1 }
-        : notes?.product === 'standard-annual'
+        : notes?.product?.endsWith('-annual')
           ? {
               type: 'subscription',
               userId: uid,
-              tier: 'standard',
+              tier: notes.product.replace('-annual', '')
+                .replace('standard', 'learner'),
               amountCents: amount,
               months: 12,
             }
           : {
               type: 'subscription',
               userId: uid,
-              tier: notes?.tier === 'creator' ? 'creator' : 'standard',
+              tier: ['learner', 'pro', 'creator'].includes(notes?.tier ?? '')
+                ? notes!.tier
+                : 'learner',
               amountCents: amount,
               months: 1,
             },
