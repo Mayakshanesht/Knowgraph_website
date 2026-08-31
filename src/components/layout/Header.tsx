@@ -63,17 +63,26 @@ export function Header() {
           ))}
           <Button 
             asChild 
-            variant="outline" 
             size="default" 
-            className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary font-medium"
+            className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg font-semibold"
+          >
+            <a href="/app/">
+              Open App
+              <ExternalLink className="w-4 h-4 ml-1" />
+            </a>
+          </Button>
+          <Button 
+            asChild 
+            variant="ghost" 
+            size="default" 
+            className="text-muted-foreground hover:text-primary"
           >
             <a 
               href={LMS_URL} 
               target="_blank" 
               rel="noopener noreferrer"
             >
-              Go to LMS
-              <ExternalLink className="w-4 h-4 ml-1" />
+              LMS
             </a>
           </Button>
         </div>
