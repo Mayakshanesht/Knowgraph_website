@@ -428,6 +428,32 @@ export default function Index() {
           </div>
         </div>
       </Section>
+    
+      {/* How KnowGraph Works */}
+      <section className="py-20 bg-gradient-to-b from-background to-primary/5">
+        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-3">How KnowGraph Works</h2>
+          <p className="text-center text-muted-foreground mb-10">A Simple Knowledge Hierarchy</p>
+          <div className="space-y-4">
+            {[
+              ["Key Ideas", "distilled insights from papers, PDFs, notes, or videos"],
+              ["Capsules", "each key idea becomes a short, visual learning unit"],
+              ["Containers", "related capsules form a topic or short course"],
+              ["Clusters", "containers connect across domains"],
+              ["Global Knowledge Graph", "a living, connected map of knowledge"],
+            ].map(([t, d], i) => (
+              <div key={t} className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border shadow-soft">
+                <div className="w-8 h-8 rounded-full bg-primary/15 text-primary flex items-center justify-center font-bold">{i + 1}</div>
+                <div>
+                  <p className="font-semibold text-foreground">{t}</p>
+                  <p className="text-sm text-muted-foreground">{d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </Layout>
   );
 }

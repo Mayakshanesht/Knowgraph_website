@@ -10,8 +10,6 @@ const navigation: { name: string; href: string; external?: boolean }[] = [
   { name: "Home", href: "/" },
   { name: "Platform", href: "/platform" },
   { name: "Learning Paths", href: "/learning-paths" },
-  { name: "Courses", href: "/courses" },
-  { name: "Web App", href: "/app/", external: true },
   { name: "Pricing", href: "/pricing" },
 ];
 
@@ -62,16 +60,6 @@ export function Header() {
           ))}
           <Button 
             asChild 
-            size="default" 
-            className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg font-semibold"
-          >
-            <a href="/app/">
-              Open App
-              <ExternalLink className="w-4 h-4 ml-1" />
-            </a>
-          </Button>
-          <Button 
-            asChild 
             variant="ghost" 
             size="default" 
             className="text-muted-foreground hover:text-primary"
@@ -82,6 +70,16 @@ export function Header() {
               rel="noopener noreferrer"
             >
               LMS
+            </a>
+          </Button>
+          <Button 
+            asChild 
+            size="lg" 
+            className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg font-semibold px-6 text-base"
+          >
+            <a href="/app/">
+              Open App
+              <ExternalLink className="w-4 h-4 ml-1" />
             </a>
           </Button>
         </div>
