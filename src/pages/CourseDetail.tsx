@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
-const LMS_URL = "https://know-path-weaver.vercel.app/";
+const LMS_URL = "https://courses.knowgraphapp.com/";
 
 type CourseDetailContent = {
   slug: string;

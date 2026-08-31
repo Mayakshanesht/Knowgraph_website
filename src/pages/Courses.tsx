@@ -4,7 +4,7 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, BookOpen, Layers, Network, ArrowRight } from "lucide-react";
 
-const LMS_URL = "https://know-path-weaver.vercel.app/";
+const LMS_URL = "https://courses.knowgraphapp.com/";
 
 const APP_URL =
   "https://knowgraph-api.greenlifeai.workers.dev/v1/media/app/knowgraph-latest.apk";

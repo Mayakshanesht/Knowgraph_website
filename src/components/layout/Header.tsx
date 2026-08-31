@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ExternalLink } from "lucide-react";
 import knowgraphLogo from "@/assets/knowgraph-logo.png";
 
-const LMS_URL = "https://know-path-weaver.vercel.app/";
+const LMS_URL = "https://courses.knowgraphapp.com/";
 
 const navigation = [
   { name: "Home", href: "/" },
