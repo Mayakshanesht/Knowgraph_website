@@ -145,10 +145,10 @@ export default function Index() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="border-2 border-primary/30 hover:border-primary hover:bg-primary/10">
-                <span>
+              <Button asChild variant="outline" size="lg" className="border-2 border-primary/30 hover:border-primary hover:bg-primary/10">
+                <Link to="/pricing">
                   View Pricing
-                </span>
+                </Link>
               </Button>
             </div>
           </div>
@@ -297,97 +297,7 @@ export default function Index() {
       </Section>
 
       {/* Plans & Pricing - Visible on Home */}
-      <Section id="pricing" className="py-24 md:py-32 bg-background">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-            Plans & Pricing
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            KnowGraph uses credits. 1 credit ≈ 1 Capsule.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mt-12">
-          <div className="p-6 rounded-2xl border border-border bg-card shadow-soft card-hover flex flex-col">
-            <h3 className="text-lg font-heading font-semibold text-foreground mb-1">
-              Explorer
-            </h3>
-            <div className="mb-4">
-              <span className="text-2xl font-bold text-foreground">₹0</span>
-            </div>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full mb-4"
-              onClick={() => handlePlanInterest("Explorer")}
-              disabled={interestedPlans["Explorer"]}
-            >
-              {interestedPlans["Explorer"] ? "Interest noted ✓" : "I'm interested"}
-            </Button>
-          </div>
 
-          <div className="p-6 rounded-2xl border border-border bg-card shadow-soft card-hover flex flex-col">
-            <h3 className="text-lg font-heading font-semibold text-foreground mb-1">
-              Learner
-            </h3>
-            <div className="mb-4">
-              <span className="text-2xl font-bold text-foreground">₹999 / month</span>
-              <span className="text-sm text-muted-foreground ml-2">(€13 / month)</span>
-            </div>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full mb-4"
-              onClick={() => handlePlanInterest("Learner")}
-              disabled={interestedPlans["Learner"]}
-            >
-              {interestedPlans["Learner"] ? "Interest noted ✓" : "I'm interested"}
-            </Button>
-          </div>
-
-          <div className="p-6 rounded-2xl border border-border bg-card shadow-soft card-hover flex flex-col">
-            <h3 className="text-lg font-heading font-semibold text-foreground mb-1">
-              Professional
-            </h3>
-            <div className="mb-4">
-              <span className="text-2xl font-bold text-foreground">₹2,499 / month</span>
-              <span className="text-sm text-muted-foreground ml-2">(€25 / month)</span>
-            </div>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full mb-4"
-              onClick={() => handlePlanInterest("Professional")}
-              disabled={interestedPlans["Professional"]}
-            >
-              {interestedPlans["Professional"] ? "Interest noted ✓" : "I'm interested"}
-            </Button>
-          </div>
-
-          <div className="p-6 rounded-2xl border border-border bg-card shadow-soft card-hover flex flex-col">
-            <h3 className="text-lg font-heading font-semibold text-foreground mb-1">
-              Student Pro
-            </h3>
-            <div className="mb-4">
-              <span className="text-2xl font-bold text-foreground">₹4,999 / month</span>
-              <span className="text-sm text-muted-foreground ml-2">(€49 / month)</span>
-            </div>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full mb-4"
-              onClick={() => handlePlanInterest("Student Pro")}
-              disabled={interestedPlans["Student Pro"]}
-            >
-              {interestedPlans["Student Pro"] ? "Interest noted ✓" : "I'm interested"}
-            </Button>
-          </div>
-        </div>
-        
-        <p className="text-sm text-muted-foreground text-center mt-8">
-          No payment collected yet. We're validating demand during beta.
-        </p>
-      </Section>
 
       {/* Beta CTA */}
       <Section className="py-20 bg-deep-indigo">
