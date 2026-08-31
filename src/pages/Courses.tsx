@@ -185,11 +185,16 @@ export default function Courses() {
               <p className="text-sm text-muted-foreground mb-4 flex-1">
                 {course.description}
               </p>
-              <Button asChild size="sm" variant="outline">
-                <a href={APP_URL}>
-                  Get the app <ArrowRight className="w-4 h-4 ml-1" />
-                </a>
-              </Button>
+              <div className="flex gap-2">
+                <Button asChild size="sm" variant="outline">
+                  <a href={APP_URL}>
+                    Get the app <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </Button>
+                <Button asChild size="sm">
+                  <a href="/app/">Use in browser</a>
+                </Button>
+              </div>
             </div>
           ))}
         </div>
