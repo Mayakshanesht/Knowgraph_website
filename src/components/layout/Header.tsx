@@ -11,6 +11,7 @@ const navigation: { name: string; href: string; external?: boolean }[] = [
   { name: "Platform", href: "/platform" },
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Pricing", href: "/pricing" },
+  { name: "Get the App", href: "/get-app" },
 ];
 
 export function Header() {
