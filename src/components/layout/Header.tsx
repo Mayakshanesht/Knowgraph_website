@@ -25,12 +25,12 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-      <nav className="container mx-auto flex items-center justify-between py-3 px-4 lg:px-8">
+      <nav className="container mx-auto flex items-center justify-between py-2 px-4 lg:px-8">
         <Link to="/" className="flex items-center gap-3">
           <img 
             src={knowgraphLogo} 
             alt="KnowGraph" 
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
 
