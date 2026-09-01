@@ -29,7 +29,7 @@ const appCourses = [
   {
     title: "CI/CD Foundations",
     description:
-      "The delivery pipeline one concept at a time — 40 reels plus the written course and project. Free.",
+      "The delivery pipeline one concept at a time — 40 reels, the written course and the hands-on project — one course.",
     color: "border-t-violet",
     bgColor: "bg-violet/5",
   },
@@ -74,7 +74,16 @@ const domains = [
   "Robotics",
 ];
 
+const COURSE_PRICES: Record<string, number> = {
+  "computer-vision-generative-ai": 99900,
+  "physical-ai-robotics": 79900,
+};
+
 export default function Courses() {
+  const params = new URLSearchParams(window.location.search);
+  const uid = params.get("uid") ?? "";
+  const courseId = params.get("course") ?? "";
+  const amount = COURSE_PRICES[courseId];
   return (
     <Layout>
       {/* Hero */}
@@ -92,6 +101,30 @@ export default function Courses() {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
+
+      {uid && courseId && (
+        <Section className="py-10">
+          <div className="max-w-2xl mx-auto p-6 rounded-2xl bg-primary/10 border border-primary/40 text-center">
+            <h3 className="font-heading font-semibold text-lg mb-2">
+              Complete your enrollment
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              {amount
+                ? `Unlock the full course — ₹${(amount / 100).toLocaleString("en-IN")}, one-time. After payment, head back to the app: everything unlocks automatically.`
+                : "This course is free — open it in the app and start learning."}
+            </p>
+            {amount ? (
+              <Button asChild size="lg">
+                <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&courseId=${encodeURIComponent(courseId)}&amount=${amount}`}>
+                  Enroll now
+                </a>
+              </Button>
+            ) : (
+              <Button asChild size="lg"><a href="/app/">Open the app</a></Button>
+            )}
+          </div>
+        </Section>
+      )}
 
       {/* LMS CTA Section */}
       <section className="py-16 bg-gradient-to-br from-primary/10 via-primary/5 to-background/50">
