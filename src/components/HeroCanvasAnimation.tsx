@@ -23,8 +23,11 @@ export function HeroCanvasAnimation() {
       
       img.onload = () => {
         loadedCount++;
-        if (loadedCount === TOTAL_FRAMES) {
-          setImages(loadedImages);
+        // Progressive start: phones on slow links were staring at nothing
+        // until all 40 frames arrived. Begin looping once a handful are
+        // ready; the loop skips frames that haven't landed yet.
+        if (loadedCount === 6 || loadedCount === TOTAL_FRAMES) {
+          setImages([...loadedImages]);
           setIsLoaded(true);
         }
       };
@@ -32,8 +35,8 @@ export function HeroCanvasAnimation() {
       img.onerror = () => {
         console.error(`Failed to load frame ${frameNum}`);
         loadedCount++;
-        if (loadedCount === TOTAL_FRAMES) {
-          setImages(loadedImages);
+        if (loadedCount >= 6) {
+          setImages([...loadedImages]);
           setIsLoaded(true);
         }
       };

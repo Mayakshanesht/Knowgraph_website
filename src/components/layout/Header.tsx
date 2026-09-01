@@ -30,7 +30,7 @@ export function Header() {
           <img 
             src={knowgraphLogo} 
             alt="KnowGraph" 
-            className="h-9 w-auto"
+            className="h-12 w-auto"
           />
         </Link>
 
