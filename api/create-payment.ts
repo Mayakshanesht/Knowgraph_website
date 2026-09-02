@@ -72,7 +72,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       standard: 'plan_TXD4k9TlXSu6zK',
       pro: 'plan_TXD4kVSCixVkhc',
       creator: 'plan_TXD4kqfN3JiKad',
-      enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE_EUR ?? '',
+      enterprise: 'plan_TXIdufe6L7YXm8',
     };
     if (!EUR_PLAN[tier]) {
       return res.status(503).json({ error: `no EUR plan for ${tier}` });
