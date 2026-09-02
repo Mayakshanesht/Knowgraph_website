@@ -13,6 +13,13 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { grantLmsAccess } from './verify-payment.js';
+
+const LMS_SLUGS = new Set([
+  'ai', 'ai-bootcamp', 'autonomous-driving-adas', 'autonomous-driving',
+  'vehicle-control', 'motion-prediction-planning', 'motion-planning',
+  'cicd-autonomous-systems',
+]);
 
 export const config = { api: { bodyParser: false } };
 
@@ -93,5 +100,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     headers: { 'Content-Type': 'application/json', 'X-Signature': mac },
     body,
   });
+  if (notes?.courseId && email && LMS_SLUGS.has(notes.courseId)) {
+    await grantLmsAccess({
+      kgSecret, email, courseSlug: notes.courseId, amountCents: amount,
+      paymentId: event.payload?.payment?.entity?.id ?? 'razorpay',
+    });
+  }
   return res.status(upstream.ok ? 200 : 502).json({ forwarded: upstream.ok });
 }

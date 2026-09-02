@@ -15,6 +15,36 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 
 const RZP = 'https://api.razorpay.com/v1';
 
+// Courses that live on the LMS (courses.knowgraphapp.com) — a verified
+// payment for one of these also provisions LMS access by payment email.
+const LMS_SLUGS = new Set([
+  'ai', 'ai-bootcamp', 'autonomous-driving-adas', 'autonomous-driving',
+  'vehicle-control', 'motion-prediction-planning', 'motion-planning',
+  'cicd-autonomous-systems',
+]);
+
+export async function grantLmsAccess(opts: {
+  kgSecret: string; email: string; courseSlug: string;
+  amountCents: number; paymentId: string;
+}): Promise<boolean> {
+  const lmsApi = process.env.LMS_API_URL ?? 'https://courses.knowgraphapp.com';
+  const body = JSON.stringify({
+    email: opts.email, courseSlug: opts.courseSlug,
+    amountCents: opts.amountCents, paymentId: opts.paymentId,
+  });
+  const mac = createHmac('sha256', opts.kgSecret).update(body).digest('hex');
+  try {
+    const r = await fetch(`${lmsApi}/api/payment-grant`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Signature': mac },
+      body,
+    });
+    return r.ok;
+  } catch {
+    return false;
+  }
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).end();
   const keyId = process.env.RAZORPAY_KEY_ID ?? process.env.RAZORPAY_API_KEY;
@@ -77,6 +107,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           body,
         });
         forwarded = upstream.ok;
+      }
+      if (r.ok && courseId && email && LMS_SLUGS.has(String(courseId))) {
+        await grantLmsAccess({
+          kgSecret, email, courseSlug: String(courseId),
+          amountCents: order.amount ?? 0, paymentId: razorpay_payment_id,
+        });
       }
     } catch {
       // webhook path will still deliver the unlock
