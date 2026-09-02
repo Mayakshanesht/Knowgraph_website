@@ -18,7 +18,8 @@ import { grantLmsAccess } from './verify-payment.js';
 const LMS_SLUGS = new Set([
   'ai', 'ai-bootcamp', 'autonomous-driving-adas', 'autonomous-driving',
   'vehicle-control', 'motion-prediction-planning', 'motion-planning',
-  'cicd-autonomous-systems',
+  'cicd-autonomous-systems', 'cicd-for-robotics',
+  'cv', 'computer-vision-generative-ai', 'physical-ai', 'physical-ai-robotics',
 ]);
 
 export const config = { api: { bodyParser: false } };
