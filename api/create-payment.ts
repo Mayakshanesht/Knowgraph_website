@@ -60,6 +60,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.redirect(302, link.short_url);
   }
 
+  // Abroad, INR subscriptions fail (RBI e-mandate is India-only) — an
+  // international buyer gets a one-time EUR yearly link instead.
+  const intl = String(req.query.intl ?? '') === '1';
+  if (intl && ['learner', 'pro', 'creator', 'standard'].includes(tier)) {
+    const EUR_ANNUAL: Record<string, number> = {
+      learner: 2200, standard: 2200, pro: 4400, creator: 11000, // cents
+    };
+    const r = await fetch(`${RZP}/payment_links`, {
+      method: 'POST',
+      headers: { Authorization: auth, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: EUR_ANNUAL[tier],
+        currency: 'EUR',
+        description: `Knowgraph ${tier === 'standard' ? 'learner' : tier} — 1 year`,
+        notes: { uid, product: `${tier === 'standard' ? 'learner' : tier}-annual` },
+        callback_url: 'https://www.knowgraphapp.com/payment-success?kind=plan',
+        callback_method: 'get',
+      }),
+    });
+    const link = await r.json();
+    if (!r.ok || !link.short_url) return res.status(502).json({ error: link });
+    return res.redirect(302, link.short_url);
+  }
+
   if (['learner', 'pro', 'creator', 'standard'].includes(tier)) {
     const plan = {
       learner: process.env.RAZORPAY_PLAN_LEARNER,

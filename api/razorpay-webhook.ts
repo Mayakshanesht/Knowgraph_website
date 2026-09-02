@@ -55,9 +55,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // notes {uid, tier?, courseId?} ride on the subscription or payment link.
   let notes: Record<string, string> | undefined;
   let amount = 0;
+  let subscriptionId: string | undefined;
   if (event.event === 'subscription.charged') {
     notes = event.payload?.subscription?.entity?.notes;
     amount = event.payload?.payment?.entity?.amount ?? 0; // paise
+    subscriptionId = event.payload?.subscription?.entity?.id;
   } else if (event.event === 'payment_link.paid') {
     notes = event.payload?.payment_link?.entity?.notes;
     amount = event.payload?.payment?.entity?.amount ?? 0;
@@ -93,6 +95,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               amountCents: amount,
               months: 1,
               ...(email ? { email } : {}),
+              ...(subscriptionId ? { subscriptionId } : {}),
             },
   );
   const mac = createHmac('sha256', kgSecret).update(body).digest('hex');

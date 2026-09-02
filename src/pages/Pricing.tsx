@@ -27,7 +27,7 @@ const plans = [
     price: "₹199 / month",
     priceUsd: "$6",
     annualPrice: "₹1,990 / year (2 months free)",
-    credits: "40 generations / month",
+    credits: "30 generations / month",
     color: "border-primary/50",
     highlight: true,
     features: [
@@ -44,7 +44,7 @@ const plans = [
     price: "₹399 / month",
     priceUsd: "$15",
     annualPrice: "₹3,990 / year (2 months free)",
-    credits: "150 generations / month",
+    credits: "100 generations / month",
     color: "border-teal/50",
     features: [
       "Everything in Learner",
@@ -60,7 +60,7 @@ const plans = [
     price: "₹999 / month",
     priceUsd: "$39",
     annualPrice: "₹9,990 / year (2 months free)",
-    credits: "500 generations / month",
+    credits: "250 generations / month",
     color: "border-violet/50",
     features: [
       "Everything in Pro",
