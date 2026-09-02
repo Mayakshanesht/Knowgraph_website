@@ -10,10 +10,10 @@ const LMS_URL = "https://courses.knowgraphapp.com/";
 
 // Kept in sync with api/_prices.ts (the server is authoritative at charge time).
 const LMS_COURSE_PRICES: Record<string, number> = {
-  "vehicle-control": 99900,
-  "autonomous-driving-adas": 99900,
-  "ai": 99900,
-  "motion-prediction-planning": 99900,
+  "vehicle-control": 1599900,
+  "autonomous-driving-adas": 3699900,
+  "ai": 2099900,
+  "motion-prediction-planning": 2099900,
 };
 
 type CourseDetailContent = {

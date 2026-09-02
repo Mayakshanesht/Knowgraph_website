@@ -9,9 +9,10 @@ export const COURSE_PRICES: Record<string, number> = {
   'physical-ai-robotics': 79900,
   'physical-ai': 79900,
   'cicd-for-robotics': 49900,
-  // LMS courses — OWNER: placeholder ₹999 each, set the real prices here.
-  'vehicle-control': 99900,
-  'autonomous-driving-adas': 99900,
-  'ai': 99900,
-  'motion-prediction-planning': 99900,
+  // LMS courses — real prices from the LMS catalogue (know-path-weaver
+  // src/data/courses.ts), in paise.
+  'vehicle-control': 1599900,
+  'autonomous-driving-adas': 3699900,
+  'ai': 2099900,
+  'motion-prediction-planning': 2099900,
 };
