@@ -32,17 +32,27 @@ export async function grantLmsAccess(opts: {
     email: opts.email, courseSlug: opts.courseSlug,
     amountCents: opts.amountCents, paymentId: opts.paymentId,
   });
-  const mac = createHmac('sha256', opts.kgSecret).update(body).digest('hex');
-  try {
-    const r = await fetch(`${lmsApi}/api/payment-grant`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Signature': mac },
-      body,
-    });
-    return r.ok;
-  } catch {
-    return false;
+  // The LMS may hold either shared secret in its KG_PAYMENT_SECRET slot —
+  // sign with each we know until one lands; both are ours and equally strong.
+  const secrets = [
+    opts.kgSecret,
+    process.env.RAZORPAY_WEBHOOK_SECRET?.trim(),
+  ].filter((x): x is string => !!x);
+  for (const secret of secrets) {
+    const mac = createHmac('sha256', secret).update(body).digest('hex');
+    try {
+      const r = await fetch(`${lmsApi}/api/payment-grant`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Signature': mac },
+        body,
+      });
+      if (r.ok) return true;
+      if (r.status !== 401) return false;
+    } catch {
+      return false;
+    }
   }
+  return false;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
