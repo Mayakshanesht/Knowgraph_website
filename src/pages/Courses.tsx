@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, BookOpen, Layers, Network, ArrowRight } from "lucide-react";
+import { openCourseCheckout } from "@/lib/razorpay";
 
 const LMS_URL = "https://courses.knowgraphapp.com/";
 
@@ -84,6 +86,27 @@ export default function Courses() {
   const uid = params.get("uid") ?? "";
   const courseId = params.get("course") ?? "";
   const amount = COURSE_PRICES[courseId];
+  const navigate = useNavigate();
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState("");
+
+  const enroll = async () => {
+    setPaying(true);
+    setPayError("");
+    try {
+      const result = await openCourseCheckout({ courseId, uid });
+      if (result.status === "paid") {
+        navigate(`/payment-success?kind=course&id=${encodeURIComponent(courseId)}`);
+      } else if (result.status === "failed") {
+        setPayError(result.error ?? "Payment failed — you have not been charged.");
+      }
+    } catch {
+      // modal unavailable (blocked script, old browser): hosted checkout
+      window.location.href = `/api/create-payment?uid=${encodeURIComponent(uid)}&courseId=${encodeURIComponent(courseId)}`;
+    } finally {
+      setPaying(false);
+    }
+  };
   return (
     <Layout>
       {/* Hero */}
@@ -114,11 +137,14 @@ export default function Courses() {
                 : "This course is free — open it in the app and start learning."}
             </p>
             {amount ? (
-              <Button asChild size="lg">
-                <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&courseId=${encodeURIComponent(courseId)}`}>
-                  Enroll now
-                </a>
-              </Button>
+              <>
+                <Button size="lg" onClick={enroll} disabled={paying}>
+                  {paying ? "Opening secure checkout…" : "Enroll now"}
+                </Button>
+                {payError && (
+                  <p className="text-sm text-destructive mt-3">{payError}</p>
+                )}
+              </>
             ) : (
               <Button asChild size="lg"><a href="/app/">Open the app</a></Button>
             )}

@@ -12,6 +12,7 @@
  *   RAZORPAY_PLAN_STANDARD / RAZORPAY_PLAN_CREATOR  (plan_… ids)
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { COURSE_PRICES } from './_prices';
 
 const RZP = 'https://api.razorpay.com/v1';
 
@@ -83,15 +84,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (courseId) {
-    // The server owns prices — a client-supplied amount is the #1 tampering
-    // vector (Razorpay's own integration guidance).
-    const COURSE_PRICES: Record<string, number> = {
-      'computer-vision-generative-ai': 99900,
-      'cv': 99900,
-      'physical-ai-robotics': 79900,
-      'physical-ai': 79900,
-      'cicd-for-robotics': 49900,
-    };
     const amount = COURSE_PRICES[courseId];
     if (!amount) return res.status(400).json({ error: 'unknown course' });
     const r = await fetch(`${RZP}/payment_links`, {
