@@ -38,6 +38,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     'learner-annual': 199000,
     'pro-annual': 399000,
     'creator-annual': 999000,
+    'enterprise-annual': 4990000,   // 10 months of Rs 4,999
     'standard-annual': 199000, // legacy alias -> learner
   };
   if (product === 'freeze' || ANNUAL[product] !== undefined) {
@@ -65,13 +66,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // International buyers subscribe monthly in EUR on dedicated plans
   // (created by /api/setup-eur-plans; ids are public identifiers).
   const intl = String(req.query.intl ?? '') === '1';
-  if (intl && ['learner', 'pro', 'creator', 'standard'].includes(tier)) {
+  if (intl && ['learner', 'pro', 'creator', 'standard', 'enterprise'].includes(tier)) {
     const EUR_PLAN: Record<string, string> = {
       learner: 'plan_TXD4k9TlXSu6zK',
       standard: 'plan_TXD4k9TlXSu6zK',
       pro: 'plan_TXD4kVSCixVkhc',
       creator: 'plan_TXD4kqfN3JiKad',
+      enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE_EUR ?? '',
     };
+    if (!EUR_PLAN[tier]) {
+      return res.status(503).json({ error: `no EUR plan for ${tier}` });
+    }
     const r = await fetch(`${RZP}/subscriptions`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
@@ -87,12 +92,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.redirect(302, sub.short_url);
   }
 
-  if (['learner', 'pro', 'creator', 'standard'].includes(tier)) {
+  if (['learner', 'pro', 'creator', 'standard', 'enterprise'].includes(tier)) {
     const plan = {
       learner: process.env.RAZORPAY_PLAN_LEARNER,
       standard: process.env.RAZORPAY_PLAN_LEARNER, // legacy alias
       pro: process.env.RAZORPAY_PLAN_PRO,
       creator: process.env.RAZORPAY_PLAN_CREATOR,
+      enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE,
     }[tier];
     if (!plan) return res.status(503).json({ error: `no plan configured for ${tier}` });
     const r = await fetch(`${RZP}/subscriptions`, {

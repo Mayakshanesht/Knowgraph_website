@@ -71,6 +71,25 @@ const plans = [
       "70% revenue share on paid enrollments",
     ],
   },
+  {
+    name: "Enterprise",
+    tier: "enterprise",
+    priceEur: "€199 / month",
+    annual: "enterprise-annual",
+    description: "Institutes, colleges and corporate L&D",
+    price: "₹4,999 / month",
+    priceUsd: "$249",
+    annualPrice: "₹49,900 / year (2 months free)",
+    credits: "1,500 generations / month, pooled across your team",
+    color: "border-amber/50",
+    features: [
+      "Everything in Creator, for a whole team",
+      "Private branded courses, cohorts and seats",
+      "Certificates under your institution's name",
+      "Course-generation service: your syllabus or PDFs become video courses",
+      "Priority support and onboarding",
+    ],
+  },
 ];
 
 // Recurring INR billing only works with Indian payment methods; everyone

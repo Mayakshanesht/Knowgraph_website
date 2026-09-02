@@ -18,6 +18,9 @@ const EUR_PLANS = [
   { tier: 'learner', name: 'Knowgraph Learner (EUR)', amount: 499 },
   { tier: 'pro', name: 'Knowgraph Pro (EUR)', amount: 999 },
   { tier: 'creator', name: 'Knowgraph Creator (EUR)', amount: 2999 },
+  // Enterprise: seats for a department or a cohort, generation pooled
+  // across the team, private courses and certificates under their brand.
+  { tier: 'enterprise', name: 'Knowgraph Enterprise (EUR)', amount: 19900 },
 ];
 
 function rawBody(req: VercelRequest): Promise<string> {
