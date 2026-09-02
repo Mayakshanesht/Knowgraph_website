@@ -62,28 +62,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.redirect(302, link.short_url);
   }
 
-  // Abroad, INR subscriptions fail (RBI e-mandate is India-only) — an
-  // international buyer gets a one-time EUR yearly link instead.
+  // International buyers subscribe monthly in EUR on dedicated plans
+  // (created by /api/setup-eur-plans; ids are public identifiers).
   const intl = String(req.query.intl ?? '') === '1';
   if (intl && ['learner', 'pro', 'creator', 'standard'].includes(tier)) {
-    const EUR_ANNUAL: Record<string, number> = {
-      learner: 2200, standard: 2200, pro: 4400, creator: 11000, // cents
+    const EUR_PLAN: Record<string, string> = {
+      learner: 'plan_TXD4k9TlXSu6zK',
+      standard: 'plan_TXD4k9TlXSu6zK',
+      pro: 'plan_TXD4kVSCixVkhc',
+      creator: 'plan_TXD4kqfN3JiKad',
     };
-    const r = await fetch(`${RZP}/payment_links`, {
+    const r = await fetch(`${RZP}/subscriptions`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        amount: EUR_ANNUAL[tier],
-        currency: 'EUR',
-        description: `Knowgraph ${tier === 'standard' ? 'learner' : tier} — 1 year`,
-        notes: { uid, product: `${tier === 'standard' ? 'learner' : tier}-annual` },
-        callback_url: `https://www.knowgraphapp.com/payment-success?kind=plan${fromApp}`,
-        callback_method: 'get',
+        plan_id: EUR_PLAN[tier],
+        total_count: 12,
+        customer_notify: 1,
+        notes: { uid, tier: tier === 'standard' ? 'learner' : tier },
       }),
     });
-    const link = await r.json();
-    if (!r.ok || !link.short_url) return res.status(502).json({ error: link });
-    return res.redirect(302, link.short_url);
+    const sub = await r.json();
+    if (!r.ok || !sub.short_url) return res.status(502).json({ error: sub });
+    return res.redirect(302, sub.short_url);
   }
 
   if (['learner', 'pro', 'creator', 'standard'].includes(tier)) {
