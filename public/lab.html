@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowgraph Lab</title>
+<!--
+  The in-app coding lab: a Jupyter-style notebook that runs entirely on the
+  student's device via Pyodide (Python in WebAssembly). No server, no
+  browser hand-off: the Flutter app embeds this page in a WebView, the web
+  app in an iframe. Exercises arrive either as ?nb=<base64 JSON> or via
+  postMessage({type:"load", cells:[...], packages:[...]}).
+
+  Cell JSON: {kind:"md"|"code", text:string, readonly?:bool}
+  Outbound: postMessage({type:"ready"}) once Pyodide is up,
+            {type:"ran", index, ok} after each run.
+-->
+<style>
+:root{--ink:#0B0D14;--panel:#161A24;--line:#242a39;--text:#EDEFF7;--muted:#8A91A8;
+      --accent:#6D5DF6;--green:#2EB82E;--warn:#F59F0A;--err:#f36262}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--text);
+     font:15px/1.5 system-ui,-apple-system,sans-serif;padding:14px 12px 90px}
+h1{font-size:19px;margin:2px 0 14px}
+.status{font-size:12.5px;color:var(--muted);margin-bottom:14px;display:flex;
+        align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--warn)}
+.dot.ready{background:var(--green)}
+.cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+      margin-bottom:12px;overflow:hidden}
+.cell.md{padding:12px 14px;background:transparent;border-color:transparent}
+.cell.md :first-child{margin-top:0}.cell.md :last-child{margin-bottom:0}
+.cell.md code{background:var(--panel);padding:1px 6px;border-radius:6px;
+              font-family:ui-monospace,monospace;font-size:13px}
+textarea{width:100%;background:transparent;color:var(--text);border:0;
+         resize:vertical;padding:12px 14px;min-height:52px;
+         font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;
+         outline:none;white-space:pre;overflow-x:auto}
+textarea[readonly]{color:var(--muted)}
+.bar{display:flex;gap:8px;align-items:center;padding:8px 12px;
+     border-top:1px solid var(--line)}
+button{background:var(--accent);color:#fff;border:0;border-radius:8px;
+       padding:7px 16px;font-size:13.5px;font-weight:600;cursor:pointer}
+button:disabled{opacity:.45}
+button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.out{border-top:1px solid var(--line);padding:10px 14px;
+     font:12.5px/1.5 ui-monospace,monospace;white-space:pre-wrap;
+     max-height:340px;overflow:auto}
+.out:empty{display:none}
+.out .err{color:var(--err)}
+.out img{max-width:100%;border-radius:8px;background:#fff;margin-top:6px}
+.runall{position:fixed;left:12px;right:12px;bottom:14px;display:flex;gap:10px}
+.runall button{flex:1;padding:13px;font-size:15px;border-radius:12px}
+</style>
+</head>
+<body>
+<h1 id="title">Lab</h1>
+<div class="status"><span class="dot" id="dot"></span><span id="status">Starting Python…</span></div>
+<div id="cells"></div>
+<div class="runall">
+  <button id="runAll" disabled>▶ Run all</button>
+  <button class="ghost" id="reset">Reset</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pyodide@0.26.4/pyodide.min.js"></script>
+<script>
+"use strict";
+let pyodide = null, running = false;
+let nb = { title: "Lab", packages: [], cells: [
+  { kind: "md", text: "**Welcome to the Knowgraph Lab.** Edit the code and press Run — Python executes right here on your device." },
+  { kind: "code", text: "import numpy as np\nx = np.linspace(0, 2*np.pi, 8)\nprint(np.round(np.sin(x), 3))" },
+]};
+
+const qs = new URLSearchParams(location.search);
+if (qs.get("nb")) {
+  try { nb = JSON.parse(atob(qs.get("nb").replace(/-/g,"+").replace(/_/g,"/"))); }
+  catch (e) { console.warn("bad nb param", e); }
+}
+window.addEventListener("message", (ev) => {
+  const d = ev.data || {};
+  if (d.type === "load" && Array.isArray(d.cells)) {
+    nb = { title: d.title || "Lab", packages: d.packages || [], cells: d.cells };
+    renderCells(); if (pyodide) preload();
+  }
+});
+
+function md(text){
+  // minimal markdown: bold, italics, inline code, line breaks
+  const esc = text.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  return esc
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/\*([^*]+)\*/g, "<i>$1</i>")
+    .replace(/\n/g, "<br>");
+}
+
+function renderCells(){
+  document.getElementById("title").textContent = nb.title || "Lab";
+  const host = document.getElementById("cells");
+  host.innerHTML = "";
+  nb.cells.forEach((cell, i) => {
+    const div = document.createElement("div");
+    if (cell.kind === "md") {
+      div.className = "cell md";
+      div.innerHTML = md(cell.text);
+    } else {
+      div.className = "cell";
+      const ta = document.createElement("textarea");
+      ta.value = cell.text;
+      ta.readOnly = !!cell.readonly;
+      ta.rows = Math.min(18, cell.text.split("\n").length + 1);
+      ta.dataset.index = i;
+      const bar = document.createElement("div");
+      bar.className = "bar";
+      const btn = document.createElement("button");
+      btn.textContent = "▶ Run";
+      btn.disabled = !pyodide;
+      btn.onclick = () => runCell(i);
+      bar.appendChild(btn);
+      const out = document.createElement("div");
+      out.className = "out"; out.id = "out-" + i;
+      div.append(ta, bar, out);
+    }
+    host.appendChild(div);
+  });
+}
+
+async function preload(){
+  const pkgs = ["numpy", ...(nb.packages || [])].filter(
+    (p, i, a) => a.indexOf(p) === i);
+  setStatus("Loading " + pkgs.join(", ") + "…", false);
+  try { await pyodide.loadPackage(pkgs); } catch (e) { console.warn(e); }
+  setStatus("Python ready — run any cell.", true);
+}
+
+function setStatus(text, ready){
+  document.getElementById("status").textContent = text;
+  document.getElementById("dot").className = "dot" + (ready ? " ready" : "");
+  document.querySelectorAll("button").forEach(b => {
+    if (b.id !== "reset") b.disabled = !ready || running;
+  });
+}
+
+async function runCell(i){
+  if (!pyodide || running) return;
+  running = true; setStatus("Running…", false);
+  const ta = document.querySelector('textarea[data-index="' + i + '"]');
+  nb.cells[i].text = ta.value;
+  const out = document.getElementById("out-" + i);
+  out.innerHTML = "";
+  try {
+    pyodide.setStdout({ batched: (t) => { out.append(t + "\n"); }});
+    pyodide.setStderr({ batched: (t) => {
+      const s = document.createElement("span"); s.className = "err";
+      s.textContent = t + "\n"; out.appendChild(s); }});
+    await pyodide.runPythonAsync(ta.value);
+    // matplotlib figures -> inline images
+    const png = await pyodide.runPythonAsync(`
+import base64, io, sys
+_out = []
+if 'matplotlib' in sys.modules:
+    import matplotlib.pyplot as plt
+    for n in plt.get_fignums():
+        b = io.BytesIO()
+        plt.figure(n).savefig(b, format='png', dpi=110,
+                              bbox_inches='tight')
+        _out.append(base64.b64encode(b.getvalue()).decode())
+    plt.close('all')
+'|'.join(_out)`);
+    if (png) for (const p of png.split("|")) {
+      const img = document.createElement("img");
+      img.src = "data:image/png;base64," + p;
+      out.appendChild(img);
+    }
+    parent.postMessage({ type: "ran", index: i, ok: true }, "*");
+  } catch (e) {
+    const s = document.createElement("span"); s.className = "err";
+    s.textContent = String(e).split("\n").slice(-8).join("\n");
+    out.appendChild(s);
+    parent.postMessage({ type: "ran", index: i, ok: false }, "*");
+  }
+  running = false; setStatus("Python ready.", true);
+}
+
+document.getElementById("runAll").onclick = async () => {
+  for (let i = 0; i < nb.cells.length; i++)
+    if (nb.cells[i].kind === "code") await runCell(i);
+};
+document.getElementById("reset").onclick = () => location.reload();
+
+(async () => {
+  renderCells();
+  pyodide = await loadPyodide();
+  await preload();
+  parent.postMessage({ type: "ready" }, "*");
+})();
+</script>
+</body>
+</html>
