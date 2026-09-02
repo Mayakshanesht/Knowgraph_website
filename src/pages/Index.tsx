@@ -145,12 +145,23 @@ export default function Index() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </Button>
+              <Button asChild size="lg" className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-emerald-400/30">
+                <Link to="/get-app">
+                  📱 Download the App
+                </Link>
+              </Button>
               <Button asChild variant="outline" size="lg" className="border-2 border-primary/30 hover:border-primary hover:bg-primary/10">
                 <Link to="/pricing">
                   View Pricing
                 </Link>
               </Button>
             </div>
+            <p
+              className="mt-3 text-sm text-muted-foreground"
+              style={{ animation: 'float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards', opacity: 0 }}
+            >
+              Free Android APK — direct download, learn in reels on your phone.
+            </p>
           </div>
         </div>
       </section>
