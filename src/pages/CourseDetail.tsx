@@ -1,10 +1,20 @@
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { openCourseCheckout } from "@/lib/razorpay";
 
 const LMS_URL = "https://courses.knowgraphapp.com/";
+
+// Kept in sync with api/_prices.ts (the server is authoritative at charge time).
+const LMS_COURSE_PRICES: Record<string, number> = {
+  "vehicle-control": 99900,
+  "autonomous-driving-adas": 99900,
+  "ai": 99900,
+  "motion-prediction-planning": 99900,
+};
 
 type CourseDetailContent = {
   slug: string;
@@ -101,6 +111,36 @@ const courseDetails: CourseDetailContent[] = [
 export default function CourseDetail() {
   const { courseSlug } = useParams<{ courseSlug: string }>();
   const course = courseDetails.find((c) => c.slug === courseSlug);
+  const navigate = useNavigate();
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState("");
+  const price = courseSlug ? LMS_COURSE_PRICES[courseSlug] : undefined;
+
+  const buyCourse = async () => {
+    if (!courseSlug) return;
+    setPaying(true);
+    setPayError("");
+    const uid =
+      new URLSearchParams(window.location.search).get("uid") ?? "web-guest";
+    try {
+      const result = await openCourseCheckout({
+        courseId: courseSlug,
+        uid,
+        title: course?.title,
+      });
+      if (result.status === "paid") {
+        navigate(
+          `/payment-success?kind=course&id=${encodeURIComponent(courseSlug)}`,
+        );
+      } else if (result.status === "failed") {
+        setPayError(result.error ?? "Payment failed — you have not been charged.");
+      }
+    } catch {
+      setPayError("Checkout could not open — please try again.");
+    } finally {
+      setPaying(false);
+    }
+  };
 
   if (!course) {
     return (
@@ -167,13 +207,21 @@ export default function CourseDetail() {
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30"
-                >
+                {price && (
+                  <Button
+                    size="lg"
+                    onClick={buyCourse}
+                    disabled={paying}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30"
+                  >
+                    {paying
+                      ? "Opening secure checkout…"
+                      : `Buy course — ₹${(price / 100).toLocaleString("en-IN")}`}
+                  </Button>
+                )}
+                <Button asChild variant={price ? "outline" : "default"} size="lg">
                   <a href={LMS_URL} target="_blank" rel="noopener noreferrer">
-                    Enroll / Go to LMS
+                    Go to LMS
                     <ExternalLink className="w-5 h-5 ml-2" />
                   </a>
                 </Button>
@@ -182,6 +230,9 @@ export default function CourseDetail() {
                   <Link to="/try">Join Beta to Access</Link>
                 </Button>
               </div>
+              {payError && (
+                <p className="text-sm text-destructive mt-3">{payError}</p>
+              )}
             </div>
 
             <div className="p-8 rounded-2xl bg-card border border-border shadow-soft">
