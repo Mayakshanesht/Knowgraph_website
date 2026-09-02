@@ -17,7 +17,7 @@ import { COURSE_PRICES } from './_prices.js';
 const RZP = 'https://api.razorpay.com/v1';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const keyId = process.env.RAZORPAY_KEY_ID;
+  const keyId = process.env.RAZORPAY_KEY_ID ?? process.env.RAZORPAY_API_KEY;
   const keySecret = process.env.RAZORPAY_KEY_SECRET ?? process.env.RAZORPAY_API_SECRET;
   if (!keyId || !keySecret) return res.status(503).json({ error: 'not configured' });
   const auth = 'Basic ' + Buffer.from(`${keyId}:${keySecret}`).toString('base64');
