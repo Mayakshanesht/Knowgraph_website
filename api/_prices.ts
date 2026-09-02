@@ -9,6 +9,7 @@ export const COURSE_PRICES: Record<string, number> = {
   'physical-ai-robotics': 79900,
   'physical-ai': 79900,
   'cicd-for-robotics': 49900,
+  'cicd-foundations': 49900,
   // LMS courses — real prices from the LMS catalogue (know-path-weaver
   // src/data/courses.ts), in paise.
   'vehicle-control': 1599900,

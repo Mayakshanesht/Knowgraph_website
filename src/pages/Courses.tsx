@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -79,6 +79,7 @@ const domains = [
 const COURSE_PRICES: Record<string, number> = {
   "computer-vision-generative-ai": 99900,
   "physical-ai-robotics": 79900,
+  "cicd-foundations": 49900,
 };
 
 export default function Courses() {
@@ -89,6 +90,23 @@ export default function Courses() {
   const navigate = useNavigate();
   const [paying, setPaying] = useState(false);
   const [payError, setPayError] = useState("");
+
+  // The app deep-links here with autopay=1: open the Razorpay modal
+  // immediately so in-app enrollment is one tap.
+  const autoFired = useRef(false);
+  useEffect(() => {
+    if (
+      params.get("autopay") === "1" &&
+      uid &&
+      courseId &&
+      amount &&
+      !autoFired.current
+    ) {
+      autoFired.current = true;
+      void enroll();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const enroll = async () => {
     setPaying(true);
