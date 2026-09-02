@@ -22,6 +22,7 @@ const plans = [
   {
     name: "Learner",
     tier: "learner",
+    priceEur: "€4.99 / month",
     annual: "learner-annual",
     description: "For active learners",
     price: "₹199 / month",
@@ -39,6 +40,7 @@ const plans = [
   {
     name: "Pro",
     tier: "pro",
+    priceEur: "€9.99 / month",
     annual: "pro-annual",
     description: "For heavy daily use",
     price: "₹399 / month",
@@ -55,6 +57,7 @@ const plans = [
   {
     name: "Creator",
     tier: "creator",
+    priceEur: "€29.99 / month",
     annual: "creator-annual",
     description: "Build and sell your own courses",
     price: "₹999 / month",
@@ -69,6 +72,14 @@ const plans = [
     ],
   },
 ];
+
+// Recurring INR billing only works with Indian payment methods; everyone
+// else subscribes monthly in EUR on dedicated plans.
+const IS_INTL = !(
+  (navigator.language || "").toUpperCase().endsWith("-IN") ||
+  Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Calcutta" ||
+  Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Kolkata"
+);
 
 export default function Pricing() {
   const uid = new URLSearchParams(window.location.search).get("uid") ?? "";
@@ -137,7 +148,7 @@ export default function Pricing() {
               </h3>
               <p className="text-sm text-muted-foreground mb-2">{plan.description}</p>
               <div className="mb-4">
-                <span className="text-2xl font-bold text-foreground">{plan.price}</span>
+                <span className="text-2xl font-bold text-foreground">{IS_INTL && plan.priceEur ? plan.priceEur : plan.price}</span>
                 {plan.priceUsd && (
                   <span className="text-sm text-muted-foreground ml-2">({plan.priceUsd})</span>
                 )}
@@ -157,15 +168,17 @@ export default function Pricing() {
                 uid ? (
                   <div className="space-y-2">
                     <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
-                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}`}>
-                        Subscribe — {plan.price}
+                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}${IS_INTL ? "&intl=1" : ""}`}>
+                        Subscribe — {IS_INTL && plan.priceEur ? plan.priceEur : plan.price}
                       </a>
                     </Button>
-                    <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
-                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&product=${plan.annual}`}>
-                        {plan.annualPrice}
-                      </a>
-                    </Button>
+                    {!IS_INTL && (
+                      <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
+                        <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&product=${plan.annual}`}>
+                          {plan.annualPrice}
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 ) : (
                   <Button variant="outline" size="sm" className="w-full" disabled>
