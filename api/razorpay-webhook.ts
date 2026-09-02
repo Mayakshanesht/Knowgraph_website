@@ -59,12 +59,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const uid = notes?.uid;
   if (!uid) return res.status(200).json({ ignored: 'no uid in notes' });
+  const email = event.payload?.payment?.entity?.email as string | undefined;
 
   const body = JSON.stringify(
     notes?.courseId
-      ? { type: 'course', userId: uid, courseId: notes.courseId, amountCents: amount }
+      ? { type: 'course', userId: uid, courseId: notes.courseId, amountCents: amount, ...(email ? { email } : {}) }
       : notes?.product === 'freeze'
-        ? { type: 'freeze', userId: uid, quantity: 1 }
+        ? { type: 'freeze', userId: uid, quantity: 1, ...(email ? { email } : {}) }
         : notes?.product?.endsWith('-annual')
           ? {
               type: 'subscription',
@@ -73,6 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 .replace('standard', 'learner'),
               amountCents: amount,
               months: 12,
+              ...(email ? { email } : {}),
             }
           : {
               type: 'subscription',
@@ -82,6 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 : 'learner',
               amountCents: amount,
               months: 1,
+              ...(email ? { email } : {}),
             },
   );
   const mac = createHmac('sha256', kgSecret).update(body).digest('hex');

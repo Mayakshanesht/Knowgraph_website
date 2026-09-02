@@ -226,9 +226,6 @@ export default function CourseDetail() {
                   </a>
                 </Button>
 
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/try">Join Beta to Access</Link>
-                </Button>
               </div>
               {payError && (
                 <p className="text-sm text-destructive mt-3">{payError}</p>

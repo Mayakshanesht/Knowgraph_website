@@ -295,8 +295,8 @@ export default function Courses() {
                   </Link>
                 </Button>
                 <Button asChild variant="default" className="flex-1">
-                  <Link to="/try">
-                    Join Beta to Access
+                  <Link to={`/courses/${course.slug}`}>
+                    Buy Course
                   </Link>
                 </Button>
               </div>

@@ -51,12 +51,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const order = await r.json();
       const uid = order?.notes?.uid;
       const courseId = order?.notes?.courseId;
+      // the payer's email is the access key for guest (website) checkouts
+      let email: string | undefined;
+      try {
+        const pr = await fetch(`${RZP}/payments/${razorpay_payment_id}`, {
+          headers: { Authorization: auth },
+        });
+        const payment = await pr.json();
+        if (pr.ok && typeof payment.email === 'string') email = payment.email;
+      } catch {
+        // email stays undefined; app users are matched by uid anyway
+      }
       if (r.ok && uid && courseId) {
         const body = JSON.stringify({
           type: 'course',
           userId: uid,
           courseId,
           amountCents: order.amount ?? 0,
+          ...(email ? { email } : {}),
         });
         const mac = createHmac('sha256', kgSecret).update(body).digest('hex');
         const upstream = await fetch(`${kgApi}/v1/webhooks/payment`, {

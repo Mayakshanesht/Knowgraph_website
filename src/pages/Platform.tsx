@@ -433,10 +433,10 @@ export default function Platform() {
             See how structured learning can accelerate your understanding.
           </p>
           <Button asChild variant="hero" size="lg">
-            <Link to="/try">
-              Join the Beta
+            <a href="/app/">
+              Open Knowgraph — free
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
           </Button>
         </div>
       </Section>

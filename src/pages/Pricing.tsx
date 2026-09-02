@@ -108,8 +108,8 @@ export default function Pricing() {
               <p className="text-sm text-muted-foreground">Credits can be added later</p>
             </div>
             <div className="p-4 rounded-xl bg-card border border-border">
-              <p className="text-lg font-heading font-semibold text-foreground mb-1">Free during beta</p>
-              <p className="text-sm text-muted-foreground">No charges yet</p>
+              <p className="text-lg font-heading font-semibold text-foreground mb-1">Card, UPI &amp; international</p>
+              <p className="text-sm text-muted-foreground">Secure payments via Razorpay</p>
             </div>
           </div>
         </div>
@@ -188,16 +188,16 @@ export default function Pricing() {
       <Section className="py-20 hero-gradient">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-heading font-semibold text-white mb-4">
-            No payment required during beta
+            Start learning today
           </h2>
           <p className="text-white/80 mb-8">
-            Help shape the platform while learning for free.
+            Start free — upgrade any time for the full catalogue and courses.
           </p>
           <Button asChild variant="default" size="lg" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
-            <Link to="/try">
-              Join the Beta
+            <a href="/app/">
+              Open Knowgraph — free
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
           </Button>
         </div>
       </Section>

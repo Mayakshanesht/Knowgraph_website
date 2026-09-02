@@ -349,10 +349,10 @@ export default function AppDemo() {
                 Sensors → Perception → Planning → Control
               </p>
               <Button asChild size="lg" className="w-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border-2 border-primary/30">
-                <Link to="/try">
-                  Join the KnowGraph Beta
+                <a href="/app/">
+                  Open Knowgraph — free
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
+                </a>
               </Button>
             </div>
           </div>

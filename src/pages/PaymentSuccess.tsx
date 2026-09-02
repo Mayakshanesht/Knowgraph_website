@@ -17,6 +17,13 @@ const PaymentSuccess = () => {
           confirmation runs server-side, so you don't need to do anything.
           Head back to the Knowgraph app and pull to refresh.
         </p>
+        {kind === "course" && (
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Bought on the website without the app? Access is linked to the
+            email you paid with — install the app and sign in with that email
+            and your course will be waiting.
+          </p>
+        )}
         <a
           href="knowgraph://payment-success"
           className="inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground"

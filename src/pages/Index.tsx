@@ -303,7 +303,7 @@ export default function Index() {
       <Section className="py-20 bg-deep-indigo">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-lg md:text-xl text-deep-indigo-foreground/90 mb-8 leading-relaxed">
-            KnowGraph is opening gradually to early users who care about understanding, not just consumption.
+            KnowGraph is live — structured learning for people who care about understanding, not just consumption.
           </p>
           <Button asChild size="xl" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-200 border-2 border-primary/30">
             <a href="/app/">
@@ -312,7 +312,7 @@ export default function Index() {
             </a>
           </Button>
           <p className="text-sm text-deep-indigo-foreground/60 mt-4">
-            No payment required. Help shape the platform.
+            Free to start. Card, UPI and international payments supported.
           </p>
         </div>
       </Section>
