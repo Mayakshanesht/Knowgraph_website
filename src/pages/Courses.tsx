@@ -114,7 +114,10 @@ export default function Courses() {
     try {
       const result = await openCourseCheckout({ courseId, uid });
       if (result.status === "paid") {
-        navigate(`/payment-success?kind=course&id=${encodeURIComponent(courseId)}`);
+        const from = params.get("from") ?? "";
+        navigate(
+          `/payment-success?kind=course&id=${encodeURIComponent(courseId)}${from ? `&from=${encodeURIComponent(from)}` : ""}`,
+        );
       } else if (result.status === "failed") {
         setPayError(result.error ?? "Payment failed — you have not been charged.");
       }

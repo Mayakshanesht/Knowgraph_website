@@ -1,10 +1,22 @@
 /** Landing after Razorpay checkout: reassure, then send them back to the app.
  *  Activation is webhook-driven (source of truth) and lands within a minute. */
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
   const kind = params.get("kind") ?? "plan";
+  const fromApp = params.get("from") === "app";
+
+  // Mobile-app buyers bounce straight back into the app; the button stays
+  // as fallback for browsers that swallow the automatic attempt.
+  useEffect(() => {
+    if (!fromApp) return;
+    const t = setTimeout(() => {
+      window.location.href = "knowgraph://payment-success";
+    }, 1200);
+    return () => clearTimeout(t);
+  }, [fromApp]);
   const what =
     kind === "course" ? "Your course" : kind === "freeze" ? "Your streak freeze" : "Your plan";
   return (
@@ -24,12 +36,17 @@ const PaymentSuccess = () => {
             and your course will be waiting.
           </p>
         )}
-        <a
-          href="knowgraph://payment-success"
-          className="inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground"
-        >
-          Open the app
-        </a>
+        <div className="flex flex-col gap-3 items-center">
+          <a
+            href="knowgraph://payment-success"
+            className="inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground"
+          >
+            {fromApp ? "Returning to the app…" : "Open the app"}
+          </a>
+          <a href="/app/" className="text-sm text-primary underline">
+            Or continue in the web app
+          </a>
+        </div>
         <p className="text-xs text-muted-foreground">
           Didn't unlock after a few minutes? Email mayurwaghchoure1995@gmail.com
           with your payment reference.
