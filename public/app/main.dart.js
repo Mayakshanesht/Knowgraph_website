@@ -108006,7 +108006,7 @@ $S:0}
 A.aHK.prototype={
 $1(a){var s=null,r=this.a.w
 r.toString
-return A.z1(A.b([A.fl(B.aoY,s,s,new A.aHJ(a),s,s)],t.p),B.bL,new A.KJ(r,B.akr,s),B.apT)},
+return A.z1(A.b([A.fl(B.aoZ,s,s,new A.aHJ(a),s,s)],t.p),B.bL,new A.KJ(r,B.akr,s),B.apT)},
 $S:70}
 A.aHJ.prototype={
 $0(){A.ck(this.a,!1).iB(null)
@@ -108049,7 +108049,7 @@ s.ad$=$.av()
 s.a5$=0
 this.aB()},
 G(a){var s=null
-return new A.aL(B.f5,A.bj(A.b([B.aqN,B.a_,A.iz(B.aI,!1,this.d,B.Tg,s,s,1,s,!0,s,s,B.bG),B.a_,A.hU(B.ap6,new A.aWY(this),s)],t.p),B.bW,B.cr,B.n),s)}}
+return new A.aL(B.f5,A.bj(A.b([B.aqN,B.a_,A.iz(B.aI,!1,this.d,B.Tg,s,s,1,s,!0,s,s,B.bG),B.a_,A.hU(B.ap7,new A.aWY(this),s)],t.p),B.bW,B.cr,B.n),s)}}
 A.aWY.prototype={
 $0(){var s=this.a,r=s.a
 r.toString
@@ -108129,7 +108129,7 @@ s=s.d
 if(s!=null)m.push(A.a4(A.j(s)+"m",q,q,q,B.fK,q,q))
 return A.jM(!1,p,!0,A.br(q,A.bD(m,B.p,B.k,B.n,0),B.m,q,q,new A.bb(B.bV,q,n,o,q,q,B.G),q,q,B.jj,B.PH,q,q,q),q,!0,q,q,q,q,q,q,q,q,r.f,q,q,q,q,q,q,q)}}
 A.a4U.prototype={
-G(a){var s=null,r=A.bd(16),q=A.cU(B.aH,1),p=this.c,o=A.a4(p?"Your account has no approved enrollment for this course yet.":"Already enrolled on the website? Sign in with the same account to watch here.",s,s,s,B.FN,s,s),n=t.p,m=A.b([A.cE(A.hU(B.aqA,new A.aMh(),s),1)],n)
+G(a){var s=null,r=A.bd(16),q=A.cU(B.aH,1),p=this.c,o=A.a4(p?"Your account has no approved enrollment for this course yet.":"Already enrolled on the website? Sign in with the same account to watch here.",s,s,s,B.FN,s,s),n=t.p,m=A.b([A.cE(A.hU(B.aqB,new A.aMh(),s),1)],n)
 if(!p)B.b.C(m,A.b([B.bP,A.cE(A.rw(B.G3,this.d,s),1)],n))
 return A.br(s,A.bj(A.b([o,B.i8,A.bD(m,B.p,B.k,B.n,0)],n),B.bW,B.k,B.n),B.m,s,s,new A.bb(B.aP,s,q,r,s,s,B.G),s,s,s,B.b0,s,s,s)}}
 A.aMh.prototype={
@@ -108165,7 +108165,7 @@ n=A.bj(n,B.p,B.k,B.a2)
 m=q.z
 s=A.fl(B.ig,p,p,m?p:new A.aVg(a),p,p)
 r=m?p:q.gaB7()
-return A.z1(A.b([s,A.hU(m?B.F5:B.G3,r,p)],o),p,n,B.apf)}}
+return A.z1(A.b([s,A.hU(m?B.F5:B.G3,r,p)],o),p,n,B.apg)}}
 A.aVd.prototype={
 $0(){var s=this.a
 s.z=!0
@@ -108256,7 +108256,7 @@ A.V0.prototype={
 G(a){var s,r=null,q=this.c,p=A.a4(q.b,r,r,r,B.ajQ,r,r),o=A.a4(q.d,4,B.a8,r,B.alT,r,r),n=q.e
 n=n===0?"Free":"\u20b9"+B.d.aE(n/100)
 s=t.p
-return A.uL(A.iw(!0,new A.aL(B.f5,A.bj(A.b([B.aqD,B.a_,B.aq6,B.C,p,B.C,o,B.C,A.a4(""+q.f+" chapters \xb7 "+q.r+" reels \xb7 "+n,r,r,r,B.dl,r,r),B.b3,A.bD(A.b([A.hU(B.aqh,new A.ai_(this,a),r),B.bP,A.fl(B.ap_,r,r,this.d,r,r)],s),B.p,B.k,B.n,0)],s),B.N,B.cr,B.n),r),!1,B.ac,!0),B.T,!0)}}
+return A.uL(A.iw(!0,new A.aL(B.f5,A.bj(A.b([B.aqE,B.a_,B.aq6,B.C,p,B.C,o,B.C,A.a4(""+q.f+" chapters \xb7 "+q.r+" reels \xb7 "+n,r,r,r,B.dl,r,r),B.b3,A.bD(A.b([A.hU(B.aqi,new A.ai_(this,a),r),B.bP,A.fl(B.ap0,r,r,this.d,r,r)],s),B.p,B.k,B.n,0)],s),B.N,B.cr,B.n),r),!1,B.ac,!0),B.T,!0)}}
 A.ai_.prototype={
 $0(){return A.ck(this.b,!1).f9(A.jS(new A.ahZ(this.a),!1,null,t.z))},
 $S:0}
@@ -108265,7 +108265,7 @@ $1(a){return A.b9a(this.a.c.a,null)},
 $S:248}
 A.V1.prototype={
 fj(a,b){var s=null,r=b.bu($.ael(),t.v1)
-return A.h9(A.jt(A.b([A.fl(B.aqv,s,s,new A.ai9(),s,s)],t.p),B.T,s,B.apV),B.T,new A.dK(new A.aia(b,r),s),s,!1,!1)}}
+return A.h9(A.jt(A.b([A.fl(B.aqw,s,s,new A.ai9(),s,s)],t.p),B.T,s,B.apV),B.T,new A.dK(new A.aia(b,r),s),s,!1,!1)}}
 A.ai9.prototype={
 $0(){return A.jr(A.c3("https://www.knowgraphapp.com",0,null),B.cq,null)},
 $S:0}
@@ -108315,7 +108315,7 @@ G(a){var s=null
 return A.bD(A.b([A.eL(this.c,B.E,s,14),B.i7,A.a4(this.d,s,s,s,B.dl,s,s)],t.p),B.p,B.k,B.n,0)}}
 A.Rv.prototype={
 G(a){var s=null
-return A.er(new A.aL(B.f5,A.bj(A.b([B.u_,B.a_,B.apA,B.a_,A.rw(B.G2,this.c,s)],t.p),B.p,B.k,B.a2),s),s,s)}}
+return A.er(new A.aL(B.f5,A.bj(A.b([B.u_,B.a_,B.apB,B.a_,A.rw(B.G2,this.c,s)],t.p),B.p,B.k,B.a2),s),s,s)}}
 A.NC.prototype={
 a13(a){var s,r,q,p,o,n,m="[^a-z0-9]",l=a.b,k=A.b5(m,!0,!1,!1)
 k=A.cx(l.toLowerCase(),k,"")
@@ -108334,7 +108334,7 @@ for(s=m.e,r=J.cA(s),q=r.ga4(s);q.q();){p=m.a13(q.gL())
 if(p!=null)k.A(0,p.a)}q=A.bd(14)
 o=B.aw.aT(0.5)
 n=t.p
-o=A.b([A.uB(A.oQ(l,l,l,!0,!0,B.SG,l,new A.aK7(b,a),l,l,l,B.aqg,l,B.apr,l,l),B.bL,new A.cG(q,new A.b8(o,1,B.y,-1))),B.a_,B.ad1],n)
+o=A.b([A.uB(A.oQ(l,l,l,!0,!0,B.SG,l,new A.aK7(b,a),l,l,l,B.aqg,l,B.aps,l,l),B.bL,new A.cG(q,new A.b8(o,1,B.y,-1))),B.a_,B.ad1],n)
 for(s=r.ga4(s);s.q();){r=s.gL()
 B.b.C(o,A.b([new A.Yb(r,new A.aK8(m,a,r),l),B.i8],n))}for(s=J.aW(m.f);s.q();){r=s.gL()
 if(!k.p(0,r.a))B.b.C(o,A.b([new A.a3O(r,new A.aK9(a,r),l),B.i8],n))}return A.jR(o,B.ea,l,!1)}}
@@ -108375,7 +108375,7 @@ A.aK5.prototype={
 $1(a){return B.NS},
 $S:679}
 A.aK6.prototype={
-$1(a){return new A.aL(B.mt,A.bj(A.b([B.aoP,B.C,B.aqd,B.b3,A.dQ(A.hU(B.aqR,new A.aK2(this.a),null),null,1/0),B.C],t.p),B.N,B.k,B.a2),null)},
+$1(a){return new A.aL(B.mt,A.bj(A.b([B.aoQ,B.C,B.aqd,B.b3,A.dQ(A.hU(B.aqR,new A.aK2(this.a),null),null,1/0),B.C],t.p),B.N,B.k,B.a2),null)},
 $S:267}
 A.aK2.prototype={
 $0(){var s=A.aa(this.a.a.i(0,"appUserId"))
@@ -108496,12 +108496,12 @@ case 8:case 1:return A.n(q,r)
 case 2:return A.m(o.at(-1),r)}})
 return A.o($async$v9,r)},
 G(a){var s,r,q,p,o=this,n=null,m=A.jt(n,B.T,n,B.aoN),l=t.p,k=A.b([A.iz(B.aI,!1,o.w,B.Tj,o.as==null,n,1,n,!1,n,n,B.bG),B.C,A.iz(B.aI,!1,o.x,B.Th,o.as==null,n,2,n,!1,n,n,B.bG),B.a_],l)
-if(o.as==null)k.push(A.hU(B.aqq,o.ax?n:o.ganj(),n))
+if(o.as==null)k.push(A.hU(B.aqr,o.ax?n:o.ganj(),n))
 if(o.as!=null){s=A.iz(B.aI,!1,o.Q,B.Tl,n,n,1,n,!1,n,n,B.bG)
-r=A.rw(B.aqz,o.ax?n:o.gapo(),n)
+r=A.rw(B.aqA,o.ax?n:o.gapo(),n)
 q=A.iz(B.aI,!1,o.y,B.To,n,n,1,n,!1,n,n,B.bG)
 p=A.iz(B.aI,!1,o.z,B.Tn,n,n,1,n,!1,n,n,B.bG)
-s=A.b([B.rL,B.aqr,B.C,s,B.C,r,B.rL,B.apx,B.C,q,B.C,p,B.C,A.b2C(B.RQ,B.aqQ,o.ax?n:o.gaCZ())],l)
+s=A.b([B.rL,B.aqs,B.C,s,B.C,r,B.rL,B.apy,B.C,q,B.C,p,B.C,A.b2C(B.RQ,B.aqQ,o.ax?n:o.gaCZ())],l)
 r=o.ay
 if(r!=null)B.b.C(s,A.b([B.C,A.aqp(n,n,n,n,r,n)],l))
 B.b.C(k,s)}s=o.at
@@ -108621,7 +108621,7 @@ A.De.prototype={
 aa(){return new A.a4R()}}
 A.a4R.prototype={
 az(){this.aJ()},
-G(a){return A.er(A.ve(B.SH,B.aqE,new A.aMf(this)),null,null)}}
+G(a){return A.er(A.ve(B.SH,B.aqF,new A.aMf(this)),null,null)}}
 A.aMf.prototype={
 $0(){return A.jr(A.c3(this.a.a.c,0,null),B.cq,null)},
 $S:0}
@@ -109030,7 +109030,7 @@ $S:694}
 A.Yb.prototype={
 G(a){var s,r,q,p=null,o=A.bd(22),n=A.bd(22),m=t.p,l=A.b([],m),k=this.c,j=k.x
 if(j!=null)l.push(A.zx(B.HX,A.b8j(j,new A.au_(),B.h0,p,120)))
-j=A.bD(A.b([A.br(p,B.aps,B.m,p,p,new A.bb(B.ck.aT(0.18),p,p,A.bd(999),p,p,B.G),p,p,p,B.Q7,p,p,p),B.cI],m),B.p,B.k,B.n,0)
+j=A.bD(A.b([A.br(p,B.apt,B.m,p,p,new A.bb(B.ck.aT(0.18),p,p,A.bd(999),p,p,B.G),p,p,p,B.Q7,p,p,p),B.cI],m),B.p,B.k,B.n,0)
 s=A.a4(k.b,p,p,p,B.aji,p,p)
 r=A.a4(k.d,2,B.a8,p,B.FR,p,p)
 q=k.w?" \xb7 Enrolled":""
@@ -109057,12 +109057,12 @@ fj(a,b){var s,r,q,p,o,n,m=this,l=null,k=b.bu($.fK(),t.GO),j=m.e,i=j.gGz().length
 h=j.a
 s=t.p
 r=A.b([A.a4(h.b,l,l,l,B.anK,l,l),B.C],s)
-if(m.f!=null)B.b.C(r,A.b([A.uB(A.oQ(l,l,l,!0,!0,B.S6,l,new A.aKi(m,a),l,l,l,B.aoQ,l,B.aqm,B.Se,l),B.bL,l),B.C],s))
+if(m.f!=null)B.b.C(r,A.b([A.uB(A.oQ(l,l,l,!0,!0,B.S6,l,new A.aKi(m,a),l,l,l,B.aoR,l,B.aqn,B.Se,l),B.bL,l),B.C],s))
 r.push(A.a4(h.d,l,l,l,B.aj8,l,l))
 if(h.e!==0&&!h.w){q=B.ck.aT(0.12)
 p=A.bd(16)
 o=A.cU(B.ck.aT(0.4),1)
-B.b.C(r,A.b([B.a_,A.br(l,A.bj(A.b([B.apF,B.C,A.bD(A.b([A.hU(B.aqJ,new A.aKj(m,b),l),B.bP,A.fl(B.apk,l,l,new A.aKk(m,b),l,l)],s),B.p,B.k,B.n,0)],s),B.N,B.k,B.n),B.m,l,l,new A.bb(q,l,o,p,l,l,B.G),l,l,l,B.b0,l,l,l)],s))}r.push(B.a_)
+B.b.C(r,A.b([B.a_,A.br(l,A.bj(A.b([B.aqh,B.C,A.bD(A.b([A.hU(B.aoO,new A.aKj(m,b),l),B.bP,A.fl(B.apl,l,l,new A.aKk(m,b),l,l)],s),B.p,B.k,B.n,0)],s),B.N,B.k,B.n),B.m,l,l,new A.bb(q,l,o,p,l,l,B.G),l,l,l,B.b0,l,l,l)],s))}r.push(B.a_)
 q=i===0?0:g/i
 p=A.bd(4)
 o=g>=i
@@ -109093,7 +109093,7 @@ for(;;)switch(s){case 0:o=A
 s=2
 return A.i(q.b.au($.eF(),t.V).tm(),$async$$0)
 case 2:p=o.aa(b.i(0,"appUserId"))
-A.jr(A.c3("https://www.knowgraphapp.com/courses?uid="+(p==null?"":p)+"&course="+q.a.e.a.a,0,null),B.cq,null)
+A.jr(A.c3("https://www.knowgraphapp.com/courses?uid="+(p==null?"":p)+"&course="+q.a.e.a.a+"&autopay=1",0,null),B.cq,null)
 return A.n(null,r)}})
 return A.o($async$$0,r)},
 $S:6}
@@ -109136,7 +109136,7 @@ fj(a,b){var s=null,r=A.bd(12)
 return A.uB(A.oQ(s,s,s,!0,!0,B.SB,s,new A.aJH(this,a,b),s,s,s,B.apZ,s,B.apL,s,s),B.bL,new A.cG(r,B.I1))}}
 A.aJG.prototype={
 $1(a){var s=null,r=this.a,q=A.iz(B.aI,!0,r,B.Tk,s,s,1,s,!1,s,B.dP,B.bG)
-return A.z1(A.b([A.fl(B.ig,s,s,new A.aJE(a),s,s),A.hU(B.apO,new A.aJF(a,r),s)],t.p),B.bL,q,B.aqG)},
+return A.z1(A.b([A.fl(B.ig,s,s,new A.aJE(a),s,s),A.hU(B.apO,new A.aJF(a,r),s)],t.p),B.bL,q,B.aqH)},
 $S:70}
 A.aJE.prototype={
 $0(){A.ck(this.a,!1).iB(null)
@@ -109381,7 +109381,7 @@ break
 case 6:case 1:return A.n(q,r)
 case 2:return A.m(o.at(-1),r)}})
 return A.o($async$yb,r)},
-G(a){var s,r,q,p=this,o=null,n=p.gbc().bu($.ld(),t.lz).b,m=A.jt(o,B.T,o,B.aph),l=t.p,k=A.b([B.atQ,B.b3,new A.a6J(p.y,new A.aKQ(p),o),B.a_],l),j=p.y
+G(a){var s,r,q,p=this,o=null,n=p.gbc().bu($.ld(),t.lz).b,m=A.jt(o,B.T,o,B.api),l=t.p,k=A.b([B.atQ,B.b3,new A.a6J(p.y,new A.aKQ(p),o),B.a_],l),j=p.y
 if(j===B.li)B.b.C(k,A.b([new A.a2L(p.w,!p.as,o),B.a_,new A.aas(B.VD,new A.aKR(p),o)],l))
 else if(j===B.lj)k.push(new A.a7j(p.x,!p.as,o))
 else k.push(new A.abX(p.as?o:p.ga1T(),o))
@@ -109398,7 +109398,7 @@ s=j?p.ga1T():p.ganw()
 k.push(A.ve(B.Sr,A.a4(j?"Choose a file":"Build my path",o,o,o,o,o,o),s))}if(n.length!==0){l=A.b([B.F6,B.auU,B.C],l)
 for(j=n.length,r=0;r<n.length;n.length===j||(0,A.z)(n),++r){q=n[r]
 l.push(new A.aL(B.cQ,new A.a3p(q,new A.aKU(p,q),new A.aKV(p,q),o),o))}l.push(B.C)
-l.push(A.fl(B.api,o,o,new A.aKW(p),o,o))
+l.push(A.fl(B.apj,o,o,new A.aKW(p),o,o))
 B.b.C(k,l)}return A.h9(m,B.T,A.iw(!0,A.jR(k,B.PT,o,!1),!1,B.ac,!1),o,!1,!1)}}
 A.aKC.prototype={
 $0(){var s=this.a
@@ -109518,7 +109518,7 @@ q.a.d.$0()},
 $S:0}
 A.a64.prototype={
 G(a){var s=null,r=A.b([B.aw.aT(0.2),B.e6.aT(0.12)],t.W),q=A.bd(22),p=A.cU(B.aH,1)
-return A.br(s,A.bj(A.b([B.TU,B.de,B.aqs,B.dM,B.apC],t.p),B.N,B.k,B.n),B.m,s,s,new A.bb(s,s,p,q,s,new A.hY(B.cd,B.fX,B.b4,r,s,s),B.G),s,s,s,B.ms,s,s,s)}}
+return A.br(s,A.bj(A.b([B.TU,B.de,B.aqt,B.dM,B.apD],t.p),B.N,B.k,B.n),B.m,s,s,new A.bb(s,s,p,q,s,new A.hY(B.cd,B.fX,B.b4,r,s,s),B.G),s,s,s,B.ms,s,s,s)}}
 A.a6J.prototype={
 G(a){var s=t.aF
 return A.KH(new A.aQl(this),B.a4l,A.cc([this.c],s),!1,null,s)}}
@@ -109547,7 +109547,7 @@ $0(){return this.a.d.$1(this.b)},
 $S:0}
 A.a2O.prototype={
 G(a){var s=t.N
-return A.bD(A.b([B.aqC,B.fE,A.cE(A.KH(new A.aIu(this),B.a8R,A.cc([this.c],s),!1,null,s),1)],t.p),B.p,B.k,B.n,0)}}
+return A.bD(A.b([B.aqD,B.fE,A.cE(A.KH(new A.aIu(this),B.a8R,A.cc([this.c],s),!1,null,s),1)],t.p),B.p,B.k,B.n,0)}}
 A.aIu.prototype={
 $1(a){return this.a.d.$1(a.gP(a))},
 $S:253}
@@ -109658,7 +109658,7 @@ s.yS()},
 $S:3}
 A.aMy.prototype={
 $1(a){var s=null,r=A.bd(28),q=this.a,p=this.b,o=this.c,n=t.p
-return A.b7m(s,B.aP,new A.aL(B.Q_,A.bj(A.b([A.a4(q,s,s,s,B.alx,s,s),B.a_,A.a4(p,s,s,s,B.alp,B.aq,s),B.C,A.a4(o,s,s,s,B.ao_,B.aq,s),B.b3,A.bD(A.b([A.ve(B.Sa,B.aoO,new A.aMw(q,p,o)),B.bP,A.fl(B.apb,s,s,new A.aMx(a),s,s)],n),B.p,B.cr,B.n,0)],n),B.p,B.k,B.a2),s),s,s,s,s,B.afR,s,new A.cG(r,B.r),s)},
+return A.b7m(s,B.aP,new A.aL(B.Q_,A.bj(A.b([A.a4(q,s,s,s,B.alx,s,s),B.a_,A.a4(p,s,s,s,B.alp,B.aq,s),B.C,A.a4(o,s,s,s,B.ao_,B.aq,s),B.b3,A.bD(A.b([A.ve(B.Sa,B.aoP,new A.aMw(q,p,o)),B.bP,A.fl(B.apc,s,s,new A.aMx(a),s,s)],n),B.p,B.cr,B.n,0)],n),B.p,B.k,B.a2),s),s,s,s,s,B.afR,s,new A.cG(r,B.r),s)},
 $S:704}
 A.aMw.prototype={
 $0(){return A.yM(this.a,this.b,this.c)},
@@ -109923,13 +109923,13 @@ G(a){var s,r,q,p=this,o=null,n=p.a.d,m=t.w,l=A.bE(a,B.dV,m).w,k=t.p,j=A.bj(A.b([
 if(h.length!==0){s=A.b([B.b3],k)
 for(r=0;r<h.length;++r)s.push(new A.aL(B.rX,new A.Nt(h[r],o),o))
 B.b.C(i,s)}h=B.c.bt(n.w).length===0
-if(!h){s=A.b([B.b3,B.ap9,B.cH,B.apY,B.C,new A.NB(n.gTD(),n.e,p.d,p.gZd(),!0,o)],k)
+if(!h){s=A.b([B.b3,B.apa,B.cH,B.apY,B.C,new A.NB(n.gTD(),n.e,p.d,p.gZd(),!0,o)],k)
 q=n.y
 if(q.length!==0)B.b.C(s,A.b([B.C,new A.OH(q,o)],k))
-B.b.C(i,s)}if(h&&n.d.length!==0)B.b.C(i,A.b([B.b3,B.aoV,B.C,new A.NB(n.d,n.e,p.d,p.gZd(),!1,o)],k))
+B.b.C(i,s)}if(h&&n.d.length!==0)B.b.C(i,A.b([B.b3,B.aoW,B.C,new A.NB(n.d,n.e,p.d,p.gZd(),!1,o)],k))
 i=A.La(A.bj(i,B.N,B.k,B.n),B.jl,!1,B.al)
 m=A.bE(a,B.iq,m).w
-return new A.fP(new A.ar(0,1/0,0,l.a.b*0.86),A.bj(A.b([new A.aL(B.jl,j,o),new A.j0(1,B.cR,i,o),A.br(o,A.bj(A.b([A.ve(B.Sc,A.a4(n.c!=null?"Open in Colab":"Copy code & open Colab",o,o,o,o,o,o),p.gax9()),B.dM,B.apj],k),B.p,B.k,B.a2),B.m,o,o,B.qc,o,o,o,new A.aj(24,16,24,16+m.w.d*0.4),o,o,1/0)],k),B.p,B.k,B.a2),o)}}
+return new A.fP(new A.ar(0,1/0,0,l.a.b*0.86),A.bj(A.b([new A.aL(B.jl,j,o),new A.j0(1,B.cR,i,o),A.br(o,A.bj(A.b([A.ve(B.Sc,A.a4(n.c!=null?"Open in Colab":"Copy code & open Colab",o,o,o,o,o,o),p.gax9()),B.dM,B.apk],k),B.p,B.k,B.a2),B.m,o,o,B.qc,o,o,o,new A.aj(24,16,24,16+m.w.d*0.4),o,o,1/0)],k),B.p,B.k,B.a2),o)}}
 A.aRM.prototype={
 $0(){return this.a.d=!0},
 $S:0}
@@ -109974,10 +109974,10 @@ p=A.br(l,A.La(A.a4(k.b,l,l,l,B.FI,l,l),l,!1,B.ax),B.m,l,l,new A.bb(B.m7,l,o,p,l,
 j=A.iz(B.aI,!1,m.d,A.aps(l,new A.hE(4,A.bd(10),B.d_),l,l,l,l,l,l,!0,new A.hE(4,A.bd(10),B.d_),l,l,l,l,l,B.bV,!0,l,l,l,l,l,l,l,l,l,l,l,l,l,B.an6,"Output\u2026",l,l,l,l,l,!0,l,l,l,!0,!0,!1,l,l,l,l,l,l,l,l,l,l,l,l,l,l),j!==!0,l,1,l,!1,new A.aJP(m),B.alL,B.bG)
 o=t.p
 n=A.b([],o)
-if(m.e!==!0)n.push(A.hU(B.aoU,m.gam5(),A.b7Q(l,l,B.ahm,l,l,l)))
-if(m.e===!0)B.b.C(n,A.b([B.Sn,B.F4,B.ap0],o))
+if(m.e!==!0)n.push(A.hU(B.aoV,m.gam5(),A.b7Q(l,l,B.ahm,l,l,l)))
+if(m.e===!0)B.b.C(n,A.b([B.Sn,B.F4,B.ap1],o))
 n.push(B.cI)
-if(m.e===!1)n.push(A.fl(B.aoR,l,l,new A.aJQ(m,k),l,l))
+if(m.e===!1)n.push(A.fl(B.aoS,l,l,new A.aJQ(m,k),l,l))
 j=A.b([q,B.de,p,B.de,j,B.C,A.bD(n,B.p,B.k,B.n,0)],o)
 if(m.f&&k.d.length!==0&&m.e!==!0)B.b.C(j,A.b([B.cH,A.a4(k.d,l,l,l,B.FQ,l,l)],o))
 return A.br(l,A.bj(j,B.N,B.k,B.n),B.m,l,l,new A.bb(B.aP,l,s,r,l,l,B.G),l,l,l,B.b0,l,l,l)}}
@@ -110046,7 +110046,7 @@ B.b.C(m,A.AF(r.a.d.f[r.w].b.length,new A.aRS(r),!0,t.l7))
 if(r.y)B.b.C(m,A.b([B.C,new A.a5_(k,r.a.d.f[r.w],q)],l))
 m=A.La(A.bj(m,B.N,B.k,B.n),B.jl,!1,B.al)
 if(r.y){s=A.b([],l)
-if(!k)B.b.C(s,A.b([A.cE(A.rw(B.apn,r.gayu(),q),1),B.fE],l))
+if(!k)B.b.C(s,A.b([A.cE(A.rw(B.apo,r.gayu(),q),1),B.fE],l))
 s.push(A.cE(A.hU(A.a4(r.ga0Q()?"Finish":"Next question",q,q,q,q,q,q),r.gavT(),q),1))
 s=A.bD(s,B.p,B.k,B.n,0)}else s=A.hU(B.aqO,r.x==null?q:r.gayw(),q)
 return A.bj(A.b([new A.a5x(p.b,n+1,o,q),new A.j0(1,B.cR,m,q),new A.a5m(s,q)],l),B.p,B.k,B.a2)},
@@ -110054,9 +110054,9 @@ alz(){var s,r=this,q=null,p=r.gbc().bu($.fK(),t.GO),o=r.a.d,n=p.oP(o.a),m=o.f,l=
 l=A.oS(n).aT(0.16)
 s=A.cU(A.oS(n).aT(0.5),1)
 s=A.er(A.br(q,A.eL(A.aqR(n),A.oS(n),q,34),B.m,q,q,new A.bb(l,q,s,q,q,q,B.bA),q,72,q,q,q,q,72),q,q)
-m=A.b([B.C,s,B.a_,A.a4(j?"Concept mastered":"Worth another pass",q,q,q,B.FM,B.aq,q),B.dM,A.a4(""+k+" of "+m.length+" correct",q,q,q,B.amD,B.aq,q),B.b3,A.hU(B.ap7,new A.aRW(r),q),B.C],t.p)
+m=A.b([B.C,s,B.a_,A.a4(j?"Concept mastered":"Worth another pass",q,q,q,B.FM,B.aq,q),B.dM,A.a4(""+k+" of "+m.length+" correct",q,q,q,B.amD,B.aq,q),B.b3,A.hU(B.ap8,new A.aRW(r),q),B.C],t.p)
 if(!j)m.push(A.rw(B.apX,new A.aRX(r,o),q))
-else m.push(A.rw(B.ap8,new A.aRY(r),q))
+else m.push(A.rw(B.ap9,new A.aRY(r),q))
 return new A.aL(B.PZ,A.bj(m,B.bW,B.k,B.a2),q)}}
 A.aRZ.prototype={
 $0(){return this.a.x=this.b},
@@ -110605,7 +110605,7 @@ G(a){var s=null,r=B.j.aT(0.14),q=A.bd(999)
 return A.ip(B.au,A.br(s,B.afb,B.m,s,s,new A.bb(r,s,A.cU(B.j.aT(0.24),1),q,s,s,B.G),s,s,s,B.t_,s,s,s),B.aj,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,this.c,s,s,s,s,s,s,!1,B.bF)}}
 A.b0j.prototype={
 $1(a){var s=this.a
-return A.iw(!0,new A.aL(B.t3,A.bj(A.b([B.aqf,B.cH,B.apy,B.a_,new A.j0(1,B.cR,A.bnc(new A.b0h(s),s.length,new A.b0i(),!0),null)],t.p),B.N,B.k,B.a2),null),!1,B.ac,!0)},
+return A.iw(!0,new A.aL(B.t3,A.bj(A.b([B.aqf,B.cH,B.apz,B.a_,new A.j0(1,B.cR,A.bnc(new A.b0h(s),s.length,new A.b0i(),!0),null)],t.p),B.N,B.k,B.a2),null),!1,B.ac,!0)},
 $S:726}
 A.b0i.prototype={
 $2(a,b){return B.C},
@@ -110910,7 +110910,7 @@ m.push(A.cE(A.a4(this.c,r,B.a8,r,B.akA,r,r),1))
 return A.B4(A.bb3(A.br(r,A.bj(A.b([A.br(r,A.bD(m,B.p,B.k,B.n,0),B.m,r,r,B.qd,r,r,r,B.PJ,r,r,r),new A.aL(B.t0,this.e,r)],n),B.p,B.k,B.a2),B.m,r,r,new A.bb(B.m7,r,o,p,r,r,B.G),r,r,r,r,r,r,r),0.96+0.04*q),q)}}
 A.aaP.prototype={
 G(a){var s=null,r=this.c,q=t.p
-q=A.b([A.bD(A.b([B.ap2,A.cE(A.a4(r.a,s,s,s,B.FL,s,s),1)],q),B.N,B.k,B.n,0)],q)
+q=A.b([A.bD(A.b([B.ap3,A.cE(A.a4(r.a,s,s,s,B.FL,s,s),1)],q),B.N,B.k,B.n,0)],q)
 r=r.b
 if(r.length!==0)q.push(new A.aL(B.jj,A.a4(r,s,s,s,B.ajw,s,s),s))
 return A.bj(q,B.N,B.k,B.n)}}
@@ -111081,7 +111081,7 @@ p.b9("Library",new A.aOl())
 J.dB(p.i(0,"Library").b9(n,new A.aOm()),h)
 h=h.w
 o.m(0,n,h.length===0?n:h)}m=k.w
-if(m==null){l=A.jR(A.b([new A.MK(p,o,new A.aOn(p,q),new A.aOo(k,p),new A.aOp(k),j),B.C,B.dM,A.aGK(B.pt,B.W1,0,14),B.cH,B.apv,B.i8,new A.a4y(!0,p,q,new A.aOq(k),j)],t.p),B.d5,j,!1)
+if(m==null){l=A.jR(A.b([new A.MK(p,o,new A.aOn(p,q),new A.aOo(k,p),new A.aOp(k),j),B.C,B.dM,A.aGK(B.pt,B.W1,0,14),B.cH,B.apw,B.i8,new A.a4y(!0,p,q,new A.aOq(k),j)],t.p),B.d5,j,!1)
 m="Your knowledge graph"}else{i=k.x
 if(i==null){i=p.i(0,m)
 if(i==null)i=B.zM
@@ -111533,7 +111533,7 @@ break}p.K(new A.aVj(p,m))
 if(m==null)p.a.aam()
 case 1:return A.n(q,r)}})
 return A.o($async$uy,r)},
-G(a){var s,r,q,p,o=this,n=null,m=t.p,l=A.b([B.cI,B.Kg,B.C,B.aoS,B.cI],m),k=o.ax
+G(a){var s,r,q,p,o=this,n=null,m=t.p,l=A.b([B.cI,B.Kg,B.C,B.aoT,B.cI],m),k=o.ax
 if(k!=null)B.b.C(l,A.b([A.a4(k,n,n,n,B.aku,B.aq,n),B.C],m))
 k=o.as
 if(k!=null)B.b.C(l,A.b([A.a4(k,n,n,n,B.FJ,B.aq,n),B.C],m))
@@ -111548,8 +111548,8 @@ else p=A.a4(o.z?"Create account":"Sign in",n,n,n,n,n,n)
 q=A.hU(p,q,n)
 p=r?n:new A.aVs(o)
 p=A.fl(A.a4(o.z?"I already have an account":"New here? Create an account",n,n,n,n,n,n),n,n,p,n,n)
-B.b.C(l,A.b([k,B.C,s,B.a_,q,p,A.fl(B.apw,n,n,r?n:new A.aVt(o),n,n)],m))}l.push(B.C)
-l.push(B.apa)
+B.b.C(l,A.b([k,B.C,s,B.a_,q,p,A.fl(B.apx,n,n,r?n:new A.aVt(o),n,n)],m))}l.push(B.C)
+l.push(B.apb)
 l.push(B.C)
 return A.h9(n,B.T,A.iw(!0,new A.aL(B.mt,A.bj(l,B.bW,B.k,B.n),n),!1,B.ac,!0),n,!1,!1)}}
 A.aVk.prototype={
@@ -111656,7 +111656,7 @@ return A.o($async$uU,r)},
 G(a){var s,r,q,p,o,n,m=this,l=null,k=A.aa(m.a.d.i(0,"title"))
 k=A.jt(l,B.T,l,A.a4(k==null?"Playground":k,l,l,l,l,l,l))
 s=m.w
-s=A.cE(A.er(s==null?B.aqF:new A.aL(B.b0,new A.a9g(s,m.x,m.y,l),l),l,l),1)
+s=A.cE(A.er(s==null?B.aqG:new A.aL(B.b0,new A.a9g(s,m.x,m.y,l),l),l,l),1)
 r=A.a4(m.z,l,l,l,B.dl,l,l)
 q=m.Q
 p=q?l:m.gayd()
@@ -111750,7 +111750,7 @@ o=o==null?q:o.a
 s=o===!0
 o=A.eL(B.QR,s?B.ae:B.E,q,10)
 r=t.p
-return A.h9(A.jt(A.b([new A.aL(B.Pu,A.bD(A.b([o,B.fF,A.a4(s?"GPU online":"GPU offline",q,q,q,B.fK,q,q)],r),B.p,B.k,B.n,0),q)],r),B.T,q,B.aqu),B.T,A.b1f(p,new A.avA(b,s,a),new A.avB(),new A.avC(),t.b5,t.jK),q,!1,!1)}}
+return A.h9(A.jt(A.b([new A.aL(B.Pu,A.bD(A.b([o,B.fF,A.a4(s?"GPU online":"GPU offline",q,q,q,B.fK,q,q)],r),B.p,B.k,B.n,0),q)],r),B.T,q,B.aqv),B.T,A.b1f(p,new A.avA(b,s,a),new A.avB(),new A.avC(),t.b5,t.jK),q,!1,!1)}}
 A.avC.prototype={
 $0(){return B.h6},
 $S:139}
@@ -111892,7 +111892,7 @@ G(a){var s=this.gbc().au($.iN(),t.vz)
 return new A.Lu(new A.aHt(this,s),s.ga64(),null,t.Li)}}
 A.aHm.prototype={
 $1(a){var s=null
-return A.z1(A.b([A.fl(B.aq3,s,s,new A.aHk(a),s,s),A.hU(B.apQ,new A.aHl(a),s)],t.p),s,B.aqb,B.aoZ)},
+return A.z1(A.b([A.fl(B.aq3,s,s,new A.aHk(a),s,s),A.hU(B.apQ,new A.aHl(a),s)],t.p),s,B.aqb,B.ap_)},
 $S:70}
 A.aHk.prototype={
 $0(){A.ck(this.a,!1).iB(!1)
@@ -111913,7 +111913,7 @@ $0(){return this.a.w=!1},
 $S:0}
 A.aHh.prototype={
 $1(a){var s=null
-return A.z1(A.b([A.fl(B.ig,s,s,new A.aHf(a),s,s),A.fl(B.apS,s,s,new A.aHg(a),s,A.tk(s,s,s,s,s,s,s,s,s,B.bl,s,s,s,s,s,s,s,s,s,s,s))],t.p),s,B.aqH,B.aqo)},
+return A.z1(A.b([A.fl(B.ig,s,s,new A.aHf(a),s,s),A.fl(B.apS,s,s,new A.aHg(a),s,A.tk(s,s,s,s,s,s,s,s,s,B.bl,s,s,s,s,s,s,s,s,s,s,s))],t.p),s,B.aqI,B.aqp)},
 $S:70}
 A.aHf.prototype={
 $0(){A.ck(this.a,!1).iB(!1)
@@ -111945,9 +111945,9 @@ o=t.p
 p=A.b([A.bD(A.b([q,B.bP,A.cE(A.a4(p,l,B.a8,l,B.ie,l,l),1)],o),B.p,B.k,B.n,0),B.C],o)
 if(!j){k=m.a
 B.b.C(p,A.b([B.aqS,B.i8,A.ve(B.SE,B.G0,k.w?l:k.gaqp())],o))}else{q=m.a
-k=A.cE(A.rw(B.aqn,q.w?l:new A.aHs(q,k),l),1)
+k=A.cE(A.rw(B.aqo,q.w?l:new A.aHs(q,k),l),1)
 n=A.b9m(l,l,l,l,l,l,l,l,l,B.bl,l,l,l,l,l,B.I_,l,l,l,l)
-B.b.C(p,A.b([A.bD(A.b([k,B.bP,A.cE(A.rw(B.ap3,q.w?l:q.ganL(),n),1)],o),B.p,B.k,B.n,0)],o))}return A.br(l,A.bj(p,B.bW,B.k,B.n),B.m,l,l,new A.bb(B.bV,l,r,s,l,l,B.G),l,l,l,B.b0,l,l,l)},
+B.b.C(p,A.b([A.bD(A.b([k,B.bP,A.cE(A.rw(B.ap4,q.w?l:q.ganL(),n),1)],o),B.p,B.k,B.n,0)],o))}return A.br(l,A.bj(p,B.bW,B.k,B.n),B.m,l,l,new A.bb(B.bV,l,r,s,l,l,B.G),l,l,l,B.b0,l,l,l)},
 $S:752}
 A.aHr.prototype={
 $1(a){return this.a.uz()},
@@ -111982,7 +111982,7 @@ this.a.au($.EO().gc2(),t.Je).dU(s)
 this.b.eX("Double","kg.pace",s)},
 $S:754}
 A.Bo.prototype={
-fj(a,b){var s=null,r=b.bu($.fK(),t.GO),q=b.bu($.b0T(),t.Eo),p=A.jt(s,B.T,s,B.apH),o=t.p,n=A.b([new A.aat(r.e,r.gaMX(),r.gaf6(),J.bV(q),s),B.a_,B.GQ,B.a_,B.ae1,B.a_,B.aqZ,B.C,A.uB(A.oQ(s,s,s,!0,!0,B.RP,s,new A.awm(a),s,s,s,B.apB,s,B.aq2,s,s),B.bL,s)],o),m=A.qx(b.bu($.uk(),t.QW),t.P)
+fj(a,b){var s=null,r=b.bu($.fK(),t.GO),q=b.bu($.b0T(),t.Eo),p=A.jt(s,B.T,s,B.apH),o=t.p,n=A.b([new A.aat(r.e,r.gaMX(),r.gaf6(),J.bV(q),s),B.a_,B.GQ,B.a_,B.ae1,B.a_,B.aqZ,B.C,A.uB(A.oQ(s,s,s,!0,!0,B.RP,s,new A.awm(a),s,s,s,B.apC,s,B.aq2,s,s),B.bL,s)],o),m=A.qx(b.bu($.uk(),t.QW),t.P)
 if(J.c(m==null?s:m.a.i(0,"isOwner"),!0))B.b.C(n,A.b([B.a_,A.oQ(s,s,s,!0,!0,B.Sg,s,new A.awn(a),new A.cG(A.bd(16),B.r),s,s,s,B.aP,B.aq8,s,s)],o))
 n.push(B.b3)
 n.push(B.auR)
@@ -112025,7 +112025,7 @@ $1(a){return B.GR},
 $S:756}
 A.awo.prototype={
 $3(a,b,c){var s,r,q,p,o,n,m,l=b.bu($.b0Z(),t.c8),k=J.nX(b.bu($.yR(),t.Eo),new A.awj(l)),j=A.V(k,k.$ti.h("E.E"))
-if(j.length===0)return B.apu
+if(j.length===0)return B.apv
 k=A.b([],t.p)
 for(s=j.length,r=this.a,q=r.c,r=r.a,p=0;p<j.length;j.length===s||(0,A.z)(j),++p){o=j[p]
 n=o.a
@@ -112044,7 +112044,7 @@ $1(a){var s,r,q,p,o,n,m,l,k=A.b([],t.sr)
 for(s=J.aW(this.a.bu($.yR(),t.Eo)),r=this.b,q=r.c;s.q();){p=s.gL()
 o=q.i(0,p.a)
 if((o==null?0:o)>=0.4)k.push(p)}B.b.eK(k,new A.awi(r))
-if(k.length===0)return B.aoW
+if(k.length===0)return B.aoX
 s=A.b([],t.p)
 for(p=k.length,r=r.a,n=0;n<k.length;k.length===p||(0,A.z)(k),++n){m=k[n]
 o=m.a
@@ -112069,7 +112069,7 @@ return A.a4(q===!0?"Knowgraph v"+r.c+" (build "+r.d+")":"",s,s,s,B.eD,B.aq,s)},
 $S:760}
 A.awh.prototype={
 $1(a){var s=null
-return A.z1(A.b([A.fl(B.ig,s,s,new A.awf(a),s,s),A.fl(B.apc,s,s,new A.awg(a),s,A.tk(s,s,s,s,s,s,s,s,s,B.bl,s,s,s,s,s,s,s,s,s,s,s))],t.p),s,B.aq5,B.aqK)},
+return A.z1(A.b([A.fl(B.ig,s,s,new A.awf(a),s,s),A.fl(B.apd,s,s,new A.awg(a),s,A.tk(s,s,s,s,s,s,s,s,s,B.bl,s,s,s,s,s,s,s,s,s,s,s))],t.p),s,B.aq5,B.aqK)},
 $S:70}
 A.awf.prototype={
 $0(){A.ck(this.a,!1).iB(!1)
@@ -112159,7 +112159,7 @@ f===$&&A.a()
 s=f.length
 if(s===0)return A.h9(A.jt(g,B.T,g,g),B.T,B.Kc,g,!1,!1)
 r=h.x
-if(r>=s)return A.h9(A.jt(g,B.T,g,g),B.T,A.er(A.bj(A.b([B.S1,B.C,A.a4(""+h.y+" / "+s+" recalled",g,g,g,B.amM,g,g),B.cH,B.aqa,B.a_,A.hU(B.apD,new A.aUc(a),g)],t.p),B.p,B.k,B.a2),g,g),g,!1,!1)
+if(r>=s)return A.h9(A.jt(g,B.T,g,g),B.T,A.er(A.bj(A.b([B.S1,B.C,A.a4(""+h.y+" / "+s+" recalled",g,g,g,B.amM,g,g),B.cH,B.aqa,B.a_,A.hU(B.apE,new A.aUc(a),g)],t.p),B.p,B.k,B.a2),g,g),g,!1,!1)
 q=f[r]
 p=q.b
 s=A.jt(g,B.T,g,A.a4("Review "+(r+1)+" of "+s,g,g,g,B.amB,g,g))
@@ -112237,7 +112237,7 @@ s=B.ck.aT(0.18)
 r=A.bd(999)
 q=t.p
 p=t.y
-p=A.b([A.bD(A.b([B.apg,B.cI,A.br(d,A.a4(b.toUpperCase(),d,d,d,B.akw,d,d),B.m,d,d,new A.bb(s,d,d,r,d,d,B.G),d,d,d,B.PG,d,d,d)],q),B.p,B.k,B.n,0),B.C,A.er(A.KH(new A.aWU(e),B.V3,A.cc([e.w],p),!1,B.lL,p),d,d)],q)
+p=A.b([A.bD(A.b([B.aph,B.cI,A.br(d,A.a4(b.toUpperCase(),d,d,d,B.akw,d,d),B.m,d,d,new A.bb(s,d,d,r,d,d,B.G),d,d,d,B.PG,d,d,d)],q),B.p,B.k,B.n,0),B.C,A.er(A.KH(new A.aWU(e),B.V3,A.cc([e.w],p),!1,B.lL,p),d,d)],q)
 if(e.w)p.push(B.ad8)
 p.push(B.C)
 for(o=0;o<4;++o){s={}
@@ -112262,7 +112262,7 @@ f=m+" \xb7 "+A.j(f)}f=A.b([g,B.bP,new A.kq(1,B.dC,A.bj(A.b([A.a4(f,d,d,d,B.alP,d
 if(s.a===b)f.push(B.ad6)
 else if(!r)f.push(B.ad7)
 B.b.C(p,A.b([A.jM(!1,new A.cD(h,h,h,h),!0,new A.aL(B.PC,A.bD(f,B.N,B.k,B.n,0),d),d,!0,d,d,d,d,d,d,d,d,i,d,d,d,d,d,d,d),B.fG],q))}p.push(B.cH)
-p.push(B.app)
+p.push(B.apq)
 p.push(B.C)
 p.push(B.auH)
 return A.br(d,A.bj(p,B.N,B.k,B.n),B.m,d,d,new A.bb(B.aP,d,d,c,d,d,B.G),d,d,d,B.b0,d,d,d)}}
@@ -112282,7 +112282,7 @@ fj(a,b){var s=null,r=A.qx(b.bu($.uk(),t.QW),t.P),q=A.aa(r==null?s:r.a.i(0,"appUs
 if(q==null)q=""
 r=q.length
 if(r===0)return B.aR
-return A.bD(A.b([A.cE(A.a4("Invite 3 friends, get a month of Standard \u2014 your code: "+(r>12?B.c.U(q,0,12):q),s,s,s,B.fK,s,s),1),A.fl(B.aqj,s,s,new A.aSZ(a,b),s,s)],t.p),B.p,B.k,B.n,0)}}
+return A.bD(A.b([A.cE(A.a4("Invite 3 friends, get a month of Standard \u2014 your code: "+(r>12?B.c.U(q,0,12):q),s,s,s,B.fK,s,s),1),A.fl(B.aqk,s,s,new A.aSZ(a,b),s,s)],t.p),B.p,B.k,B.n,0)}}
 A.aSZ.prototype={
 $0(){var s=0,r=A.p(t.H),q,p=this,o,n,m
 var $async$$0=A.q(function(a,b){if(a===1)return A.m(b,r)
@@ -112302,7 +112302,7 @@ return A.o($async$$0,r)},
 $S:6}
 A.aSX.prototype={
 $1(a){var s=null,r=this.a,q=A.iz(B.aI,!0,r,B.Ti,s,s,1,s,!1,s,B.dP,B.bG)
-return A.z1(A.b([A.fl(B.ig,s,s,new A.aSV(a),s,s),A.hU(B.aqI,new A.aSW(a,r),s)],t.p),B.bL,q,B.apE)},
+return A.z1(A.b([A.fl(B.ig,s,s,new A.aSV(a),s,s),A.hU(B.aqJ,new A.aSW(a,r),s)],t.p),B.bL,q,B.apF)},
 $S:70}
 A.aSV.prototype={
 $0(){A.ck(this.a,!1).iB(null)
@@ -126569,16 +126569,16 @@ B.f5=new A.aj(32,32,32,32)
 B.E=new A.L(1,0.6039215686274509,0.6431372549019608,0.7215686274509804,B.f)
 B.FU=new A.u(!0,B.E,null,"Outfit",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.aq=new A.pB(2,"center")
-B.apz=new A.ad("No content is available for this lesson, or your enrollment does not cover it.",null,B.FU,B.aq,null,null,null,null,null)
-B.ad2=new A.aL(B.f5,B.apz,null)
+B.apA=new A.ad("No content is available for this lesson, or your enrollment does not cover it.",null,B.FU,B.aq,null,null,null,null,null)
+B.ad2=new A.aL(B.f5,B.apA,null)
 B.Kb=new A.fO(B.M,null,null,B.ad2,null)
 B.mt=new A.aj(24,24,24,24)
 B.c5=new A.u(!0,B.E,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.ape=new A.ad("Watch a few reels first \u2014 your review deck builds itself from what you learn.",null,B.c5,B.aq,null,null,null,null,null)
-B.ad0=new A.aL(B.mt,B.ape,null)
+B.apf=new A.ad("Watch a few reels first \u2014 your review deck builds itself from what you learn.",null,B.c5,B.aq,null,null,null,null,null)
+B.ad0=new A.aL(B.mt,B.apf,null)
 B.Kc=new A.fO(B.M,null,null,B.ad0,null)
-B.aqp=new A.ad("No graph for this reel yet.",null,B.c5,null,null,null,null,null,null)
-B.Kd=new A.fO(B.M,null,null,B.aqp,null)
+B.aqq=new A.ad("No graph for this reel yet.",null,B.c5,null,null,null,null,null,null)
+B.Kd=new A.fO(B.M,null,null,B.aqq,null)
 B.avD=new A.aHD(0,"material")
 B.Kt=new A.jz(null,null,null,null,null,null,null,null,null,null)
 B.h6=new A.fO(B.M,null,null,B.Kt,null)
@@ -126746,8 +126746,8 @@ B.ie=new A.u(!0,B.F,null,"Outfit",null,null,15,B.af,null,null,null,null,null,nul
 B.aq_=new A.ad("PDF, TXT or Markdown",null,B.ie,null,null,null,null,null,null)
 B.oE=new A.cd(null,3,null,null)
 B.dl=new A.u(!0,B.E,null,"Outfit",null,null,12.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apt=new A.ad("A chapter works better than a whole book",null,B.dl,null,null,null,null,null,null)
-B.a4i=s([B.SI,B.C,B.aq_,B.oE,B.apt],t.p)
+B.apu=new A.ad("A chapter works better than a whole book",null,B.dl,null,null,null,null,null,null)
+B.a4i=s([B.SI,B.C,B.aq_,B.oE,B.apu],t.p)
 B.NP=new A.zB(B.al,B.k,B.n,B.p,null,B.cc,null,0,B.a4i,null)
 B.mc=new A.zF(0,"none")
 B.ro=new A.zF(1,"waiting")
@@ -127109,8 +127109,8 @@ B.ta=new A.v9(!1,!1,!1,!1)
 B.tb=new A.v9(!1,!1,!1,!0)
 B.dC=new A.W3(0,"tight")
 B.aju=new A.u(!0,B.E,null,null,null,null,12,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aqt=new A.ad("Also answer with reels, added next to this path",null,B.aju,null,null,null,null,null,null)
-B.Qg=new A.kq(1,B.dC,B.aqt,null)
+B.aqu=new A.ad("Also answer with reels, added next to this path",null,B.aju,null,null,null,null,null,null)
+B.Qg=new A.kq(1,B.dC,B.aqu,null)
 B.Qh=new A.Aa(null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.jp=new A.op(!1,!1,!1,!1)
 B.jq=new A.op(!1,!1,!1,!0)
@@ -127512,10 +127512,10 @@ B.aeR=new A.tW(["learner","Learner","\u20b9199/mo","\u20b91,990/yr","40 generati
 B.aeO=new A.tW(["pro","Pro","\u20b9399/mo","\u20b93,990/yr","150 generations/mo \xb7 300 playground runs/day \xb7 priority queue"])
 B.aeQ=new A.tW(["creator","Creator","\u20b9999/mo","\u20b99,990/yr","500 generations/mo \xb7 create & sell courses \xb7 70% revenue share"])
 B.V1=s([B.aeP,B.aeR,B.aeO,B.aeQ],A.ah("w<+(e,e,e?,e?,e)>"))
-B.aqB=new A.ad("Monthly",null,null,null,null,null,null,null,null)
-B.Iv=new A.de(!1,null,B.aqB,t.Mt)
-B.aoT=new A.ad("Yearly",null,null,null,null,null,null,null,null)
-B.Iu=new A.de(!0,null,B.aoT,t.Mt)
+B.aqC=new A.ad("Monthly",null,null,null,null,null,null,null,null)
+B.Iv=new A.de(!1,null,B.aqC,t.Mt)
+B.aoU=new A.ad("Yearly",null,null,null,null,null,null,null,null)
+B.Iu=new A.de(!0,null,B.aoU,t.Mt)
 B.V3=s([B.Iv,B.Iu],A.ah("w<de<I>>"))
 B.atR=new A.jk(0,1)
 B.atW=new A.jk(0.5,1)
@@ -127547,12 +127547,12 @@ B.W5=s([4.85481134,2.47563463],t.n)
 B.Vp=s([5.62945551,2.72948597],t.n)
 B.VH=s([6.43023796,2.98020421],t.n)
 B.up=s([B.VF,B.Ul,B.a_K,B.a0r,B.Vl,B.Vv,B.Wl,B.VP,B.W5,B.Vp,B.VH],t.zg)
-B.aql=new A.ad("Calm",null,null,null,null,null,null,null,null)
-B.In=new A.de(0.75,null,B.aql,t.dl)
+B.aqm=new A.ad("Calm",null,null,null,null,null,null,null,null)
+B.In=new A.de(0.75,null,B.aqm,t.dl)
 B.aqM=new A.ad("1x",null,null,null,null,null,null,null,null)
 B.Iy=new A.de(1,null,B.aqM,t.dl)
-B.aqy=new A.ad("1.25x",null,null,null,null,null,null,null,null)
-B.Ik=new A.de(1.25,null,B.aqy,t.dl)
+B.aqz=new A.ad("1.25x",null,null,null,null,null,null,null,null)
+B.Ik=new A.de(1.25,null,B.aqz,t.dl)
 B.aoL=new A.ad("1.5x",null,null,null,null,null,null,null,null)
 B.Il=new A.de(1.5,null,B.aoL,t.dl)
 B.Vg=s([B.In,B.Iy,B.Ik,B.Il],A.ah("w<de<N>>"))
@@ -127829,11 +127829,11 @@ B.a3f=s([3,7,14,30,60,100],t.t)
 B.uJ=s(["password"],t.s)
 B.a3t=s(["pdf","txt","md"],t.s)
 B.p7=new A.i7(2,"dark")
-B.ap4=new A.ad("Dark",null,null,null,null,null,null,null,null)
-B.Ix=new A.de(B.p7,null,B.ap4,t.b6)
+B.ap5=new A.ad("Dark",null,null,null,null,null,null,null,null)
+B.Ix=new A.de(B.p7,null,B.ap5,t.b6)
 B.p6=new A.i7(1,"light")
-B.ap5=new A.ad("Light",null,null,null,null,null,null,null,null)
-B.It=new A.de(B.p6,null,B.ap5,t.b6)
+B.ap6=new A.ad("Light",null,null,null,null,null,null,null,null)
+B.It=new A.de(B.p6,null,B.ap6,t.b6)
 B.ih=new A.i7(0,"system")
 B.Is=new A.de(B.ih,null,B.G1,t.b6)
 B.a46=s([B.Ix,B.It,B.Is],A.ah("w<de<i7>>"))
@@ -127846,17 +127846,17 @@ B.a4k=s([120,120,20,45,20,15,20,120,120],t.n)
 B.li=new A.kX(0,"ask")
 B.Rm=new A.aO(63460,"MaterialIcons",!0)
 B.Sb=new A.bn(B.Rm,17,null,null,null)
-B.aoX=new A.ad("Ask",null,null,null,null,null,null,null,null)
-B.Io=new A.de(B.li,B.Sb,B.aoX,t.px)
+B.aoY=new A.ad("Ask",null,null,null,null,null,null,null,null)
+B.Io=new A.de(B.li,B.Sb,B.aoY,t.px)
 B.lj=new A.kX(1,"paste")
 B.Rr=new A.aO(983075,"MaterialIcons",!1)
 B.SD=new A.bn(B.Rr,17,null,null,null)
-B.aqw=new A.ad("Paste",null,null,null,null,null,null,null,null)
-B.Ip=new A.de(B.lj,B.SD,B.aqw,t.px)
+B.aqx=new A.ad("Paste",null,null,null,null,null,null,null,null)
+B.Ip=new A.de(B.lj,B.SD,B.aqx,t.px)
 B.GF=new A.kX(2,"upload")
 B.RZ=new A.bn(B.tT,17,null,null,null)
-B.apl=new A.ad("File",null,null,null,null,null,null,null,null)
-B.IA=new A.de(B.GF,B.RZ,B.apl,t.px)
+B.apm=new A.ad("File",null,null,null,null,null,null,null,null)
+B.IA=new A.de(B.GF,B.RZ,B.apm,t.px)
 B.a4l=s([B.Io,B.Ip,B.IA],A.ah("w<de<kX>>"))
 B.dg=new A.C9(0,"butt")
 B.ez=new A.C9(1,"round")
@@ -129911,18 +129911,18 @@ B.Ad=new A.auH(0,"max")
 B.acZ=new A.YH(0,"nearestOverlay")
 B.ad_=new A.YH(1,"rootOverlay")
 B.aog=new A.u(!0,B.F,null,"Outfit",null,null,18,B.ed,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apq=new A.ad("Course catalogue",null,B.aog,null,null,null,null,null,null)
-B.ad1=new A.aL(B.cQ,B.apq,null)
+B.apr=new A.ad("Course catalogue",null,B.aog,null,null,null,null,null,null)
+B.ad1=new A.aL(B.cQ,B.apr,null)
 B.PB=new A.aj(0,5,0,5)
 B.Ra=new A.aO(62837,"MaterialIcons",!1)
 B.SJ=new A.bn(B.Ra,17,B.E,null,null)
 B.ad3=new A.aL(B.PB,B.SJ,null)
 B.p4=new A.u(!0,B.F,null,"Outfit",null,null,14,B.O,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aqx=new A.ad("Want to sell your course?",null,B.p4,null,null,null,null,null,null)
+B.aqy=new A.ad("Want to sell your course?",null,B.p4,null,null,null,null,null,null)
 B.dM=new A.cd(null,6,null,null)
 B.anV=new A.u(!0,B.E,null,"Outfit",null,null,12.5,null,null,null,null,null,1.45,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aqk=new A.ad("Once your course is ready, email mayurwaghchoure1995@gmail.com with the course title. We will list it for paid enrollment on the Knowgraph website courses page with a revenue share, and learners continue watching it right here in the app.",null,B.anV,null,null,null,null,null,null)
-B.Vu=s([B.aqx,B.dM,B.aqk],t.p)
+B.aql=new A.ad("Once your course is ready, email mayurwaghchoure1995@gmail.com with the course title. We will list it for paid enrollment on the Knowgraph website courses page with a revenue share, and learners continue watching it right here in the app.",null,B.anV,null,null,null,null,null,null)
+B.Vu=s([B.aqy,B.dM,B.aql],t.p)
 B.NO=new A.zB(B.al,B.k,B.n,B.N,null,B.cc,null,0,B.Vu,null)
 B.ad4=new A.aL(B.b0,B.NO,null)
 B.akS=new A.u(!0,B.a0,null,"Outfit",null,null,12,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
@@ -130099,14 +130099,14 @@ B.RH=new A.aO(983662,"MaterialIcons",!1)
 B.S4=new A.bn(B.RH,18,B.ae,null,null)
 B.bP=new A.cd(8,null,null,null)
 B.am8=new A.u(!0,B.F,null,"Outfit",null,null,null,B.af,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.ap1=new A.ad("You are enrolled",null,B.am8,null,null,null,null,null,null)
-B.Wn=s([B.S4,B.bP,B.ap1],t.p)
+B.ap2=new A.ad("You are enrolled",null,B.am8,null,null,null,null,null,null)
+B.Wn=s([B.S4,B.bP,B.ap2],t.p)
 B.af9=new A.wZ(B.ax,B.k,B.n,B.p,null,B.cc,null,0,B.Wn,null)
 B.SM=new A.bn(B.nb,11,B.j,null,null)
 B.oC=new A.cd(4,null,null,null)
 B.akv=new A.u(!0,B.j,null,"Outfit",null,null,11,B.O,null,0.2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apd=new A.ad("Yours",null,B.akv,null,null,null,null,null,null)
-B.UG=s([B.SM,B.oC,B.apd],t.p)
+B.ape=new A.ad("Yours",null,B.akv,null,null,null,null,null,null)
+B.UG=s([B.SM,B.oC,B.ape],t.p)
 B.afa=new A.wZ(B.ax,B.k,B.a2,B.p,null,B.cc,null,0,B.UG,null)
 B.Rp=new A.aO(63578,"MaterialIcons",!1)
 B.Sd=new A.bn(B.Rp,13,B.j,null,null)
@@ -130405,16 +130405,16 @@ B.ahE=new A.m1(5,"timeout")
 B.ahF=new A.C2(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.apU=new A.ad("Your data has been deleted.",null,null,null,null,null,null,null,null)
 B.ahG=new A.je(B.apU,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
-B.apo=new A.ad("Course saved for offline watching.",null,null,null,null,null,null,null,null)
-B.ahH=new A.je(B.apo,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
+B.app=new A.ad("Course saved for offline watching.",null,null,null,null,null,null,null,null)
+B.ahH=new A.je(B.app,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
 B.aq9=new A.ad("Link copied \u2014 paste it anywhere.",null,null,null,null,null,null,null,null)
 B.ahI=new A.je(B.aq9,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
-B.apm=new A.ad("Finish the remaining reels to unlock the certificate.",null,null,null,null,null,null,null,null)
-B.ahJ=new A.je(B.apm,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
+B.apn=new A.ad("Finish the remaining reels to unlock the certificate.",null,null,null,null,null,null,null,null)
+B.ahJ=new A.je(B.apn,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
 B.aqc=new A.ad("Streak frozen for today \u2014 the fire survives.",null,null,null,null,null,null,null,null)
 B.ahK=new A.je(B.aqc,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
-B.aqi=new A.ad("Marked as complete",null,null,null,null,null,null,null,null)
-B.ahL=new A.je(B.aqi,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
+B.aqj=new A.ad("Marked as complete",null,null,null,null,null,null,null,null)
+B.ahL=new A.je(B.aqj,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
 B.apJ=new A.ad("Could not open Colab on this device.",null,null,null,null,null,null,null,null)
 B.ahM=new A.je(B.apJ,null,null,null,null,null,null,null,null,null,null,null,null,B.bY,!1,null,null,null,B.B,null)
 B.Fe=new A.Lk(0,"permissive")
@@ -130907,58 +130907,57 @@ B.aoK=new A.ad("Sign in with email",null,null,null,null,null,null,null,null)
 B.aoM=new A.ad("Reel pace",null,null,null,null,null,null,null,null)
 B.G0=new A.ad("Continue with Google",null,null,null,null,null,null,null,null)
 B.aoN=new A.ad("Create a course",null,null,null,null,null,null,null,null)
-B.aoO=new A.ad("Share",null,null,null,null,null,null,null,null)
+B.aoO=new A.ad("Buy with Razorpay \u2014 card / UPI",null,null,null,null,null,null,null,null)
+B.aoP=new A.ad("Share",null,null,null,null,null,null,null,null)
 B.akM=new A.u(!0,B.F,null,"Outfit",null,null,17,B.ed,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aoP=new A.ad("Course creation is a Creator perk",null,B.akM,null,null,null,null,null,null)
-B.aoQ=new A.ad("The written track for this course \u2014 read alongside the reels",null,B.c5,null,null,null,null,null,null)
-B.aoR=new A.ad("Show answer",null,null,null,null,null,null,null,null)
+B.aoQ=new A.ad("Course creation is a Creator perk",null,B.akM,null,null,null,null,null,null)
+B.aoR=new A.ad("The written track for this course \u2014 read alongside the reels",null,B.c5,null,null,null,null,null,null)
+B.aoS=new A.ad("Show answer",null,null,null,null,null,null,null,null)
 B.aj1=new A.u(!0,B.E,null,"Outfit",null,null,14.5,null,null,null,null,null,1.45,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aoS=new A.ad("Sign in so your progress, streaks and generated paths follow you \u2014 on this phone and the next one.",null,B.aj1,B.aq,null,null,null,null,null)
-B.aoU=new A.ad("Check",null,null,null,null,null,null,null,null)
-B.aoV=new A.ad("Take it further",null,B.p3,null,null,null,null,null,null)
-B.aoW=new A.ad("Reels you watch show up here.",null,B.kX,null,null,null,null,null,null)
-B.aoY=new A.ad("Close",null,null,null,null,null,null,null,null)
-B.aoZ=new A.ad("Saving your progress",null,null,null,null,null,null,null,null)
-B.ap_=new A.ad("Keep scrolling",null,null,null,null,null,null,null,null)
+B.aoT=new A.ad("Sign in so your progress, streaks and generated paths follow you \u2014 on this phone and the next one.",null,B.aj1,B.aq,null,null,null,null,null)
+B.aoV=new A.ad("Check",null,null,null,null,null,null,null,null)
+B.aoW=new A.ad("Take it further",null,B.p3,null,null,null,null,null,null)
+B.aoX=new A.ad("Reels you watch show up here.",null,B.kX,null,null,null,null,null,null)
+B.aoZ=new A.ad("Close",null,null,null,null,null,null,null,null)
+B.ap_=new A.ad("Saving your progress",null,null,null,null,null,null,null,null)
+B.ap0=new A.ad("Keep scrolling",null,null,null,null,null,null,null,null)
 B.ajO=new A.u(!0,B.ae,null,"Outfit",null,null,14,B.O,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.ap0=new A.ad("Correct",null,B.ajO,null,null,null,null,null,null)
+B.ap1=new A.ad("Correct",null,B.ajO,null,null,null,null,null,null)
 B.aos=new A.u(!0,B.ae,null,"JetBrainsMono",null,null,13.5,null,null,null,null,null,1.5,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.ap2=new A.ad("$ ",null,B.aos,null,null,null,null,null,null)
-B.ap3=new A.ad("Delete my data",null,null,null,null,null,null,null,null)
-B.ap6=new A.ad("Unlock",null,null,null,null,null,null,null,null)
-B.ap7=new A.ad("Next capsule",null,null,null,null,null,null,null,null)
-B.ap8=new A.ad("Rewatch capsule",null,null,null,null,null,null,null,null)
-B.ap9=new A.ad("Build it yourself",null,B.p3,null,null,null,null,null,null)
+B.ap3=new A.ad("$ ",null,B.aos,null,null,null,null,null,null)
+B.ap4=new A.ad("Delete my data",null,null,null,null,null,null,null,null)
+B.ap7=new A.ad("Unlock",null,null,null,null,null,null,null,null)
+B.ap8=new A.ad("Next capsule",null,null,null,null,null,null,null,null)
+B.ap9=new A.ad("Rewatch capsule",null,null,null,null,null,null,null,null)
+B.apa=new A.ad("Build it yourself",null,B.p3,null,null,null,null,null,null)
 B.alA=new A.u(!0,B.E,null,"Outfit",null,null,11.5,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apa=new A.ad("An account keeps your progress, streaks and courses in sync \u2014 and starts on the free plan automatically.",null,B.alA,B.aq,null,null,null,null,null)
-B.apb=new A.ad("Nice",null,null,null,null,null,null,null,null)
-B.apc=new A.ad("Reset",null,null,null,null,null,null,null,null)
-B.apf=new A.ad("Sign in to KnowGraph",null,null,null,null,null,null,null,null)
+B.apb=new A.ad("An account keeps your progress, streaks and courses in sync \u2014 and starts on the free plan automatically.",null,B.alA,B.aq,null,null,null,null,null)
+B.apc=new A.ad("Nice",null,null,null,null,null,null,null,null)
+B.apd=new A.ad("Reset",null,null,null,null,null,null,null,null)
+B.apg=new A.ad("Sign in to KnowGraph",null,null,null,null,null,null,null,null)
 B.alJ=new A.u(!0,B.F,null,"Outfit",null,null,15,B.O,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apg=new A.ad("Your plan",null,B.alJ,null,null,null,null,null,null)
-B.aph=new A.ad("Learn anything",null,null,null,null,null,null,null,null)
-B.api=new A.ad("Back to the catalogue",null,null,null,null,null,null,null,null)
-B.apj=new A.ad("Runs in your browser on a free Google Colab machine \u2014 nothing to install.",null,B.FY,B.aq,null,null,null,null,null)
-B.apk=new A.ad("I've paid \u2014 refresh",null,null,null,null,null,null,null,null)
-B.apn=new A.ad("Try again",null,null,null,null,null,null,null,null)
+B.aph=new A.ad("Your plan",null,B.alJ,null,null,null,null,null,null)
+B.api=new A.ad("Learn anything",null,null,null,null,null,null,null,null)
+B.apj=new A.ad("Back to the catalogue",null,null,null,null,null,null,null,null)
+B.apk=new A.ad("Runs in your browser on a free Google Colab machine \u2014 nothing to install.",null,B.FY,B.aq,null,null,null,null,null)
+B.apl=new A.ad("I've paid \u2014 refresh",null,null,null,null,null,null,null,null)
+B.apo=new A.ad("Try again",null,null,null,null,null,null,null,null)
 B.aop=new A.u(!0,B.E,null,"Outfit",null,null,11,null,null,null,null,null,1.35,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.app=new A.ad("Tap a plan to subscribe \u2014 payment opens on Razorpay (card, UPI or netbanking). Your plan activates automatically within a minute of paying.",null,B.aop,null,null,null,null,null,null)
-B.apr=new A.ad("Create a course",null,B.id,null,null,null,null,null,null)
+B.apq=new A.ad("Tap a plan to subscribe \u2014 payment opens on Razorpay (card, UPI or netbanking). Your plan activates automatically within a minute of paying.",null,B.aop,null,null,null,null,null,null)
+B.aps=new A.ad("Create a course",null,B.id,null,null,null,null,null,null)
 B.amq=new A.u(!0,B.ck,null,"Outfit",null,null,10,B.O,null,0.8,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aps=new A.ad("REELS COURSE",null,B.amq,null,null,null,null,null,null)
-B.apu=new A.ad("Nothing saved yet \u2014 tap the bookmark on any reel.",null,B.kX,null,null,null,null,null,null)
-B.apv=new A.ad("Pinch and drag to explore \xb7 tap a node to dive in",null,B.FZ,B.aq,null,null,null,null,null)
-B.apw=new A.ad("Back",null,null,null,null,null,null,null,null)
-B.apx=new A.ad("Or upload recorded lessons",null,B.p4,null,null,null,null,null,null)
-B.apy=new A.ad("This capsule was generated. Check anything that matters.",null,B.kX,null,null,null,null,null,null)
-B.apA=new A.ad("Courses could not be loaded. Check your connection.",null,B.FU,B.aq,null,null,null,null,null)
-B.apB=new A.ad("5 questions from what you watched \u2014 recall makes it stick",null,B.c5,null,null,null,null,null,null)
+B.apt=new A.ad("REELS COURSE",null,B.amq,null,null,null,null,null,null)
+B.apv=new A.ad("Nothing saved yet \u2014 tap the bookmark on any reel.",null,B.kX,null,null,null,null,null,null)
+B.apw=new A.ad("Pinch and drag to explore \xb7 tap a node to dive in",null,B.FZ,B.aq,null,null,null,null,null)
+B.apx=new A.ad("Back",null,null,null,null,null,null,null,null)
+B.apy=new A.ad("Or upload recorded lessons",null,B.p4,null,null,null,null,null,null)
+B.apz=new A.ad("This capsule was generated. Check anything that matters.",null,B.kX,null,null,null,null,null,null)
+B.apB=new A.ad("Courses could not be loaded. Check your connection.",null,B.FU,B.aq,null,null,null,null,null)
+B.apC=new A.ad("5 questions from what you watched \u2014 recall makes it stick",null,B.c5,null,null,null,null,null,null)
 B.ano=new A.u(!0,B.E,null,"Outfit",null,null,13.5,null,null,null,null,null,1.45,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apC=new A.ad("You get a set of 30-second capsules in prerequisite order, with questions and a practice notebook where it makes sense.",null,B.ano,null,null,null,null,null,null)
-B.apD=new A.ad("Done",null,null,null,null,null,null,null,null)
-B.apE=new A.ad("Enter a referral code",null,B.dP,null,null,null,null,null,null)
-B.alh=new A.u(!0,B.F,null,"Outfit",null,null,13,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.apF=new A.ad("Chapter 1 is open as a preview. Enroll on the Knowgraph website to unlock the full course, then continue right here \u2014 your progress carries over.",null,B.alh,null,null,null,null,null,null)
+B.apD=new A.ad("You get a set of 30-second capsules in prerequisite order, with questions and a practice notebook where it makes sense.",null,B.ano,null,null,null,null,null,null)
+B.apE=new A.ad("Done",null,null,null,null,null,null,null,null)
+B.apF=new A.ad("Enter a referral code",null,B.dP,null,null,null,null,null,null)
 B.ig=new A.ad("Cancel",null,null,null,null,null,null,null,null)
 B.FS=new A.u(!0,B.E,null,"Outfit",null,null,13.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.apG=new A.ad("Voice",null,B.FS,null,null,null,null,null,null)
@@ -130994,28 +130993,29 @@ B.aqd=new A.ad("Upgrade to the Creator plan to generate reels with AI or upload 
 B.al7=new A.u(!0,B.F,null,"Outfit",null,null,19,B.O,null,-0.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.aqf=new A.ad("What this is based on",null,B.al7,null,null,null,null,null,null)
 B.aqg=new A.ad("Generate with AI or upload your own videos",null,B.c5,null,null,null,null,null,null)
-B.aqh=new A.ad("View course",null,null,null,null,null,null,null,null)
-B.aqj=new A.ad("Redeem code",null,null,null,null,null,null,null,null)
-B.aqm=new A.ad("Course guide, quizzes & project",null,B.id,null,null,null,null,null,null)
-B.aqn=new A.ad("Sign out",null,null,null,null,null,null,null,null)
-B.aqo=new A.ad("Delete your data?",null,null,null,null,null,null,null,null)
-B.aqq=new A.ad("Create draft course",null,null,null,null,null,null,null,null)
-B.aqr=new A.ad("Generate reels with Knowgraph",null,B.p4,null,null,null,null,null,null)
+B.alh=new A.u(!0,B.F,null,"Outfit",null,null,13,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
+B.aqh=new A.ad("Chapter 1 is open as a preview. Pay once with Razorpay (card or UPI) and the full course unlocks here within a minute. Already bought it on the LMS? It unlocks automatically when you sign in with the same email.",null,B.alh,null,null,null,null,null,null)
+B.aqi=new A.ad("View course",null,null,null,null,null,null,null,null)
+B.aqk=new A.ad("Redeem code",null,null,null,null,null,null,null,null)
+B.aqn=new A.ad("Course guide, quizzes & project",null,B.id,null,null,null,null,null,null)
+B.aqo=new A.ad("Sign out",null,null,null,null,null,null,null,null)
+B.aqp=new A.ad("Delete your data?",null,null,null,null,null,null,null,null)
+B.aqr=new A.ad("Create draft course",null,null,null,null,null,null,null,null)
+B.aqs=new A.ad("Generate reels with Knowgraph",null,B.p4,null,null,null,null,null,null)
 B.amp=new A.u(!0,B.F,null,"Outfit",null,null,19,B.O,null,-0.4,null,null,1.25,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aqs=new A.ad("Ask a question, or bring your own chapter.",null,B.amp,null,null,null,null,null,null)
-B.aqu=new A.ad("Playground",null,null,null,null,null,null,null,null)
-B.aqv=new A.ad("Website",null,null,null,null,null,null,null,null)
-B.aqz=new A.ad("Queue generation",null,null,null,null,null,null,null,null)
-B.aqA=new A.ad("Enrol on the website",null,null,null,null,null,null,null,null)
-B.aqC=new A.ad("Teach it for",null,B.FS,null,null,null,null,null,null)
+B.aqt=new A.ad("Ask a question, or bring your own chapter.",null,B.amp,null,null,null,null,null,null)
+B.aqv=new A.ad("Playground",null,null,null,null,null,null,null,null)
+B.aqw=new A.ad("Website",null,null,null,null,null,null,null,null)
+B.aqA=new A.ad("Queue generation",null,null,null,null,null,null,null,null)
+B.aqB=new A.ad("Enrol on the website",null,null,null,null,null,null,null,null)
+B.aqD=new A.ad("Teach it for",null,B.FS,null,null,null,null,null,null)
 B.ajS=new A.u(!0,null,null,null,null,null,44,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.aqD=new A.ad("\ud83d\udcda",null,B.ajS,null,null,null,null,null,null)
-B.aqE=new A.ad("Open lesson video",null,null,null,null,null,null,null,null)
-B.aqF=new A.ad("No image yet.",null,B.c5,null,null,null,null,null,null)
-B.aqG=new A.ad("Name on your certificate",null,B.dP,null,null,null,null,null,null)
-B.aqH=new A.ad("This permanently deletes your learning progress, generated-path requests and account record from Knowgraph servers, and signs you out. It cannot be undone.\n\nYour course enrollment account (website) is separate \u2014 manage or delete it at know-path-weaver.vercel.app.",null,null,null,null,null,null,null,null)
-B.aqI=new A.ad("Redeem",null,null,null,null,null,null,null,null)
-B.aqJ=new A.ad("Enroll here",null,null,null,null,null,null,null,null)
+B.aqE=new A.ad("\ud83d\udcda",null,B.ajS,null,null,null,null,null,null)
+B.aqF=new A.ad("Open lesson video",null,null,null,null,null,null,null,null)
+B.aqG=new A.ad("No image yet.",null,B.c5,null,null,null,null,null,null)
+B.aqH=new A.ad("Name on your certificate",null,B.dP,null,null,null,null,null,null)
+B.aqI=new A.ad("This permanently deletes your learning progress, generated-path requests and account record from Knowgraph servers, and signs you out. It cannot be undone.\n\nYour course enrollment account (website) is separate \u2014 manage or delete it at know-path-weaver.vercel.app.",null,null,null,null,null,null,null,null)
+B.aqJ=new A.ad("Redeem",null,null,null,null,null,null,null,null)
 B.aqK=new A.ad("Reset all progress?",null,null,null,null,null,null,null,null)
 B.aqN=new A.ad("Paste the admin token from the server to unlock moderation.",null,B.FN,null,null,null,null,null,null)
 B.aqO=new A.ad("Check answer",null,null,null,null,null,null,null,null)
