@@ -184,26 +184,35 @@ export default function Pricing() {
               </ul>
               
               {plan.tier ? (
-                uid ? (
+                (() => {
+                  // Anyone can subscribe from the website. A visitor without
+                  // the app pays as a guest: the webhook parks the plan
+                  // against their payment email and the first sign-in with
+                  // that email claims it — the same path course buyers use.
+                  const buyer = uid || "web-guest";
+                  return (
                   <div className="space-y-2">
                     <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
-                      <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&tier=${plan.tier}${IS_INTL ? "&intl=1" : ""}`}>
+                      <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&tier=${plan.tier}${IS_INTL ? "&intl=1" : ""}`}>
                         Subscribe — {IS_INTL && plan.priceEur ? plan.priceEur : plan.price}
                       </a>
                     </Button>
                     {!IS_INTL && (
                       <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
-                        <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&product=${plan.annual}`}>
+                        <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&product=${plan.annual}`}>
                           {plan.annualPrice}
                         </a>
                       </Button>
                     )}
+                    {!uid && (
+                      <p className="text-[11px] text-muted-foreground text-center leading-snug">
+                        Pay with any email — your plan unlocks when you sign
+                        in to the app with it.
+                      </p>
+                    )}
                   </div>
-                ) : (
-                  <Button variant="outline" size="sm" className="w-full" disabled>
-                    Open from the Knowgraph app to subscribe
-                  </Button>
-                )
+                  );
+                })()
               ) : (
                 <Button asChild variant="outline" size="sm" className="w-full">
                   <a href="/app/">Start free in the browser</a>
