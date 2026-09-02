@@ -30,6 +30,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // One-time purchases that are not courses: annual plan and streak freeze.
   const product = String(req.query.product ?? '');
+  // came from the mobile app? the success page bounces back via deep link
+  const fromApp = String(req.query.from ?? '') === 'app' ? '&from=app' : '';
   // Annual = ten months' price (routes around RBI e-mandate renewal
   // failures on recurring cards); freeze is a one-off.
   const ANNUAL: Record<string, number> = {
@@ -51,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             ? 'Knowgraph streak freeze'
             : `Knowgraph ${product.replace('-annual', '')} - 1 year`,
         notes: { uid, product },
-        callback_url: `https://www.knowgraphapp.com/payment-success?kind=${product === 'freeze' ? 'freeze' : 'plan'}`,
+        callback_url: `https://www.knowgraphapp.com/payment-success?kind=${product === 'freeze' ? 'freeze' : 'plan'}${fromApp}`,
         callback_method: 'get',
       }),
     });
@@ -75,7 +77,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         currency: 'EUR',
         description: `Knowgraph ${tier === 'standard' ? 'learner' : tier} — 1 year`,
         notes: { uid, product: `${tier === 'standard' ? 'learner' : tier}-annual` },
-        callback_url: 'https://www.knowgraphapp.com/payment-success?kind=plan',
+        callback_url: `https://www.knowgraphapp.com/payment-success?kind=plan${fromApp}`,
         callback_method: 'get',
       }),
     });
@@ -118,7 +120,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         currency: 'INR',
         description: `Knowgraph course: ${courseId}`,
         notes: { uid, courseId },
-        callback_url: `https://www.knowgraphapp.com/payment-success?kind=course&id=${encodeURIComponent(courseId)}`,
+        callback_url: `https://www.knowgraphapp.com/payment-success?kind=course&id=${encodeURIComponent(courseId)}${fromApp}`,
         callback_method: 'get',
       }),
     });
