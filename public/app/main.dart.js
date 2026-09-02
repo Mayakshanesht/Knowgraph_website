@@ -30691,11 +30691,11 @@ this.a=c},
 aKi:function aKi(a){this.a=a},
 aKj:function aKj(a,b){this.a=a
 this.b=b},
-aKh:function aKh(a){this.a=a},
 aKk:function aKk(a,b){this.a=a
 this.b=b},
 aKl:function aKl(a,b){this.a=a
 this.b=b},
+aKh:function aKh(a){this.a=a},
 a3h:function a3h(a,b){this.e=a
 this.a=b},
 aJH:function aJH(a){this.a=a},
@@ -109123,12 +109123,12 @@ fk(a,b){var s,r,q,p,o,n,m=this,l=null,k=b.bu($.fK(),t.GO),j=m.e,i=j.gGD().length
 h=j.a
 s=t.p
 r=A.b([A.a3(h.b,l,l,l,B.anR,l,l),B.D],s)
-if(m.f!=null)B.b.C(r,A.b([A.uF(A.oQ(l,l,l,!0,!0,B.Sb,l,new A.aKj(m,a),l,l,l,B.aoX,l,B.aqx,B.Sj,l),B.bM,l),B.D],s))
-r.push(A.a3(h.d,l,l,l,B.ajg,l,l))
 if(h.e!==0&&!h.w){q=B.ck.aT(0.12)
 p=A.bd(16)
 o=A.cU(B.ck.aT(0.4),1)
-B.b.C(r,A.b([B.a_,A.br(l,A.bj(A.b([B.aqr,B.D,A.bD(A.b([A.hs(B.aoU,new A.aKk(m,b),l),B.bQ,A.f5(B.aps,l,l,new A.aKl(m,b),l,l)],s),B.p,B.k,B.n,0)],s),B.N,B.k,B.n),B.m,l,l,new A.bc(q,l,o,p,l,l,B.G),l,l,l,B.b1,l,l,l)],s))}r.push(B.a_)
+B.b.C(r,A.b([B.a_,A.br(l,A.bj(A.b([B.aqr,B.D,A.bD(A.b([A.hs(B.aoU,new A.aKj(m,b),l),B.bQ,A.f5(B.aps,l,l,new A.aKk(m,b),l,l)],s),B.p,B.k,B.n,0)],s),B.N,B.k,B.n),B.m,l,l,new A.bc(q,l,o,p,l,l,B.G),l,l,l,B.b1,l,l,l)],s))}if(m.f!=null)B.b.C(r,A.b([A.uF(A.oQ(l,l,l,!0,!0,B.Sb,l,new A.aKl(m,a),l,l,l,B.aoX,l,B.aqx,B.Sj,l),B.bM,l),B.D],s))
+r.push(A.a3(h.d,l,l,l,B.ajg,l,l))
+r.push(B.a_)
 q=i===0?0:g/i
 p=A.bd(4)
 o=g>=i
@@ -109145,14 +109145,6 @@ A.aKi.prototype={
 $1(a){return this.a.Rk(a.a)>=0.75},
 $S:28}
 A.aKj.prototype={
-$0(){return A.cd(this.b,!1).f9(A.jS(new A.aKh(this.a),!1,null,t.z))},
-$S:0}
-A.aKh.prototype={
-$1(a){var s=this.a.f
-s.toString
-return new A.qN(s,null)},
-$S:250}
-A.aKk.prototype={
 $0(){var s=0,r=A.p(t.H),q=this,p,o
 var $async$$0=A.q(function(a,b){if(a===1)return A.m(b,r)
 for(;;)switch(s){case 0:o=A
@@ -109163,12 +109155,20 @@ A.jr(A.c3("https://www.knowgraphapp.com/courses?uid="+(p==null?"":p)+"&course="+
 return A.n(null,r)}})
 return A.o($async$$0,r)},
 $S:6}
-A.aKl.prototype={
+A.aKk.prototype={
 $0(){var s=this.b,r=$.b64().$1(this.a.e.a.a)
 if(s.e==null)A.R(A.a0(u.w))
 s.gln().oe(r)
 return null},
 $S:0}
+A.aKl.prototype={
+$0(){return A.cd(this.b,!1).f9(A.jS(new A.aKh(this.a),!1,null,t.z))},
+$S:0}
+A.aKh.prototype={
+$1(a){var s=this.a.f
+s.toString
+return new A.qN(s,null)},
+$S:250}
 A.a3h.prototype={
 ur(a,b){return this.amF(a,b)},
 amF(a,b){var s=0,r=A.p(t.H),q,p=2,o=[],n=this,m,l,k,j
