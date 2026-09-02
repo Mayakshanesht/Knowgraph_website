@@ -12,7 +12,7 @@
  *   RAZORPAY_PLAN_STANDARD / RAZORPAY_PLAN_CREATOR  (plan_… ids)
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { COURSE_PRICES } from './_prices';
+import { COURSE_PRICES } from './_prices.js';
 
 const RZP = 'https://api.razorpay.com/v1';
 
