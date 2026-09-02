@@ -48,8 +48,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         description:
           product === 'freeze'
             ? 'Knowgraph streak freeze'
-            : 'Knowgraph Standard - 1 year',
+            : `Knowgraph ${product.replace('-annual', '')} - 1 year`,
         notes: { uid, product },
+        callback_url: `https://www.knowgraphapp.com/payment-success?kind=${product === 'freeze' ? 'freeze' : 'plan'}`,
+        callback_method: 'get',
       }),
     });
     const link = await r.json();
@@ -81,8 +83,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (courseId) {
-    const amount = Number(req.query.amount ?? 0);
-    if (!amount) return res.status(400).json({ error: 'amount (paise) required' });
+    // The server owns prices — a client-supplied amount is the #1 tampering
+    // vector (Razorpay's own integration guidance).
+    const COURSE_PRICES: Record<string, number> = {
+      'computer-vision-generative-ai': 99900,
+      'cv': 99900,
+      'physical-ai-robotics': 79900,
+      'physical-ai': 79900,
+      'cicd-for-robotics': 49900,
+    };
+    const amount = COURSE_PRICES[courseId];
+    if (!amount) return res.status(400).json({ error: 'unknown course' });
     const r = await fetch(`${RZP}/payment_links`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
@@ -91,6 +102,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         currency: 'INR',
         description: `Knowgraph course: ${courseId}`,
         notes: { uid, courseId },
+        callback_url: `https://www.knowgraphapp.com/payment-success?kind=course&id=${encodeURIComponent(courseId)}`,
+        callback_method: 'get',
       }),
     });
     const link = await r.json();

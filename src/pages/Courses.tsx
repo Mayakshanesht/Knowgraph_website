@@ -115,7 +115,7 @@ export default function Courses() {
             </p>
             {amount ? (
               <Button asChild size="lg">
-                <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&courseId=${encodeURIComponent(courseId)}&amount=${amount}`}>
+                <a href={`/api/create-payment?uid=${encodeURIComponent(uid)}&courseId=${encodeURIComponent(courseId)}`}>
                   Enroll now
                 </a>
               </Button>
