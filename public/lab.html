@@ -32,6 +32,20 @@ h1{font-size:19px;margin:2px 0 14px}
 .cell.md :first-child{margin-top:0}.cell.md :last-child{margin-bottom:0}
 .cell.md code{background:var(--panel);padding:1px 6px;border-radius:6px;
               font-family:ui-monospace,monospace;font-size:13px}
+.cell.md pre{background:var(--panel);border:1px solid var(--line);
+             border-radius:10px;padding:10px 12px;overflow-x:auto;
+             font:12.5px/1.55 ui-monospace,monospace}
+.cell.md pre code{background:none;padding:0}
+details{background:var(--panel);border:1px solid var(--line);
+        border-radius:10px;margin:8px 0;overflow:hidden}
+details > summary{cursor:pointer;list-style:none;padding:10px 14px;
+                  font-size:13.5px;font-weight:600;color:var(--accent);
+                  user-select:none}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"\25B8 ";display:inline-block;
+                          transition:transform .12s}
+details[open] > summary::before{transform:rotate(90deg)}
+details > .fold-body{padding:0 14px 12px;border-top:1px solid var(--line)}
 textarea{width:100%;background:transparent;color:var(--text);border:0;
          resize:vertical;padding:12px 14px;min-height:52px;
          font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -84,14 +98,50 @@ window.addEventListener("message", (ev) => {
   }
 });
 
-function md(text){
-  // minimal markdown: bold, italics, inline code, line breaks
-  const esc = text.replace(/&/g,"&amp;").replace(/</g,"&lt;");
-  return esc
+function esc(text){
+  return text.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+}
+
+// Inline markdown only. Everything is escaped first, so a notebook that
+// ships raw HTML cannot inject anything here.
+function mdInline(text){
+  return esc(text)
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
     .replace(/\*([^*]+)\*/g, "<i>$1</i>")
     .replace(/\n/g, "<br>");
+}
+
+// Fenced blocks become real <pre>. Without this a folded solution was one
+// long line of backticks and code with the answer sitting in the middle.
+function mdFences(text){
+  let out = "", rest = text;
+  for (;;) {
+    const m = /```[a-zA-Z0-9_+-]*\n([\s\S]*?)```/.exec(rest);
+    if (!m) return out + mdInline(rest);
+    out += mdInline(rest.slice(0, m.index).replace(/\n+$/, ""));
+    out += "<pre><code>" + esc(m[1].replace(/\n$/, "")) + "</code></pre>";
+    rest = rest.slice(m.index + m[0].length).replace(/^\n+/, "");
+  }
+}
+
+// The notebook writes hints and the reference solution as <details> folds
+// (see pipeline/notebook.py). This page used to escape the tags along with
+// everything else, so "<details><summary>Show solution</summary>" and the
+// whole answer rendered as flat text — the solution was on screen before
+// the learner had typed a character. Turn the fold back into a real fold.
+function md(text){
+  let out = "", rest = text;
+  for (;;) {
+    const m = /<details>\s*(?:<summary>([\s\S]*?)<\/summary>)?([\s\S]*?)<\/details>/i
+      .exec(rest);
+    if (!m) return out + mdFences(rest);
+    out += mdFences(rest.slice(0, m.index).replace(/\n+$/, ""));
+    out += "<details><summary>" + mdInline((m[1] || "Show").trim()) +
+           "</summary><div class=\"fold-body\">" +
+           mdFences(m[2].replace(/^\n+|\n+$/g, "")) + "</div></details>";
+    rest = rest.slice(m.index + m[0].length).replace(/^\n+/, "");
+  }
 }
 
 function renderCells(){
