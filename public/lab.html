@@ -181,6 +181,12 @@ async function preload(){
   setStatus("Loading " + pkgs.join(", ") + "…", false);
   try { await pyodide.loadPackage(pkgs); } catch (e) { console.warn(e); }
   setStatus("Python ready — run any cell.", true);
+  // Two listeners, because this page has two hosts. An iframe parent hears
+  // postMessage; the Flutter app hosts it in a WebView and hears a
+  // JavaScript channel instead. Announcing readiness on both is what lets
+  // the app deliver the exercise at the only moment Pyodide can accept it.
+  try { parent.postMessage({ type: "ready" }, "*"); } catch (e) {}
+  try { if (window.KGLab) window.KGLab.postMessage("ready"); } catch (e) {}
 }
 
 function setStatus(text, ready){
