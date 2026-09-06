@@ -37,34 +37,54 @@ const appCourses = [
   },
 ];
 
+// The LMS is where these are taught, enrolled in and paid for. This page
+// used to offer "View Course" and "Buy Course", which forked the buyer into
+// a second checkout on a second site with its own prices — the fork that let
+// ADAS advertise ₹9,999 here and charge ₹36,999 there. One destination now.
+const LMS = "https://courses.knowgraphapp.com/courses";
+
 const courses = [
   {
-    slug: "ai",
-    title: "AI Course — ML → LLMs → Generative AI",
+    lmsId: "64c67e86-4327-42e1-bef3-7841c70719d6",
+    title: "AI Bootcamp — ML → LLMs → Generative AI",
     description: "Foundations → system-level thinking → deployable autonomy projects.",
     color: "border-t-primary",
     bgColor: "bg-primary/5",
   },
   {
-    slug: "autonomous-driving-adas",
-    title: "Autonomous Driving & ADAS Course",
+    lmsId: "9078b1a0-fc12-4808-ad21-98ed4e94b70c",
+    title: "Autonomous Driving & ADAS",
     description: "End-to-end ADAS and autonomous driving engineering.",
     color: "border-t-violet",
     bgColor: "bg-violet/5",
   },
   {
-    slug: "vehicle-control",
+    lmsId: "dd0ce657-1483-4984-9f80-fbb81e41622d",
     title: "Modern Vehicle Control — PID → LQR → MPC",
     description: "Advanced vehicle dynamics and control for ADAS & autonomous driving.",
     color: "border-t-teal",
     bgColor: "bg-teal/5",
   },
   {
-    slug: "motion-prediction-planning",
+    lmsId: "ff819242-209a-4105-b598-afe6561ef1e9",
     title: "Motion Prediction & Planning",
     description: "Planning, prediction, and decision-making projects for autonomous driving.",
     color: "border-t-accent",
     bgColor: "bg-accent/5",
+  },
+  {
+    lmsId: "190adb5e-be9a-4bd5-9d34-19dd6bc23e9b",
+    title: "Perception Lab for Computer Vision",
+    description: "Perception playground — camera to 3D to generative vision.",
+    color: "border-t-cyan",
+    bgColor: "bg-cyan/5",
+  },
+  {
+    lmsId: "699a4120-587c-48a6-bda6-570ba0b29377",
+    title: "CI/CD Foundations — Git to Kubernetes",
+    description: "The delivery pipeline end to end: Git, Jenkins, Docker, Kubernetes.",
+    color: "border-t-primary",
+    bgColor: "bg-primary/5",
   },
 ];
 
@@ -293,7 +313,7 @@ export default function Courses() {
       <Section className="py-20">
         <SectionHeader
           title="Available Courses"
-          description="Structured learning delivered through KnowGraph Capsules"
+          description="Taught, enrolled and paid for in the KnowGraph LMS"
         />
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {courses.map((course) => (
@@ -317,19 +337,16 @@ export default function Courses() {
               <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
                 {course.description}
               </p>
-              <div className="flex gap-3">
-                <Button asChild variant="outline" className="flex-1">
-                  <Link to={`/courses/${course.slug}`}>
-                    View Course
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="default" className="flex-1">
-                  <Link to={`/courses/${course.slug}`}>
-                    Buy Course
-                  </Link>
-                </Button>
-              </div>
+              <Button asChild variant="default" className="w-full">
+                <a
+                  href={`${LMS}/${course.lmsId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Go to course
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
             </div>
           ))}
         </div>
