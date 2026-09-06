@@ -76,7 +76,11 @@ button.ghost{background:transparent;color:var(--muted);border:1px solid var(--li
   <button class="ghost" id="reset">Reset</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/pyodide@0.26.4/pyodide.min.js"></script>
+<!-- The npm package carries the runtime but NOT the package wheels, and
+     loadPyodide() derives indexURL from wherever this script came from.
+     So numpy 404d on every load and practice opened with its first cell
+     already broken. The wheels live under /pyodide/vN/full/. -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <script>
 "use strict";
 let pyodide = null, running = false;
@@ -179,8 +183,18 @@ async function preload(){
   const pkgs = ["numpy", ...(nb.packages || [])].filter(
     (p, i, a) => a.indexOf(p) === i);
   setStatus("Loading " + pkgs.join(", ") + "…", false);
-  try { await pyodide.loadPackage(pkgs); } catch (e) { console.warn(e); }
-  setStatus("Python ready — run any cell.", true);
+  let missing = [];
+  for (const pkg of pkgs) {
+    try { await pyodide.loadPackage(pkg); }
+    catch (e) { console.warn(pkg, e); missing.push(pkg); }
+  }
+  // It said "Python ready" while numpy had 404d, so the first cell failed
+  // with an import error and the page looked broken for no stated reason.
+  setStatus(
+    missing.length
+      ? "Python ready — but " + missing.join(", ") + " could not load."
+      : "Python ready — run any cell.",
+    true);
   // Two listeners, because this page has two hosts. An iframe parent hears
   // postMessage; the Flutter app hosts it in a WebView and hears a
   // JavaScript channel instead. Announcing readiness on both is what lets
@@ -246,7 +260,9 @@ document.getElementById("reset").onclick = () => location.reload();
 
 (async () => {
   renderCells();
-  pyodide = await loadPyodide();
+  pyodide = await loadPyodide({
+    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/",
+  });
   await preload();
   parent.postMessage({ type: "ready" }, "*");
 })();

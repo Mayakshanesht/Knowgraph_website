@@ -43,5 +43,39 @@
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    // Flutter's video player mounts real <video> elements over the canvas,
+    // and a browser gives every one of them a download button and a
+    // "Save video as…" menu item. That is a one-click copy of the reel.
+    //
+    // controlsList and disablePictureInPicture remove the affordances the
+    // browser adds; main.dart disables the Flutter-level context menu. None
+    // of this is DRM and it does not pretend to be — the network tab still
+    // exists. It closes the path people actually use.
+    (function () {
+      function harden(v) {
+        if (!v || v.__kgHardened) return;
+        v.__kgHardened = true;
+        v.setAttribute("controlsList", "nodownload noplaybackrate");
+        v.setAttribute("disablePictureInPicture", "");
+        v.setAttribute("disableRemotePlayback", "");
+        v.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      }
+      document.querySelectorAll("video").forEach(harden);
+      // The player creates them long after load, and replaces them as the
+      // feed scrolls, so one pass over the document is not enough.
+      new MutationObserver(function (records) {
+        for (const r of records) {
+          for (const n of r.addedNodes) {
+            if (!(n instanceof Element)) continue;
+            if (n.tagName === "VIDEO") harden(n);
+            else n.querySelectorAll && n.querySelectorAll("video").forEach(harden);
+          }
+        }
+      }).observe(document.documentElement, {childList: true, subtree: true});
+    })();
+  </script>
 </body>
 </html>
