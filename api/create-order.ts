@@ -11,7 +11,7 @@
  * Vercel env vars required: RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { COURSE_PRICES } from './_prices.js';
+import { KNOWN_COURSES, COURSE_ALIASES, livePriceInPaise } from './_prices.js';
 
 const RZP = 'https://api.razorpay.com/v1';
 
@@ -30,8 +30,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let amount = Number(body.amount);
   if (courseId) {
-    const priced = COURSE_PRICES[courseId];
-    if (!priced) return res.status(400).json({ error: 'unknown course' });
+    // The price comes from the course row the storefront renders, never
+    // from a literal in this repo and never from the client. When it cannot
+    // be confirmed the checkout REFUSES: a failed payment is recoverable,
+    // an incorrect one is not, and the table this replaced had drifted to
+    // 4x the advertised price on one course and an eighth of it on another.
+    const priced = await livePriceInPaise(courseId);
+    if (priced === null) {
+      const known =
+        KNOWN_COURSES.has(COURSE_ALIASES[courseId] ?? courseId);
+      return res.status(known ? 503 : 400).json({
+        error: known
+          ? 'Could not confirm the price right now — please try again.'
+          : 'unknown course',
+      });
+    }
     amount = priced;
     notes.courseId = courseId;
   }

@@ -8,12 +8,17 @@ import { openCourseCheckout } from "@/lib/razorpay";
 
 const LMS_URL = "https://courses.knowgraphapp.com/";
 
-// Kept in sync with api/_prices.ts (the server is authoritative at charge time).
+// Display only — the server resolves the real amount from the LMS at charge
+// time. "Kept in sync with api/_prices.ts" is what the old comment claimed
+// while showing ₹36,999 for a course the LMS sells at ₹9,999, so these are
+// now the LMS's own numbers and the shape that let them drift is gone.
 const LMS_COURSE_PRICES: Record<string, number> = {
-  "vehicle-control": 1599900,
-  "autonomous-driving-adas": 3699900,
-  "ai": 2099900,
-  "motion-prediction-planning": 2099900,
+  "autonomous-driving-adas": 999900,
+  "ai": 999900,
+  "vehicle-control": 499900,
+  "motion-prediction-planning": 499900,
+  "cicd-foundations": 399900,
+  "perception-lab": 99900,
 };
 
 type CourseDetailContent = {

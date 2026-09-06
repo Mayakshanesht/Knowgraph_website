@@ -12,7 +12,7 @@
  *   RAZORPAY_PLAN_STANDARD / RAZORPAY_PLAN_CREATOR  (plan_… ids)
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { COURSE_PRICES } from './_prices.js';
+import { KNOWN_COURSES, COURSE_ALIASES, livePriceInPaise } from './_prices.js';
 
 const RZP = 'https://api.razorpay.com/v1';
 
@@ -117,8 +117,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (courseId) {
-    const amount = COURSE_PRICES[courseId];
-    if (!amount) return res.status(400).json({ error: 'unknown course' });
+    // Same rule as create-order: the live LMS price, or no payment link at
+    // all. This is the fallback path a blocked checkout script lands on, so
+    // it charged from the same stale table and would have been wrong in
+    // exactly the same way.
+    const amount = await livePriceInPaise(courseId);
+    if (amount === null) {
+      const known = KNOWN_COURSES.has(COURSE_ALIASES[courseId] ?? courseId);
+      return res.status(known ? 503 : 400).json({
+        error: known
+          ? 'Could not confirm the price right now — please try again.'
+          : 'unknown course',
+      });
+    }
     const r = await fetch(`${RZP}/payment_links`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },

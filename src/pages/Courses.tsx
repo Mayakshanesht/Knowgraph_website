@@ -76,10 +76,19 @@ const domains = [
   "Robotics",
 ];
 
+// Display only. The charge amount is resolved server-side from the LMS row
+// (api/_prices.ts livePriceInPaise) — this table exists so the page can show
+// a number before the modal opens, and drifting from it is how CI/CD came to
+// advertise ₹499 for a ₹3,999 course.
 const COURSE_PRICES: Record<string, number> = {
   "computer-vision-generative-ai": 99900,
   "physical-ai-robotics": 79900,
-  "cicd-foundations": 49900,
+  "cicd-foundations": 399900,
+  "autonomous-driving-adas": 999900,
+  "ai": 999900,
+  "vehicle-control": 499900,
+  "motion-prediction-planning": 499900,
+  "perception-lab": 99900,
 };
 
 export default function Courses() {
