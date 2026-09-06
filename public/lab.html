@@ -185,16 +185,47 @@ function renderCells(){
 // a "%pip install <homework>" SyntaxError in the learner's first cell.
 const PIP_NAME = /^[A-Za-z][A-Za-z0-9._-]{0,60}(\[[A-Za-z0-9,._-]+\])?\s*([<>=!~]=?\s*[0-9]\S*)?$/;
 
+// What the CODE actually imports, mapped to Pyodide distribution names.
+// The authored `packages` list is a promise, not a fact: a cell can import
+// matplotlib while nobody wrote it down, and the learner meets
+// ModuleNotFoundError. The code is the truth, so read the code.
+const IMPORT_RE = /^\s*(?:from\s+([A-Za-z_][\w.]*)|import\s+([A-Za-z_][\w.]*(?:\s*,\s*[A-Za-z_][\w.]*)*))/gm;
+const DIST_FOR = {
+  sklearn: "scikit-learn", skimage: "scikit-image", cv2: "opencv-python",
+  PIL: "pillow", yaml: "pyyaml", bs4: "beautifulsoup4", dateutil: "python-dateutil",
+};
+
+function importedPackages(code){
+  const found = new Set();
+  let m;
+  IMPORT_RE.lastIndex = 0;
+  while ((m = IMPORT_RE.exec(code)) !== null) {
+    const names = (m[1] || m[2] || "").split(",");
+    for (const raw of names) {
+      const top = raw.trim().split(".")[0];
+      if (top) found.add(DIST_FOR[top] || top);
+    }
+  }
+  return [...found];
+}
+
 async function preload(){
-  const pkgs = ["numpy", ...(nb.packages || [])]
+  // Everything the notebook's own cells import, plus whatever was declared.
+  const fromCode = (nb.cells || [])
+    .filter((c) => c.kind === "code")
+    .flatMap((c) => importedPackages(c.text || ""));
+  const pkgs = ["numpy", ...(nb.packages || []), ...fromCode]
     .map((p) => String(p).trim())
     .filter((p) => PIP_NAME.test(p))
     .filter((p, i, a) => a.indexOf(p) === i);
   setStatus("Loading " + pkgs.join(", ") + "…", false);
+  const needed = new Set(["numpy", ...fromCode]);
   let missing = [];
   for (const pkg of pkgs) {
     try { await pyodide.loadPackage(pkg); }
-    catch (e) { console.warn(pkg, e); missing.push(pkg); }
+    // Only say so when a cell actually imports it. A declared-but-absent
+    // package the code never touches is noise on a page that works.
+    catch (e) { console.warn(pkg, e); if (needed.has(pkg)) missing.push(pkg); }
   }
   // It said "Python ready" while numpy had 404d, so the first cell failed
   // with an import error and the page looked broken for no stated reason.
@@ -219,6 +250,22 @@ function setStatus(text, ready){
   });
 }
 
+let aggReady = false;
+async function ensureAggBackend(){
+  if (aggReady) return;
+  try {
+    await pyodide.runPythonAsync(
+      "import sys\n"
+      + "if 'matplotlib' in sys.modules or True:\n"
+      + "    try:\n"
+      + "        import matplotlib\n"
+      + "        matplotlib.use('AGG')\n"
+      + "    except Exception:\n"
+      + "        pass\n");
+    aggReady = true;
+  } catch (e) { console.warn("AGG backend", e); }
+}
+
 async function runCell(i){
   if (!pyodide || running) return;
   running = true; setStatus("Running…", false);
@@ -231,6 +278,16 @@ async function runCell(i){
     pyodide.setStderr({ batched: (t) => {
       const s = document.createElement("span"); s.className = "err";
       s.textContent = t + "\n"; out.appendChild(s); }});
+    // The learner edits these cells, so the imports at run time need not be
+    // the imports we preloaded. Pyodide can resolve them from the source.
+    try { await pyodide.loadPackagesFromImports(ta.value); }
+    catch (e) { console.warn("loadPackagesFromImports", e); }
+    // matplotlib's default Pyodide backend draws into a browser canvas it
+    // manages itself, and it threw on teardown while our savefig capture
+    // found nothing to save — a cell that plotted correctly showed a
+    // traceback and no figure. AGG renders into a buffer, which is exactly
+    // what the capture below reads.
+    await ensureAggBackend();
     await pyodide.runPythonAsync(ta.value);
     // matplotlib figures -> inline images
     const png = await pyodide.runPythonAsync(`
