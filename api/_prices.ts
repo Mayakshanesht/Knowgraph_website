@@ -28,9 +28,43 @@ export const COURSE_ALIASES: Record<string, string> = {
   'cicd-for-robotics': '699a4120-587c-48a6-bda6-570ba0b29377',
 };
 
-/** Last known good prices, in paise. Kept only so a checkout can tell an
- *  unknown course from an unreachable database — never used to charge. */
-export const KNOWN_COURSES = new Set(Object.values(COURSE_ALIASES));
+/// Courses sold in the APP only. They have no LMS row — the storefront no
+/// longer lists them — but they still gate 126 reels in the feed, so they
+/// remain purchasable in-app. Their price lives in D1, which is where the
+/// owner sets it, and is read live from the Worker for the same reason the
+/// LMS ones are read live: a literal here is a price nobody maintains.
+export const APP_ONLY_COURSES = new Set([
+  'computer-vision-generative-ai',
+  'physical-ai-robotics',
+  'cicd-foundations',
+]);
+
+/** Every course this checkout will sell, so it can tell an unknown course
+ *  from an unreachable database. Never used to charge. */
+export const KNOWN_COURSES = new Set([
+  ...Object.values(COURSE_ALIASES),
+  ...APP_ONLY_COURSES,
+]);
+
+/// The app's own catalogue price, in paise, straight from D1.
+async function appPriceInPaise(courseId: string): Promise<number | null> {
+  const api =
+    process.env.VITE_KG_API_BASE_URL ??
+    process.env.KG_API_BASE_URL ??
+    'https://knowgraph-api.greenlifeai.workers.dev';
+  try {
+    const r = await fetch(`${api}/v1/courses`);
+    if (!r.ok) return null;
+    const body = (await r.json()) as
+      | { courses?: { id: string; priceCents?: number }[] }
+      | null;
+    const row = body?.courses?.find((c) => c.id === courseId);
+    const paise = Number(row?.priceCents);
+    return Number.isInteger(paise) && paise > 0 ? paise : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * The live price in paise, or null when it cannot be confirmed.
@@ -42,6 +76,13 @@ export const KNOWN_COURSES = new Set(Object.values(COURSE_ALIASES));
 export async function livePriceInPaise(
   courseId: string,
 ): Promise<number | null> {
+  // App-only courses are priced in D1, not the LMS. Checked first, because
+  // one of them (cicd-foundations) exists in BOTH and the app's number is
+  // the one the learner was shown.
+  if (APP_ONLY_COURSES.has(courseId)) {
+    const fromApp = await appPriceInPaise(courseId);
+    if (fromApp !== null) return fromApp;
+  }
   const id = COURSE_ALIASES[courseId] ?? courseId;
   const url = process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL;
   const key =
