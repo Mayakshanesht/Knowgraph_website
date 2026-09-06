@@ -179,9 +179,17 @@ function renderCells(){
   });
 }
 
+// A PyPI name, not a sentence. The authored requirements list collected the
+// exercise's own constraints in 13 of 329 reels, and anything that reaches
+// loadPackage as prose is at best noise and at worst — in the notebook path —
+// a "%pip install <homework>" SyntaxError in the learner's first cell.
+const PIP_NAME = /^[A-Za-z][A-Za-z0-9._-]{0,60}(\[[A-Za-z0-9,._-]+\])?\s*([<>=!~]=?\s*[0-9]\S*)?$/;
+
 async function preload(){
-  const pkgs = ["numpy", ...(nb.packages || [])].filter(
-    (p, i, a) => a.indexOf(p) === i);
+  const pkgs = ["numpy", ...(nb.packages || [])]
+    .map((p) => String(p).trim())
+    .filter((p) => PIP_NAME.test(p))
+    .filter((p, i, a) => a.indexOf(p) === i);
   setStatus("Loading " + pkgs.join(", ") + "…", false);
   let missing = [];
   for (const pkg of pkgs) {
