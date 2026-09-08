@@ -252,7 +252,7 @@ export default function CourseDetail() {
             </div>
           </div>
         </div>
-      
+      </Section>
     </Layout>
   );
 }

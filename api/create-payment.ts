@@ -14,6 +14,45 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { KNOWN_COURSES, COURSE_ALIASES, livePriceInPaise } from './_prices.js';
 import { PRICING } from './pricing.generated.js';
+import { planName } from './setup-plans.js';
+
+/**
+ * Monthly-subscribable tiers, keyed by every name a caller might send.
+ *
+ * Derived from the price book so a tier added there is purchasable without a
+ * second edit here — Team and Studio shipped in the app while this file still
+ * listed learner|pro|creator|standard|enterprise, so both fell through to the
+ * course branch and could not be bought at all. Legacy aliases stay: links in
+ * the wild and older app builds still say `learner`/`standard` for Pro.
+ */
+const MONTHLY_TIER: Record<string, {
+  key: string; eurMinor: number; inrMinor: number;
+}> = (() => {
+  const map: Record<string, { key: string; eurMinor: number; inrMinor: number }> = {};
+  for (const t of [...PRICING.learn, ...PRICING.create]) {
+    if (t.contactOnly) continue;
+    const eurMinor = Math.round((t.eurMonth ?? 0) * 100);
+    const inrMinor = Math.round((t.inrMonth ?? 0) * 100);
+    if (!eurMinor && !inrMinor) continue;  // Free has nothing to charge
+    map[t.key] = { key: t.key, eurMinor, inrMinor };
+  }
+  if (map.pro) {
+    map.learner = map.pro;
+    map.standard = map.pro;
+  }
+  return map;
+})();
+
+/** Razorpay plan id for an exact plan name, or null. Plans are few. */
+async function findPlan(auth: string, name: string): Promise<string | null> {
+  const r = await fetch(`${RZP}/plans?count=100`, { headers: { Authorization: auth } });
+  if (!r.ok) return null;
+  const j = await r.json();
+  for (const plan of j.items ?? []) {
+    if (plan?.item?.name === name) return plan.id as string;
+  }
+  return null;
+}
 
 const RZP = 'https://api.razorpay.com/v1';
 
@@ -75,49 +114,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // International buyers subscribe monthly in EUR on dedicated plans
   // (created by /api/setup-eur-plans; ids are public identifiers).
   const intl = String(req.query.intl ?? '') === '1';
-  if (intl && ['learner', 'pro', 'creator', 'standard', 'enterprise'].includes(tier)) {
-    const EUR_PLAN: Record<string, string> = {
-      learner: 'plan_TXD4k9TlXSu6zK',
-      standard: 'plan_TXD4k9TlXSu6zK',
-      pro: 'plan_TXD4kVSCixVkhc',
-      creator: 'plan_TXD4kqfN3JiKad',
-      enterprise: 'plan_TXIdufe6L7YXm8',
-    };
-    if (!EUR_PLAN[tier]) {
-      return res.status(503).json({ error: `no EUR plan for ${tier}` });
+  const monthly = MONTHLY_TIER[tier];
+  if (monthly) {
+    // The plan is resolved by a name that CONTAINS the amount, so a plan
+    // created at an older price can never satisfy a newer one. Env-var plan
+    // ids did exactly that: RAZORPAY_PLAN_PRO still pointed at the EUR9.99
+    // plan after the book moved to EUR12, and Creator was charging EUR29.99
+    // against an advertised EUR29. Fail closed instead of charging a number
+    // the learner was never shown.
+    const currency = intl ? 'EUR' : 'INR';
+    const amount = intl ? monthly.eurMinor : monthly.inrMinor;
+    if (!amount) {
+      return res.status(503).json({ error: `${tier} has no ${currency} price` });
+    }
+    const planId = await findPlan(auth, planName(monthly.key, currency, amount));
+    if (!planId) {
+      return res.status(503).json({
+        error: `no ${currency} plan provisioned for ${tier} at ${amount}`,
+        hint: 'run POST /api/setup-plans',
+      });
     }
     const r = await fetch(`${RZP}/subscriptions`, {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        plan_id: EUR_PLAN[tier],
+        plan_id: planId,
         total_count: 12,
         customer_notify: 1,
-        notes: { uid, tier: tier === 'standard' ? 'learner' : tier },
-      }),
-    });
-    const sub = await r.json();
-    if (!r.ok || !sub.short_url) return res.status(502).json({ error: sub });
-    return res.redirect(302, sub.short_url);
-  }
-
-  if (['learner', 'pro', 'creator', 'standard', 'enterprise'].includes(tier)) {
-    const plan = {
-      learner: process.env.RAZORPAY_PLAN_LEARNER,
-      standard: process.env.RAZORPAY_PLAN_LEARNER, // legacy alias
-      pro: process.env.RAZORPAY_PLAN_PRO,
-      creator: process.env.RAZORPAY_PLAN_CREATOR,
-      enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE,
-    }[tier];
-    if (!plan) return res.status(503).json({ error: `no plan configured for ${tier}` });
-    const r = await fetch(`${RZP}/subscriptions`, {
-      method: 'POST',
-      headers: { Authorization: auth, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        plan_id: plan,
-        total_count: 12,
-        customer_notify: 1,
-        notes: { uid, tier },
+        notes: { uid, tier: monthly.key },
       }),
     });
     const sub = await r.json();

@@ -3,94 +3,89 @@ import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Sparkles, Building2, Users } from "lucide-react";
+import { PRICING } from "@/pricing.generated";
 
-const plans = [
-  {
-    name: "Free",
-    tier: "",
-    description: "Learn every day, free forever",
-    price: "₹0",
-    priceUsd: "$0",
-    credits: "5 generations / month",
-    color: "border-border",
-    features: [
-      "Unlimited feed — always free, every tier",
-      "20 playground runs a day",
-      "Enroll in any free course",
-    ],
-  },
-  {
-    name: "Learner",
-    tier: "learner",
-    priceEur: "€4.99 / month",
-    annual: "learner-annual",
-    description: "For active learners",
-    price: "₹199 / month",
-    priceUsd: "$6",
-    annualPrice: "₹1,990 / year (2 months free)",
-    credits: "30 generations / month",
-    color: "border-primary/50",
-    highlight: true,
-    features: [
-      "Everything in Free",
-      "100 playground runs a day",
-      "Offline courses, streak freezes, certificates",
-    ],
-  },
-  {
-    name: "Pro",
-    tier: "pro",
-    priceEur: "€9.99 / month",
-    annual: "pro-annual",
-    description: "For heavy daily use",
-    price: "₹399 / month",
-    priceUsd: "$15",
-    annualPrice: "₹3,990 / year (2 months free)",
-    credits: "100 generations / month",
-    color: "border-teal/50",
-    features: [
-      "Everything in Learner",
-      "300 playground runs a day",
-      "Priority generation queue",
-    ],
-  },
-  {
-    name: "Creator",
-    tier: "creator",
-    priceEur: "€29.99 / month",
-    annual: "creator-annual",
-    description: "Build and sell your own courses",
-    price: "₹999 / month",
-    priceUsd: "$39",
-    annualPrice: "₹9,990 / year (2 months free)",
-    credits: "250 generations / month",
-    color: "border-violet/50",
-    features: [
-      "Everything in Pro",
-      "Create & publish courses: AI-generated or your own videos",
-      "70% revenue share on paid enrollments",
-    ],
-  },
-  {
-    name: "Enterprise",
-    tier: "enterprise",
-    priceEur: "€199 / month",
-    annual: "enterprise-annual",
-    description: "Institutes, colleges and corporate L&D",
-    price: "₹4,999 / month",
-    priceUsd: "$249",
-    annualPrice: "₹49,900 / year (2 months free)",
-    credits: "1,500 generations / month, pooled across your team",
-    color: "border-amber/50",
-    features: [
-      "Everything in Creator, for a whole team",
-      "Private branded courses, cohorts and seats",
-      "Certificates under your institution's name",
-      "Course-generation service: your syllabus or PDFs become video courses",
-      "Priority support and onboarding",
-    ],
-  },
-];
+/**
+ * The plans come from pricing.generated.ts, written from pipeline/pricing.py.
+ *
+ * They used to be typed out here: five tiers with EUR4.99/EUR9.99/EUR29.99
+ * literals, while the app rendered the generated table and D1 held a third
+ * set. A visitor could be shown one price on the site and charged another at
+ * checkout, which costs trust rather than money.
+ */
+type Plan = {
+  name: string;
+  tier: string;
+  description: string;
+  price: string;
+  priceEur: string | null;
+  annual: string | null;
+  annualPrice: string | null;
+  credits: string;
+  features: readonly string[];
+  color: string;
+  highlight?: boolean;
+  contactOnly: boolean;
+};
+
+const COLOR: Record<string, string> = {
+  free: "border-border",
+  pro: "border-primary/50",
+  team: "border-teal/50",
+  enterprise: "border-amber/50",
+  create_free: "border-border",
+  creator: "border-violet/50",
+  studio: "border-amber/50",
+};
+
+const inr = (n: number) => `\u20b9${n.toLocaleString("en-IN")}`;
+
+/** The shape both books share, without the `as const` literal types. */
+type Tier = {
+  key: string;
+  name: string;
+  eurMonth: number | null;
+  eurYear: number | null;
+  inrMonth: number | null;
+  inrYear: number | null;
+  generations: number | null;
+  blurb: string;
+  features: readonly string[];
+  seatMin: number;
+  contactOnly: boolean;
+};
+
+function toPlan(t: Tier): Plan {
+  const paid = !t.contactOnly && (t.inrMonth ?? 0) > 0;
+  const seats = t.seatMin > 1 ? ` \u00b7 min ${t.seatMin} seats` : "";
+  return {
+    name: t.name,
+    // A tier with no self-serve price is quoted, never checked out.
+    tier: paid ? t.key : "",
+    description: t.blurb,
+    price: t.contactOnly
+      ? "Let's talk"
+      : (t.inrMonth ?? 0) > 0
+        ? `${inr(t.inrMonth as number)} / month${seats}`
+        : "Free",
+    priceEur:
+      t.contactOnly || !(t.eurMonth ?? 0) ? null : `\u20ac${t.eurMonth} / month`,
+    annual: (t.inrYear ?? 0) > 0 ? `${t.key}-annual` : null,
+    annualPrice:
+      (t.inrYear ?? 0) > 0 ? `${inr(t.inrYear as number)} / year` : null,
+    credits:
+      typeof t.generations === "number"
+        ? `${t.generations} generations / month`
+        : "Unlimited watching",
+    features: t.features,
+    contactOnly: t.contactOnly,
+    color: COLOR[t.key] ?? "border-border",
+    highlight: t.key === "pro" || t.key === "creator",
+  };
+}
+
+const LEARN_PLANS: Plan[] = (PRICING.learn as readonly Tier[]).map(toPlan);
+const CREATE_PLANS: Plan[] = (PRICING.create as readonly Tier[]).map(toPlan);
 
 // Recurring INR billing only works with Indian payment methods; everyone
 // else subscribes monthly in EUR on dedicated plans.
@@ -99,6 +94,73 @@ const IS_INTL = !(
   Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Calcutta" ||
   Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Kolkata"
 );
+
+function PlanCard({ plan, uid }: { plan: Plan; uid: string }) {
+  // Anyone can subscribe from the website. A visitor without the app pays as
+  // a guest: the webhook parks the plan against their payment email and the
+  // first sign-in with that email claims it — the same path course buyers use.
+  const buyer = uid || "web-guest";
+  const shown = IS_INTL && plan.priceEur ? plan.priceEur : plan.price;
+  return (
+    <div
+      className={`p-6 rounded-2xl bg-card border-2 ${plan.color} shadow-soft ${plan.highlight ? "shadow-elevated ring-2 ring-primary/20" : ""}`}
+    >
+      {plan.highlight && (
+        <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">
+          Most popular
+        </span>
+      )}
+      <h3 className="text-xl font-heading font-semibold text-foreground mb-1">
+        {plan.name}
+      </h3>
+      <p className="text-sm text-muted-foreground mb-2">{plan.description}</p>
+      <div className="mb-4">
+        <span className="text-2xl font-bold text-foreground">{shown}</span>
+      </div>
+      <p className="text-sm font-medium text-primary mb-4">{plan.credits}</p>
+
+      <ul className="space-y-2 mb-6">
+        {plan.features.map((feature) => (
+          <li key={feature} className="flex items-start gap-2 text-sm text-foreground">
+            <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      {plan.tier ? (
+        <div className="space-y-2">
+          <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
+            <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&tier=${plan.tier}${IS_INTL ? "&intl=1" : ""}`}>
+              Subscribe — {shown}
+            </a>
+          </Button>
+          {!IS_INTL && plan.annual && (
+            <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
+              <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&product=${plan.annual}`}>
+                {plan.annualPrice}
+              </a>
+            </Button>
+          )}
+          {!uid && (
+            <p className="text-[11px] text-muted-foreground text-center leading-snug">
+              Pay with any email — your plan unlocks when you sign in to the
+              app with it.
+            </p>
+          )}
+        </div>
+      ) : plan.contactOnly ? (
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href="/contact">Talk to us</a>
+        </Button>
+      ) : (
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href="/app/">Start free in the browser</a>
+        </Button>
+      )}
+    </div>
+  );
+}
 
 export default function Pricing() {
   const uid = new URLSearchParams(window.location.search).get("uid") ?? "";
@@ -145,85 +207,31 @@ export default function Pricing() {
         </div>
       </Section>
 
-      {/* Pricing Cards */}
-      <Section className="py-20">
-        <SectionHeader
-          title="Choose your plan"
-          description="All plans include access to the full KnowGraph platform"
-        />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {plans.map((plan) => (
-            <div 
-              key={plan.name}
-              className={`p-6 rounded-2xl bg-card border-2 ${plan.color} shadow-soft ${plan.highlight ? 'shadow-elevated ring-2 ring-primary/20' : ''}`}
-            >
-              {plan.highlight && (
-                <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">
-                  Most popular
-                </span>
-              )}
-              <h3 className="text-xl font-heading font-semibold text-foreground mb-1">
-                {plan.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-2">{plan.description}</p>
-              <div className="mb-4">
-                <span className="text-2xl font-bold text-foreground">{IS_INTL && plan.priceEur ? plan.priceEur : plan.price}</span>
-                {plan.priceUsd && (
-                  <span className="text-sm text-muted-foreground ml-2">({plan.priceUsd})</span>
-                )}
-              </div>
-              <p className="text-sm font-medium text-primary mb-4">{plan.credits}</p>
-              
-              <ul className="space-y-2 mb-6">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-foreground">
-                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              
-              {plan.tier ? (
-                (() => {
-                  // Anyone can subscribe from the website. A visitor without
-                  // the app pays as a guest: the webhook parks the plan
-                  // against their payment email and the first sign-in with
-                  // that email claims it — the same path course buyers use.
-                  const buyer = uid || "web-guest";
-                  return (
-                  <div className="space-y-2">
-                    <Button asChild variant={plan.highlight ? "default" : "outline"} size="sm" className="w-full">
-                      <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&tier=${plan.tier}${IS_INTL ? "&intl=1" : ""}`}>
-                        Subscribe — {IS_INTL && plan.priceEur ? plan.priceEur : plan.price}
-                      </a>
-                    </Button>
-                    {!IS_INTL && (
-                      <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
-                        <a href={`/api/create-payment?uid=${encodeURIComponent(buyer)}&product=${plan.annual}`}>
-                          {plan.annualPrice}
-                        </a>
-                      </Button>
-                    )}
-                    {!uid && (
-                      <p className="text-[11px] text-muted-foreground text-center leading-snug">
-                        Pay with any email — your plan unlocks when you sign
-                        in to the app with it.
-                      </p>
-                    )}
-                  </div>
-                  );
-                })()
-              ) : (
-                <Button asChild variant="outline" size="sm" className="w-full">
-                  <a href="/app/">Start free in the browser</a>
-                </Button>
-              )}
-            </div>
-          ))}
-        </div>
-      </Section>
+        {/* Learn */}
+        <Section className="py-20">
+          <SectionHeader
+            title="Learn"
+            description="Watch, practise and follow structured paths. Free forever to watch."
+          />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {LEARN_PLANS.map((plan) => (
+              <PlanCard key={plan.name} plan={plan} uid={uid} />
+            ))}
+          </div>
+        </Section>
 
-
+        {/* Create */}
+        <Section className="py-20">
+          <SectionHeader
+            title="Create"
+            description="Generate your own reels and courses, and export them to any LMS."
+          />
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {CREATE_PLANS.map((plan) => (
+              <PlanCard key={plan.name} plan={plan} uid={uid} />
+            ))}
+          </div>
+        </Section>
 
       {/* Final CTA */}
       <Section className="py-20 hero-gradient">
