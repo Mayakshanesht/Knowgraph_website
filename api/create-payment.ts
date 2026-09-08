@@ -13,6 +13,7 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { KNOWN_COURSES, COURSE_ALIASES, livePriceInPaise } from './_prices.js';
+import { PRICING } from './pricing.generated.js';
 
 const RZP = 'https://api.razorpay.com/v1';
 
@@ -34,13 +35,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const fromApp = String(req.query.from ?? '') === 'app' ? '&from=app' : '';
   // Annual = ten months' price (routes around RBI e-mandate renewal
   // failures on recurring cards); freeze is a one-off.
-  const ANNUAL: Record<string, number> = {
-    'learner-annual': 199000,
-    'pro-annual': 399000,
-    'creator-annual': 999000,
-    'enterprise-annual': 4990000,   // 10 months of Rs 4,999
-    'standard-annual': 199000, // legacy alias -> learner
-  };
+  // Amounts come from the generated table, never a literal here. This map
+  // held Rs3,990 for Pro while the app showed EUR9.99 and D1 carried a third
+  // number: a learner could be SHOWN one price and CHARGED another, which
+  // costs trust rather than money. Legacy aliases stay so links already in
+  // the wild, and older app builds, keep resolving.
+  const ANNUAL: Record<string, number> = Object.fromEntries(
+    [...PRICING.learn, ...PRICING.create]
+      // contactOnly tiers are quoted, never checked out: Enterprise would
+      // otherwise appear as a self-serve Rs12,00,000 payment link.
+      .filter((x) => !x.contactOnly)
+      .filter((x) => typeof x.inrYear === 'number' && (x.inrYear as number) > 0)
+      .map((x) => [`${x.key}-annual`, (x.inrYear as number) * 100]),
+  );
+  ANNUAL['learner-annual'] = ANNUAL['pro-annual'];
+  ANNUAL['standard-annual'] = ANNUAL['pro-annual'];
   if (product === 'freeze' || ANNUAL[product] !== undefined) {
     const amount = product === 'freeze' ? 2900 : ANNUAL[product];
     const r = await fetch(`${RZP}/payment_links`, {
