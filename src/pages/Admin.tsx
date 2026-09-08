@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section } from "@/components/ui/section";
+import { DistributeSection } from "@/components/courses/DistributeSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -340,6 +341,7 @@ export default function Admin() {
         <p className="text-sm text-muted-foreground mt-4">
           Showing {filteredSignups.length} of {signups.length} signups
         </p>
+        <DistributeSection />
       </Section>
     </Layout>
   );

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { Distribute } from "@/components/courses/Distribute";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
@@ -254,12 +253,6 @@ export default function CourseDetail() {
           </div>
         </div>
       
-        {courseSlug && (
-          <div className="mt-12 max-w-2xl">
-            <Distribute courseId={courseSlug} courseTitle={course.title} />
-          </div>
-        )}
-      </Section>
     </Layout>
   );
 }
