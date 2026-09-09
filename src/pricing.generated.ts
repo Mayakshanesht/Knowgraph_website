@@ -13,97 +13,36 @@ export const PRICING = {
       "eurYear": 0,
       "inrMonth": 0,
       "inrYear": 0,
-      "generations": null,
-      "blurb": "Unlimited watching of the public library.",
+      "generations": 3,
+      "blurb": "Unlimited watching, and three reels a month of your own.",
       "features": [
         "Unlimited watching",
         "Quiz tracking",
         "Concept map",
-        "7 caption languages"
+        "7 caption languages",
+        "3 generations/month, watermarked"
       ],
       "seatMin": 1,
       "contactOnly": false
     },
     {
-      "key": "pro",
-      "name": "Pro",
+      "key": "learner",
+      "name": "Learner",
       "book": "learn",
-      "eurMonth": 12,
-      "eurYear": 99,
-      "inrMonth": 499,
-      "inrYear": 4990,
-      "generations": null,
-      "blurb": "For an engineer learning on their own time.",
+      "eurMonth": 4.99,
+      "eurYear": 49.9,
+      "inrMonth": 199,
+      "inrYear": 1990,
+      "generations": 30,
+      "blurb": "For someone learning on their own time.",
       "features": [
         "Everything in Free",
         "Runnable notebooks",
         "Structured paths",
         "Certificates",
         "Offline downloads",
-        "No ads"
-      ],
-      "seatMin": 1,
-      "contactOnly": false
-    },
-    {
-      "key": "team",
-      "name": "Team",
-      "book": "learn",
-      "eurMonth": 18,
-      "eurYear": null,
-      "inrMonth": 1500,
-      "inrYear": null,
-      "generations": null,
-      "blurb": "For a company training its engineers.",
-      "features": [
-        "Everything in Pro",
-        "SSO",
-        "SCORM export",
-        "LTI 1.3 launch",
-        "Admin dashboard",
-        "Assigned paths",
-        "Completion reports"
-      ],
-      "seatMin": 5,
-      "contactOnly": false
-    },
-    {
-      "key": "enterprise",
-      "name": "Enterprise",
-      "book": "learn",
-      "eurMonth": null,
-      "eurYear": 15000,
-      "inrMonth": null,
-      "inrYear": 1200000,
-      "generations": null,
-      "blurb": "100+ seats, private library, your own generation quota.",
-      "features": [
-        "Everything in Team",
-        "Private library",
-        "Custom quota",
-        "SCORM export rights",
-        "DPA",
-        "SLA"
-      ],
-      "seatMin": 100,
-      "contactOnly": true
-    }
-  ],
-  "create": [
-    {
-      "key": "create_free",
-      "name": "Free",
-      "book": "create",
-      "eurMonth": 0,
-      "eurYear": 0,
-      "inrMonth": 0,
-      "inrYear": 0,
-      "generations": 3,
-      "blurb": "Try it. Three reels a month, watermarked.",
-      "features": [
-        "3 generations/month",
-        "Watermarked",
-        "Public only"
+        "No ads",
+        "30 generations/month"
       ],
       "seatMin": 1,
       "contactOnly": false
@@ -112,42 +51,49 @@ export const PRICING = {
       "key": "creator",
       "name": "Creator",
       "book": "create",
-      "eurMonth": 29,
-      "eurYear": 290,
-      "inrMonth": 1999,
-      "inrYear": 19990,
+      "eurMonth": 29.99,
+      "eurYear": 299.9,
+      "inrMonth": 999,
+      "inrYear": 9990,
       "generations": 150,
       "blurb": "For an educator building their own library.",
       "features": [
+        "Everything in Learner",
         "150 generations/month",
         "Publish into the library",
         "Revenue share",
-        "No watermark"
+        "No watermark",
+        "SCORM + LTI export of your own content"
       ],
       "seatMin": 1,
       "contactOnly": false
     },
     {
-      "key": "studio",
-      "name": "Studio",
-      "book": "create",
-      "eurMonth": 249,
-      "eurYear": 2490,
-      "inrMonth": 14999,
-      "inrYear": 149990,
-      "generations": 500,
-      "blurb": "For a team producing course content.",
+      "key": "enterprise",
+      "name": "Enterprise",
+      "book": "learn",
+      "eurMonth": 199,
+      "eurYear": 1990,
+      "inrMonth": null,
+      "inrYear": null,
+      "generations": null,
+      "blurb": "Institutions and corporate L&D: courses built for your people.",
       "features": [
-        "500 generations/month",
-        "Brand kit",
-        "Private library",
-        "SCORM + LTI export of your own content",
-        "Priority queue"
+        "Everything in Creator",
+        "Course-creation service",
+        "Seats and cohorts",
+        "SSO",
+        "SCORM export",
+        "LTI 1.3 launch",
+        "Completion reports",
+        "DPA",
+        "SLA"
       ],
-      "seatMin": 1,
-      "contactOnly": false
+      "seatMin": 5,
+      "contactOnly": true
     }
   ],
+  "create": [],
   "institutional": [
     {
       "key": "pilot",

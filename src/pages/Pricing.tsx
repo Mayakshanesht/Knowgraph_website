@@ -84,8 +84,13 @@ function toPlan(t: Tier): Plan {
   };
 }
 
-const LEARN_PLANS: Plan[] = (PRICING.learn as readonly Tier[]).map(toPlan);
-const CREATE_PLANS: Plan[] = (PRICING.create as readonly Tier[]).map(toPlan);
+// One book now: four plans, the owner's call. `create` stays as an empty
+// alias so nothing importing it breaks, and is concatenated here rather
+// than rendered as a second, empty section.
+const PLANS: Plan[] = [
+  ...(PRICING.learn as readonly Tier[]),
+  ...(PRICING.create as readonly Tier[]),
+].map(toPlan);
 
 // Recurring INR billing only works with Indian payment methods; everyone
 // else subscribes monthly in EUR on dedicated plans.
@@ -207,27 +212,14 @@ export default function Pricing() {
         </div>
       </Section>
 
-        {/* Learn */}
+        {/* Plans */}
         <Section className="py-20">
           <SectionHeader
-            title="Learn"
-            description="Watch, practise and follow structured paths. Free forever to watch."
+            title="Four plans"
+            description="Watch free forever. Pay when you want to build."
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {LEARN_PLANS.map((plan) => (
-              <PlanCard key={plan.name} plan={plan} uid={uid} />
-            ))}
-          </div>
-        </Section>
-
-        {/* Create */}
-        <Section className="py-20">
-          <SectionHeader
-            title="Create"
-            description="Generate your own reels and courses, and export them to any LMS."
-          />
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {CREATE_PLANS.map((plan) => (
+            {PLANS.map((plan) => (
               <PlanCard key={plan.name} plan={plan} uid={uid} />
             ))}
           </div>
