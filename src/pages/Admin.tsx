@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section } from "@/components/ui/section";
 import { DistributeSection } from "@/components/courses/DistributeSection";
+import { VoiceBank } from "@/components/voices/VoiceBank";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
