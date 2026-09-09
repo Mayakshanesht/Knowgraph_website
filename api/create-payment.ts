@@ -43,6 +43,21 @@ const MONTHLY_TIER: Record<string, {
   return map;
 })();
 
+/** A plan's amount in minor units, or null if it cannot be read. */
+async function planAmount(auth: string, planId: string): Promise<number | null> {
+  try {
+    const r = await fetch(`${RZP}/plans/${planId}`, {
+      headers: { Authorization: auth },
+    });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const amt = j?.item?.amount;
+    return typeof amt === 'number' ? amt : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Razorpay plan id for an exact plan name, or null. Plans are few. */
 async function findPlan(auth: string, name: string): Promise<string | null> {
   const r = await fetch(`${RZP}/plans?count=100`, { headers: { Authorization: auth } });
@@ -127,12 +142,39 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!amount) {
       return res.status(503).json({ error: `${tier} has no ${currency} price` });
     }
-    const planId = await findPlan(auth, planName(monthly.key, currency, amount));
+    let planId = await findPlan(auth, planName(monthly.key, currency, amount));
     if (!planId) {
-      return res.status(503).json({
-        error: `no ${currency} plan provisioned for ${tier} at ${amount}`,
-        hint: 'run POST /api/setup-plans',
-      });
+      // Fall back to the plan Razorpay already has for this tier. Refusing
+      // outright was wrong: the integration was live and working, and failing
+      // closed took monthly checkout down for every tier to guard against a
+      // rounding-sized overcharge on one of them.
+      //
+      // The rule is asymmetric because the harm is. Charging LESS than the
+      // page advertises costs margin and costs the buyer nothing, so it
+      // proceeds. Charging MORE is what must never happen — Creator was
+      // billing EUR29.99 against an advertised EUR29 — so only that refuses.
+      const legacy = {
+        pro: process.env.RAZORPAY_PLAN_PRO,
+        learner: process.env.RAZORPAY_PLAN_LEARNER,
+        standard: process.env.RAZORPAY_PLAN_LEARNER,
+        creator: process.env.RAZORPAY_PLAN_CREATOR,
+        enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE,
+      }[monthly.key];
+      const charge = legacy ? await planAmount(auth, legacy) : null;
+      if (!legacy || charge === null) {
+        return res.status(503).json({
+          error: `no ${currency} plan for ${tier} at ${amount}`,
+          hint: 'run POST /api/setup-plans',
+        });
+      }
+      if (charge > amount) {
+        return res.status(503).json({
+          error: `the only ${tier} plan charges ${charge}, more than the ` +
+                 `${amount} shown — refusing rather than overcharging`,
+          hint: 'run POST /api/setup-plans',
+        });
+      }
+      planId = legacy;
     }
     const r = await fetch(`${RZP}/subscriptions`, {
       method: 'POST',
