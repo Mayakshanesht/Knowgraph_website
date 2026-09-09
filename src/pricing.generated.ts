@@ -4,6 +4,7 @@
 
 export const PRICING = {
   "version": 1,
+  "contactEmail": "akshay.waghchoure@knowgraphapp.com",
   "learn": [
     {
       "key": "free",
@@ -77,7 +78,7 @@ export const PRICING = {
       "inrMonth": null,
       "inrYear": null,
       "generations": null,
-      "blurb": "Institutions and corporate L&D: courses built for your people.",
+      "blurb": "Institutions and corporate L&D: courses built for your people. Contact us at akshay.waghchoure@knowgraphapp.com.",
       "features": [
         "Everything in Creator",
         "Course-creation service",

@@ -155,9 +155,23 @@ function PlanCard({ plan, uid }: { plan: Plan; uid: string }) {
           )}
         </div>
       ) : plan.contactOnly ? (
-        <Button asChild variant="outline" size="sm" className="w-full">
-          <a href="/contact">Talk to us</a>
-        </Button>
+        // A mailto, not a contact form. Enterprise is a conversation with a
+        // person, and the address comes from the price table so it cannot go
+        // stale on one surface while staying right on another.
+        <div className="space-y-2">
+          <Button asChild variant="outline" size="sm" className="w-full">
+            <a
+              href={`mailto:${PRICING.contactEmail}?subject=${encodeURIComponent(
+                "Knowgraph Enterprise enquiry",
+              )}`}
+            >
+              Contact us
+            </a>
+          </Button>
+          <p className="text-[11px] text-muted-foreground text-center break-all">
+            {PRICING.contactEmail}
+          </p>
+        </div>
       ) : (
         <Button asChild variant="outline" size="sm" className="w-full">
           <a href="/app/">Start free in the browser</a>
