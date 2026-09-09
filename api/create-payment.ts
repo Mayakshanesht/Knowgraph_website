@@ -153,13 +153,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // page advertises costs margin and costs the buyer nothing, so it
       // proceeds. Charging MORE is what must never happen — Creator was
       // billing EUR29.99 against an advertised EUR29 — so only that refuses.
-      const legacy = {
-        pro: process.env.RAZORPAY_PLAN_PRO,
-        learner: process.env.RAZORPAY_PLAN_LEARNER,
-        standard: process.env.RAZORPAY_PLAN_LEARNER,
-        creator: process.env.RAZORPAY_PLAN_CREATOR,
-        enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE,
-      }[monthly.key];
+      // Two maps, because there have always been two. The env-var plans are
+      // INR; international subscribes on separate EUR plans created by
+      // /api/setup-eur-plans, whose ids were hardcoded here. Collapsing them
+      // into one map billed a EUR checkout against an INR plan — Creator came
+      // back "charges 99900" against an advertised 2900, which is Rs999 in
+      // paise being compared with EUR29 in cents.
+      const legacy = (currency === 'EUR'
+        ? {
+            learner: 'plan_TXD4k9TlXSu6zK',
+            standard: 'plan_TXD4k9TlXSu6zK',
+            pro: 'plan_TXD4kVSCixVkhc',
+            creator: 'plan_TXD4kqfN3JiKad',
+            enterprise: 'plan_TXIdufe6L7YXm8',
+          }
+        : {
+            pro: process.env.RAZORPAY_PLAN_PRO,
+            learner: process.env.RAZORPAY_PLAN_LEARNER,
+            standard: process.env.RAZORPAY_PLAN_LEARNER,
+            creator: process.env.RAZORPAY_PLAN_CREATOR,
+            enterprise: process.env.RAZORPAY_PLAN_ENTERPRISE,
+          } as Record<string, string | undefined>
+      )[monthly.key];
       const charge = legacy ? await planAmount(auth, legacy) : null;
       if (!legacy || charge === null) {
         return res.status(503).json({
