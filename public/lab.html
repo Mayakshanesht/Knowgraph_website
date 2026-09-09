@@ -266,6 +266,23 @@ async function ensureAggBackend(){
   } catch (e) { console.warn("AGG backend", e); }
 }
 
+// IPython magics and shell escapes are not Python, and Pyodide compiles the
+// cell as plain Python — so "%pip install --quiet matplotlib" is a SyntaxError
+// on the learner's FIRST cell, pointing at the very line we put there to help
+// them. The notebook keeps that line because it is correct in a real Jupyter
+// kernel, where the .ipynb also has to run; this strips it for the one runtime
+// that cannot parse it.
+//
+// Dropping the install is safe HERE and only here: preload() and
+// loadPackagesFromImports already install from what the code actually imports,
+// which is the truth the %pip line was only promising.
+function stripMagics(src){
+  return String(src == null ? "" : src)
+    .split("\n")
+    .map((line) => (/^\s*[%!]/.test(line) ? "" : line))
+    .join("\n");
+}
+
 async function runCell(i){
   if (!pyodide || running) return;
   running = true; setStatus("Running…", false);
@@ -280,7 +297,8 @@ async function runCell(i){
       s.textContent = t + "\n"; out.appendChild(s); }});
     // The learner edits these cells, so the imports at run time need not be
     // the imports we preloaded. Pyodide can resolve them from the source.
-    try { await pyodide.loadPackagesFromImports(ta.value); }
+    const source = stripMagics(ta.value);
+    try { await pyodide.loadPackagesFromImports(source); }
     catch (e) { console.warn("loadPackagesFromImports", e); }
     // matplotlib's default Pyodide backend draws into a browser canvas it
     // manages itself, and it threw on teardown while our savefig capture
@@ -288,7 +306,7 @@ async function runCell(i){
     // traceback and no figure. AGG renders into a buffer, which is exactly
     // what the capture below reads.
     await ensureAggBackend();
-    await pyodide.runPythonAsync(ta.value);
+    await pyodide.runPythonAsync(source);
     // matplotlib figures -> inline images
     const png = await pyodide.runPythonAsync(`
 import base64, io, sys
