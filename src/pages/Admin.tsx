@@ -343,6 +343,9 @@ export default function Admin() {
           Showing {filteredSignups.length} of {signups.length} signups
         </p>
         <DistributeSection />
+        <div className="mt-8">
+          <VoiceBank />
+        </div>
       </Section>
     </Layout>
   );
