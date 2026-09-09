@@ -260,6 +260,14 @@ async function ensureAggBackend(){
       + "    try:\n"
       + "        import matplotlib\n"
       + "        matplotlib.use('AGG')\n"
+      // plt.show() on a non-GUI backend warns that it "cannot show the
+      // figure" — true, and irrelevant: the capture below reads the
+      // figure out of AGG's buffer and puts it in the page. The learner
+      // wrote correct code and was told off for it, in red, beneath a
+      // plot that had rendered fine. Make show() the no-op it already
+      // effectively is.
+      + "        import matplotlib.pyplot as _plt\n"
+      + "        _plt.show = lambda *a, **k: None\n"
       + "    except Exception:\n"
       + "        pass\n");
     aggReady = true;
