@@ -112788,7 +112788,7 @@ $S:0}
 A.aNr.prototype={
 $0(){var s=this.a
 s.ax=!1
-s.ay="Still building. It will appear in your paths when it is done."},
+s.ay='Still building \u2014 this is queued on our GPU, not lost. Come back and it will be under "Your reels" in the Graph tab.'},
 $S:0}
 A.aNd.prototype={
 $0(){return this.a.ay="Tell us what you want to learn."},
@@ -114637,7 +114637,7 @@ A.b08.prototype={
 $0(){return this.a.y=!1},
 $S:0}
 A.b09.prototype={
-$0(){this.a.Q="Your deep-dive path is being generated \u2014 it will appear in your graph next to this path in a few minutes. Finish it and we will bring you back here."},
+$0(){this.a.Q='Your deep-dive is queued. We render on our own GPU and it runs in batches, so this is not instant \u2014 come back and you will find these reels under "Your reels" in the Graph tab, next to this path.'},
 $S:0}
 A.b0a.prototype={
 $0(){this.a.Q="Could not start the deep-dive \u2014 try again in a moment."},
