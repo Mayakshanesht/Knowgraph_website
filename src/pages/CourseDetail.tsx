@@ -3,10 +3,19 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Ticket } from "lucide-react";
 import { openCourseCheckout } from "@/lib/razorpay";
+import { courseCouponDestination, LMS_COURSE_CATALOG } from "@/lib/courseDestinations";
 
 const LMS_URL = "https://courses.knowgraphapp.com/";
+
+function CouponCheckoutLink({ href }: { href: string }) {
+  return <div className="mt-7 rounded-xl border border-primary/20 bg-primary/5 p-5 text-left">
+    <h2 className="flex items-center gap-2 font-heading text-lg font-semibold"><Ticket className="h-5 w-5 text-primary" />Have a coupon?</h2>
+    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Apply your code on the course website before checking out. A valid 100% sponsorship gives a zero total; partial discounts leave a balance payable securely through Razorpay.</p>
+    <Button asChild variant="outline" className="mt-4 max-w-full"><a href={href} aria-label="Apply coupon on the course website">Apply your coupon<ExternalLink className="ml-2 h-4 w-4" /></a></Button>
+  </div>;
+}
 
 // Display only — the server resolves the real amount from the LMS at charge
 // time. "Kept in sync with api/_prices.ts" is what the old comment claimed
@@ -120,6 +129,7 @@ export default function CourseDetail() {
   const [paying, setPaying] = useState(false);
   const [payError, setPayError] = useState("");
   const price = courseSlug ? LMS_COURSE_PRICES[courseSlug] : undefined;
+  const couponDestination = courseCouponDestination(courseSlug);
 
   const buyCourse = async () => {
     if (!courseSlug) return;
@@ -153,10 +163,12 @@ export default function CourseDetail() {
         <Section className="py-20">
           <div className="max-w-2xl mx-auto text-center">
             <h1 className="text-3xl md:text-4xl font-heading font-semibold text-foreground mb-4">
-              Course not found
+              {couponDestination !== LMS_COURSE_CATALOG ? 'Continue on the course website' : 'Course not found'}
             </h1>
             <p className="text-muted-foreground mb-8">
-              This course page doesn’t exist.
+              {couponDestination !== LMS_COURSE_CATALOG
+                ? 'Open this course’s current page to review its lessons, sign in, and apply your invitation or discount code.'
+                : 'This course page doesn’t exist. You can browse the course catalog and choose where to apply your coupon.'}
             </p>
             <Button asChild variant="outline" size="lg">
               <Link to="/courses">
@@ -164,6 +176,7 @@ export default function CourseDetail() {
                 Back to Courses
               </Link>
             </Button>
+            <CouponCheckoutLink href={couponDestination} />
           </div>
         </Section>
       </Layout>
@@ -210,6 +223,8 @@ export default function CourseDetail() {
                   <p className="text-foreground font-medium">{course.note}</p>
                 )}
               </div>
+
+              <CouponCheckoutLink href={couponDestination} />
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 {price && (

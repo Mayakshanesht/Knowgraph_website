@@ -8,6 +8,7 @@ const LMS_URL = "https://courses.knowgraphapp.com/";
 
 const navigation: { name: string; href: string; external?: boolean }[] = [
   { name: "Home", href: "/" },
+  { name: "Start Here", href: "/start" },
   { name: "Platform", href: "/platform" },
   { name: "Learning Paths", href: "/learning-paths" },
   { name: "Pricing", href: "/pricing" },
@@ -35,7 +36,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-8">
           {navigation.map((item) => (
             item.external ? (
               <a
@@ -88,6 +89,9 @@ export function Header() {
         {/* Mobile Menu Button */}
         <button
           type="button"
+          aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
           className="lg:hidden p-2 text-muted-foreground hover:text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -97,7 +101,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border">
+        <div id="mobile-navigation" className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navigation.map((item) => (
               item.external ? (

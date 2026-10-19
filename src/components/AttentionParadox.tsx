@@ -268,7 +268,7 @@ export function AttentionParadox() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes scroll-down {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100vh); }

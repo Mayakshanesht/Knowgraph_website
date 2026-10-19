@@ -1,4 +1,5 @@
 import knowgraphLogo from "@/assets/knowgraph-logo.png";
+import { Link } from "react-router-dom";
 
 const domains = [
   "AI",
@@ -41,6 +42,11 @@ export function Footer() {
               ))}
             </div>
             
+            <nav aria-label="Getting started guides" className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-background/80">
+              <Link to="/start" className="hover:text-background">Start learning</Link>
+              <Link to="/abaja-students" className="hover:text-background">aBAJA student access</Link>
+              <Link to="/abaja-committee" className="hover:text-background">aBAJA technical committee</Link>
+            </nav>
             <div className="border-t border-background/10 pt-6 w-full">
               <p className="text-sm text-background/50">
                 © 2026 KnowGraph

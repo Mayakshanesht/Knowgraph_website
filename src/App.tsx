@@ -16,6 +16,9 @@ import AppDemo from "./pages/AppDemo";
 import Admin from "./pages/Admin";
 import AdminAuth from "./pages/AdminAuth";
 import NotFound from "./pages/NotFound";
+import Start from "./pages/Start";
+import AbajaStudents from "./pages/AbajaStudents";
+import AbajaCommittee from "./pages/AbajaCommittee";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/get-app" element={<GetApp />} />
+          <Route path="/start" element={<Start />} />
+          <Route path="/abaja-students" element={<AbajaStudents />} />
+          <Route path="/abaja-committee" element={<AbajaCommittee />} />
           <Route path="/try" element={<Try />} />
           <Route path="/app-demo" element={<AppDemo />} />
           <Route path="/admin" element={<Admin />} />
